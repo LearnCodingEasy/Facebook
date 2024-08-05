@@ -72,7 +72,7 @@ npm run format
 npm run dev
 ```
 
-# 11  Install Libraries [ 1 - Tailwind | 2 - PrimeVue | 3 - vueuse | 4 - scss | 5 - vue Router | 6 - Axios | 7 - | 8 - | 9 - |  ]
+# 11  Install Vue Libraries [ 1 - Tailwind | 2 - PrimeVue | 3 - vueuse | 4 - scss | 5 - vue Router | 6 - Axios | 7 - | 8 - | 9 - |  ]
 ```
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
