@@ -157,8 +157,7 @@ const toggleDarkMode = () => {
 </script>
 ```
 
-# 14 Vue Router
-* Create File [ router ]
+# 14 
+* 
 ```
-index.js
 ```
