@@ -102,7 +102,20 @@ content: [
 @tailwind utilities;
 ```
 
-# 13 Vue Theme
+# 13 Import Font Awesome
+```js
+// Font Awesome
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import { far } from "@fortawesome/free-regular-svg-icons";
+// Add Free Icons Styles To SVG Core
+library.add(fas, far, fab);
+
+app.component("fa", FontAwesomeIcon)
+```
+# 14 Vue Theme
 ```html
 <!-- Icon Change Them -->
 <button @click="toggleDark()" class="wrapper-change-theme">
