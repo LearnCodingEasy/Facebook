@@ -25,7 +25,7 @@ facebook_virtual_environment\Scripts\activate
 pip install django
 ```
 
-# 6 Install Libraries [ 1 - djangorestframework | 2 - djangorestframework-simplejwt | 3 - django-cors-headers | 4 - pillow ]
+# 6 Install Django Libraries [ 1 - djangorestframework | 2 - djangorestframework-simplejwt | 3 - django-cors-headers | 4 - pillow ]
 ```
 pip install djangorestframework djangorestframework-simplejwt django-cors-headers pillow
 ```
@@ -102,7 +102,17 @@ content: [
 ```
 
 # 13 Vue Theme
-# 13 Vue Router
+```html
+<!-- Icon Change Them -->
+<button @click="toggleDark()" class="wrapper-change-theme">
+  <fa class="change-theme" :icon="['fas', 'moon']"></fa>
+</button>
+```
+```js
+
+```
+
+# 14 Vue Router
 * Create File [ router ]
 ```
 index.js
