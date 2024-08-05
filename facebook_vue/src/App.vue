@@ -1,6 +1,11 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import { useDark } from "@vueuse/core";
+  import { useToggle } from "@vueuse/core";
+  
+  let isDark = useDark();
+  let toggleDark = useToggle(isDark);
 </script>
 
 <template>
@@ -13,6 +18,10 @@ import HelloWorld from './components/HelloWorld.vue'
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+        <!-- Icon Change Them -->
+        <button @click="toggleDark()" class="wrapper-change-theme">
+          <fa class="change-theme" :icon="['fas', 'moon']"></fa>
+        </button>
       </nav>
     </div>
   </header>

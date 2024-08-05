@@ -89,14 +89,14 @@ npm i @primevue/auto-import-resolver -D
 
 # 12 Configure Tailwind
 * tailwind.config.js
-```
+```js
 content: [
 "./index.html",
 "./src/**/*.{vue,js,ts,jsx,tsx}",
 ],
 ```
 * style.css
-```
+```css
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -110,7 +110,13 @@ content: [
 </button>
 ```
 ```js
-
+<script setup>
+  import { useDark } from "@vueuse/core";
+  import { useToggle } from "@vueuse/core";
+  
+  let isDark = useDark();
+  let toggleDark = useToggle(isDark);
+</script>
 ```
 
 # 14 Vue Router
