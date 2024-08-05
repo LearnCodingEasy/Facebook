@@ -72,7 +72,7 @@ npm run format
 npm run dev
 ```
 
-# 11  Install Vue Libraries [ 1 - Tailwind | 2 - PrimeVue | 3 - vueuse | 4 - scss | 5 - vue Router | 6 - Axios | 7 - | 8 - | 9 - |  ]
+# 11  Install Vue Libraries [ 1 - Tailwind | 2 - PrimeVue | 3 - vueuse | 4 - scss | 5 - Axios | 6 - Font Awesome | 7 - | 8 - | 9 - |  ]
 ```
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
@@ -80,6 +80,7 @@ npm install primevue primeicons
 npm i @vueuse/core
 npm install -D sass
 npm install axios
+npm i --save @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome@latest @fortawesome/vue-fontawesome@prerelease @fortawesome/free-solid-svg-icons @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons
 
 npm i unplugin-vue-components -D
 npm i @primevue/auto-import-resolver -D
