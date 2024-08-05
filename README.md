@@ -115,20 +115,45 @@ library.add(fas, far, fab);
 
 app.component("fa", FontAwesomeIcon)
 ```
+```css
+// Global Color Light Theme
+:root {
+  /* Body */
+  --body-bg: #f0f2f5;
+}
+
+// Style For Dark Mode
+html.dark {
+  --body-bg: #0d121b;
+}
+body {
+  background-color: var(--body-bg);
+}
+```
 # 14 Vue Theme
 ```html
-<!-- Icon Change Them -->
-<button @click="toggleDark()" class="wrapper-change-theme">
-  <fa class="change-theme" :icon="['fas', 'moon']"></fa>
+<!-- Icon Change Theme -->
+<button @click="toggleDarkMode()" class="wrapper-change-theme">
+  <fa class="change-theme" :icon="currentIcon"></fa>
 </button>
 ```
 ```js
 <script setup>
-  import { useDark } from "@vueuse/core";
-  import { useToggle } from "@vueuse/core";
-  
-  let isDark = useDark();
-  let toggleDark = useToggle(isDark);
+import { useDark } from '@vueuse/core'
+import { useToggle } from '@vueuse/core'
+import { ref } from 'vue'
+
+let isDark = useDark()
+let toggleDark = useToggle(isDark)
+
+// الحالة لتتبع الأيقونة الحالية
+const currentIcon = ref(['fas', 'moon'])
+
+// دالة تبديل الأيقونة عند الضغط على الزر
+const toggleDarkMode = () => {
+  toggleDark()
+  currentIcon.value = isDark.value ? ['fas', 'sun'] : ['fas', 'moon']
+}
 </script>
 ```
 
