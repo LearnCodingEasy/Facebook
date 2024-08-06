@@ -1,46 +1,56 @@
 # Facebook
+👋 Hello! 🗣️ Design presentation about online Social project named “Faceb ook”.
 
-# 1 Git Clone Project
+🎨 Design motivation for an online Facebook project.
+
+💖 Please click like and appreciate.
+
+🙏 Thank you for supporting and appreciating my efforts
+
+## Website Build
+
+
+### 1 Git Clone Project
 ```
 git clone https://github.com/LearnCodingEasy/Facebook.git
 ``` 
 
-# 2 Create File [ LICENSE ]
+### 2 Create File [ LICENSE ]
 ```
 LICENSE
 ``` 
 
-# 3 Create Virtual Environment
+### 3 Create Virtual Environment
 ```
 python -m venv facebook_virtual_environment
 ```
 
-# 4 Activate Virtual Environment
+### 4 Activate Virtual Environment
 ```
 facebook_virtual_environment\Scripts\activate
 ```
 
-# 5 Install Django
+### 5 Install Django
 ```
 pip install django
 ```
 
-# 6 Install Django Libraries [ 1 - djangorestframework | 2 - djangorestframework-simplejwt | 3 - django-cors-headers | 4 - pillow ]
+### 6 Install Django Libraries [ 1 - djangorestframework | 2 - djangorestframework-simplejwt | 3 - django-cors-headers | 4 - pillow ]
 ```
 pip install djangorestframework djangorestframework-simplejwt django-cors-headers pillow
 ```
 
-# 7 Create Django Project
+### 7 Create Django Project
 ```
 django-admin startproject facebook_django
 ```
 
-# 8 Create Vue Project
+### 8 Create Vue Project
 ```
 npm create vue@latest
 ```
 
-# 9 Choose Vite [ Project name & Select a framework ]
+### 9 Choose Vite [ Project name & Select a framework ]
 ```
 √ Project name: ... facebook_vue
 √ Add TypeScript? ... No / Yes
@@ -64,7 +74,7 @@ Done. Now run:
 
 ```
 
-# 10 Go To Project [ Install & Run Dev ]
+### 10 Go To Project [ Install & Run Dev ]
 ```
 cd facebook_vue
 npm install
@@ -72,7 +82,7 @@ npm run format
 npm run dev
 ```
 
-# 11  Install Vue Libraries [ 1 - Tailwind | 2 - PrimeVue | 3 - vueuse | 4 - scss | 5 - Axios | 6 - Font Awesome | 7 - | 8 - | 9 - |  ]
+### 11  Install Vue Libraries [ 1 - Tailwind | 2 - PrimeVue | 3 - vueuse | 4 - scss | 5 - Axios | 6 - Font Awesome | 7 - | 8 - | 9 - |  ]
 ```
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
@@ -87,7 +97,7 @@ npm i @primevue/auto-import-resolver -D
 
 ```
 
-# 12 Configure Tailwind
+### 12 Configure Tailwind
 * tailwind.config.js
 ```js
 content: [
@@ -102,7 +112,7 @@ content: [
 @tailwind utilities;
 ```
 
-# 13 Import Font Awesome
+### 13 Import Font Awesome
 ```js
 // Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -130,7 +140,7 @@ body {
   background-color: var(--body-bg);
 }
 ```
-# 14 Vue Theme
+### 14 Vue Theme
 ```html
 <!-- Icon Change Theme -->
 <button @click="toggleDarkMode()" class="wrapper-change-theme">
