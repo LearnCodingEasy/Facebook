@@ -28,14 +28,15 @@ app.mount('#app')
 
 // For Pwa
 // Register Service Worker
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/facebook/sw.js')
-      .then(registration => {
-        console.log('Service Worker registered with scope:', registration.scope);
-      })
-      .catch(error => {
-        console.error('Service Worker registration failed:', error);
-      });
-  });
-}
+// if ('serviceWorker' in navigator) {
+//   window.addEventListener('load', () => {
+//     navigator.serviceWorker.register('/sw.js')
+//       .then(registration => {
+//         console.log('Service Worker registered with scope:', registration.scope);
+//       })
+//       .catch(error => {
+//         console.error('Service Worker registration failed:', error);
+//         console.error('Service Worker registration failed:', error.message);
+//       });
+//   });
+// }

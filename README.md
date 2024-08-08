@@ -79,6 +79,7 @@ Done. Now run:
 cd facebook_vue
 npm install
 npm run format
+npm run build
 npm run dev
 ```
 
@@ -169,5 +170,39 @@ body {
 ### 15 Add Pwa To Vue 
 *  
 ```js
+// vite.config.js
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import { VitePWA } from 'vite-plugin-pwa';
+
+export default defineConfig({
+  plugins: [
+    vue(),
+    VitePWA({
+      manifest: {
+        name: 'My Awesome App',
+        short_name: 'MyApp',
+        description: 'My awesome app description',
+        theme_color: '#ffffff',
+        icons: [
+          {
+            src: 'icons/icon-192x192.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: 'icons/icon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png'
+          }
+        ]
+      },
+      registerType: 'autoUpdate',
+      devOptions: {
+        enabled: true
+      }
+    })
+  ]
+});
 
 ```
