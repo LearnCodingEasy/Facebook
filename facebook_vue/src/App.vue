@@ -26,13 +26,15 @@ const toggleDarkMode = () => {
           <!-- Left Section (Logo and Search Bar) -->
           <div class="header_left_section flex items-center space-x-1 basis-1/4">
             <!-- Logo -->
-            <div class="logo text-white text-3xl font-bold">
-              <i class="fab fa-facebook fa-fw"></i>
-            </div>
+            <RouterLink to="/" class="logo">
+              <!-- <i class="fab fa-facebook fa-fw"></i> -->
+              <fa :icon="['fab', 'facebook']" />
+            </RouterLink>
             <!-- Search Bar -->
             <div class="search_bar w-full">
               <span class="icon">
-                <i class="fas fa-search fa-fw"></i>
+                <!-- <i class="fas fa-search fa-fw"></i> -->
+                <fa :icon="['fas', 'search']" />
               </span>
               <input
                 type="text"
@@ -44,7 +46,7 @@ const toggleDarkMode = () => {
 
           <!-- Center Section (Navigation Icons) -->
           <div class="header_center_section flex items-center justify-center space-x-1 basis-1/2">
-            <a href="#" class="header_center_section_link_home grow">
+            <RouterLink to="/" class="header_center_section_link_home grow">
               <span class="header_center_section_link_home_span">
                 <svg
                   viewBox="0 0 24 24"
@@ -58,8 +60,8 @@ const toggleDarkMode = () => {
                   ></path>
                 </svg>
               </span>
-            </a>
-            <a href="#" class="text-white text-xl grow header_center_section_link_friends">
+            </RouterLink>
+            <RouterLinka to="/" class="text-white text-xl grow header_center_section_link_friends">
               <span class="header_center_section_link_friends_span">
                 <svg
                   viewBox="0 0 24 24"
@@ -73,8 +75,8 @@ const toggleDarkMode = () => {
                   ></path>
                 </svg>
               </span>
-            </a>
-            <a href="#" class="text-white text-xl grow header_center_section_link_videos">
+            </RouterLinka>
+            <RouterLink to="/" class="text-white text-xl grow header_center_section_link_videos">
               <span class="header_center_section_link_videos_span">
                 <svg
                   viewBox="0 0 24 24"
@@ -91,8 +93,11 @@ const toggleDarkMode = () => {
                   ></path>
                 </svg>
               </span>
-            </a>
-            <a href="#" class="text-white text-xl grow header_center_section_link_marketplace">
+            </RouterLink>
+            <RouterLink
+              to="/"
+              class="text-white text-xl grow header_center_section_link_marketplace"
+            >
               <span class="header_center_section_link_marketplace_span">
                 <svg
                   viewBox="0 0 24 24"
@@ -106,8 +111,8 @@ const toggleDarkMode = () => {
                   ></path>
                 </svg>
               </span>
-            </a>
-            <a href="#" class="text-white text-xl grow header_center_section_link_groups">
+            </RouterLink>
+            <RouterLink to="/" class="text-white text-xl grow header_center_section_link_groups">
               <span class="header_center_section_link_groups_span">
                 <svg
                   viewBox="0 0 24 24"
@@ -124,7 +129,7 @@ const toggleDarkMode = () => {
                   ></path>
                 </svg>
               </span>
-            </a>
+            </RouterLink>
           </div>
           <!--  -->
           <div class="toggle_header_left_section">
@@ -132,7 +137,7 @@ const toggleDarkMode = () => {
           </div>
           <!-- Right Section (Profile and Notifications) -->
           <div class="header_right_section flex items-center justify-end space-x-1 basis-1/4">
-            <a href="#" class="header_right_section_link">
+            <RouterLinka to="/" class="header_right_section_link">
               <span class="header_right_section_link_span">
                 <svg
                   viewBox="0 0 24 24"
@@ -146,8 +151,8 @@ const toggleDarkMode = () => {
                   ></path>
                 </svg>
               </span>
-            </a>
-            <a href="#" class="header_right_section_link">
+            </RouterLinka>
+            <RouterLinka to="/" class="header_right_section_link">
               <span class="header_right_section_link_span">
                 <svg
                   viewBox="0 0 12 13"
@@ -163,8 +168,8 @@ const toggleDarkMode = () => {
                   </g>
                 </svg>
               </span>
-            </a>
-            <a href="#" class="header_right_section_link">
+            </RouterLinka>
+            <RouterLink to="/" class="header_right_section_link">
               <span class="header_right_section_link_span">
                 <svg
                   viewBox="0 0 24 24"
@@ -178,8 +183,12 @@ const toggleDarkMode = () => {
                   ></path>
                 </svg>
               </span>
-            </a>
-            <img src="/image/user.png" alt="Profile Picture" class="w-10 h-10 rounded-full" />
+            </RouterLink>
+            <img
+              src="./assets/image/user.png"
+              alt="Profile Picture"
+              class="w-10 h-10 rounded-full"
+            />
           </div>
         </div>
         <!--  -->
@@ -188,76 +197,10 @@ const toggleDarkMode = () => {
           <fa class="change-theme" :icon="currentIcon"></fa>
         </button>
       </header>
-      <nav style="display: none">
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
     </div>
   </header>
 
   <RouterView />
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style>
+<style scoped></style>

@@ -26,6 +26,7 @@ app.component("fa", FontAwesomeIcon)
 app.mount('#app')
 
 
+
 // For Pwa
 // Register Service Worker
 // if ('serviceWorker' in navigator) {

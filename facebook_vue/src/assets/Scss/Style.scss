@@ -2,8 +2,52 @@
 :root {
   /* Body */
   --body-bg: #f0f2f5;
+  // Header Style
+  --header-height: 4rem;
+  --header-bg: #fff;
+  // Logo
+  --header-facebook-icon-color: #0866ff;
+  --header-facebook-icon-font-size: 2.5rem;
+  // search
+  --header-search-icon-color: #65676b;
+  --header-search-input-text-color: #050505;
+  --header-search-input-placeholder-color: #0505059e;
+  // placeholder
+  --header-search-input-color: #f0f2f5;
+  // Linke Center
+  --header_center_section_link_home_border: #0866ff;
+  --header_center_section_link_home_active_color: #0866ff;
+  --header_center_section_link_home_color: #65676b;
+  --header_center_section_link_home_hover_bg: #f2f2f2;
+  //
+  --header-center-section-icon-size: 1.5rem;
+  --header-link-border-color: #0866ff;
+  --header-link-background-color: #d8dadf;
+  //
+  // Index Style
+  //
+
+  /* Fore Content Page Index Center Content */
+  --page-index-content-center: #fff;
+  --page-index-post-bg: #fff;
+  --page-index-post-button-hover: #f0f2f5;
+  --page-index-post-icon-trand: #65676b;
+  /* For Scrollbar Page Index Lift Sidebar */
+  --page-index-sidebar-lift-scrollbar: #e6e8eb;
+  --page-index-sidebar-lift-scrollbar-thumb: #bcc0c4;
+
+  /* For Scrollbar Page Index right Sidebar */
+  --page-index-sidebar-right-scrollbar: #e6e8eb;
+  --page-index-sidebar-right-scrollbar-thumb: #bcc0c4;
+  --page-index-sidebar-right-border-user-control: #bcc0c4;
+  --page-index-sidebar-right-text-color: #65676b;
+  --page-index-sidebar-right-icon-bg: #65676b;
 }
 
+// Header
+@import 'Header/header';
+// Index
+@import 'Index/index';
 // Style For Dark Mode
 html.dark {
   /* Body */
