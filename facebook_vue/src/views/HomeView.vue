@@ -6,6 +6,7 @@
   <main>
     <div class="container">
       <div class="wrapper_index_page flex flex-row">
+        <!-- Left -->
         <div class="left basis-1/4 md:basis-0 lg:basis-1/4">
           <div class="wrapper_left">
             <div class="inner_left">
@@ -150,21 +151,21 @@
             </div>
           </div>
         </div>
+        <!-- Center -->
         <div class="content basis-1/2 lg:basis-1/2 md:basis-1/2 sm:basis-full">
           <div class="wrapper_creat_story">
             <div class="inner_creat_story">
               <div class="wrapprt_swiper">
                 <div class="inner_swiper">
                   <swiper
-                    ref="{swiperRef}"
+                    ref="swiperRef"
                     :slidesPerView="3"
-                    :centeredSlides="true"
                     :spaceBetween="30"
                     :pagination="{
-                      type: 'fraction'
+                      type: 'progressbar'
                     }"
                     :navigation="true"
-                    :modules="modules"
+                    :modules="[Pagination, Navigation]"
                     class="mySwiper"
                   >
                     <swiper-slide
@@ -177,7 +178,8 @@
                       <div class="creat_story">
                         <div class="user_create_story">
                           <div class="img">
-                            <!-- <img :src="userStore.user.avatar" class="" alt="" /> -->
+                            <!-- :src="userStore.user.avatar" -->
+                            <img src="" class="" alt="" />
                           </div>
                           <div class="icon">
                             <span class="">
@@ -190,10 +192,14 @@
                         </div>
                       </div>
                     </swiper-slide>
-                    <swiper-slide>Slide 2</swiper-slide><swiper-slide>Slide 3</swiper-slide>
-                    <swiper-slide>Slide 4</swiper-slide><swiper-slide>Slide 5</swiper-slide>
-                    <swiper-slide>Slide 6</swiper-slide><swiper-slide>Slide 7</swiper-slide>
-                    <swiper-slide>Slide 8</swiper-slide><swiper-slide>Slide 9</swiper-slide>
+                    <swiper-slide>Slide 2</swiper-slide>
+                    <swiper-slide>Slide 3</swiper-slide>
+                    <swiper-slide>Slide 4</swiper-slide>
+                    <swiper-slide>Slide 5</swiper-slide>
+                    <swiper-slide>Slide 6</swiper-slide>
+                    <swiper-slide>Slide 7</swiper-slide>
+                    <swiper-slide>Slide 8</swiper-slide>
+                    <swiper-slide>Slide 9</swiper-slide>
                   </swiper>
                 </div>
               </div>
@@ -522,25 +528,24 @@
             </div>
           </div>
           <!-- Message -->
-          <div v-if="showMessage" class="wrapper_message">
+          <!-- v-if="showMessage" -->
+          <div class="wrapper_message">
             <div class="inner_message">
               <div class="box">
                 <div class="message_user_data_option">
                   <div class="user_data">
-                    <RouterLink
-                      :to="{
-                        name: 'ProfileView',
-                        params: { id: otherUserOnChat.id }
-                      }"
-                      class="user_data_link"
-                    >
+                    <!-- :to="{name: 'ProfileView', params: { id: otherUserOnChat.id }}" -->
+                    <RouterLink to="/" class="user_data_link">
                       <!-- عرض بيانات الشخص الآخر -->
+                      <!-- v-if="otherUserOnChat" -->
                       <div class="friend_chat_data" v-if="otherUserOnChat">
                         <div class="user_img">
-                          <img :src="otherUserOnChat.get_avatar" alt="Avatar" />
+                          <!-- :src="otherUserOnChat.get_avatar" -->
+                          <img src="" alt="Avatar" />
                         </div>
                         <div class="user_name">
-                          {{ otherUserOnChat.name }}
+                          <!-- {{ otherUserOnChat.name }} -->
+                          otherUserOnChat.name
                         </div>
                       </div>
                     </RouterLink>
@@ -552,9 +557,11 @@
                     <span class="icon_video">
                       <fa :icon="['fas', 'video']"></fa>
                     </span>
+                    <!-- @click="toggleShowMessage" -->
                     <span class="icon_minus" @click="toggleShowMessage">
                       <fa :icon="['fas', 'minus']"></fa>
                     </span>
+                    <!-- @click="toggleShowMessage" -->
                     <span class="icon_cloose" @click="toggleShowMessage">
                       <fa :icon="['fas', 'times']"></fa>
                     </span>
@@ -563,35 +570,44 @@
                 <div class="message_body">
                   <div class="main-center">
                     <div class="all_message">
-                      <template
-                        v-for="message in activeConversation.messages"
-                        v-bind:key="message.id"
-                      >
-                        <div
-                          class="wrapper_myMessage"
-                          v-if="message.created_by.id == userStore.user.id"
-                        >
+                      <!-- v-for="message in activeConversation.messages"
+                        v-bind:key="message.id" -->
+                      <template>
+                        <!-- v-if="message.created_by.id == userStore.user.id" -->
+                        <div class="wrapper_myMessage">
                           <div class="inner_myMessage">
                             <div class="content">
-                              <p class="text-sm">{{ message.body }}</p>
+                              <p class="text-sm">
+                                <!-- {{ message.body }} -->
+                                message.body
+                              </p>
                             </div>
-                            <div class="time">{{ message.created_at_formatted }} ago</div>
+                            <div class="time">
+                              <!-- {{ message.created_at_formatted }} -->
+                              message.created_at_formatted ago
+                            </div>
                           </div>
                           <div class="my_image">
-                            <img :src="message.created_by.get_avatar" class="" />
+                            <!-- :src="message.created_by.get_avatar" -->
+                            <img src="" class="" />
                           </div>
                         </div>
-
-                        <div class="wrapper_yourMessage" v-else>
+                        <!-- v-else -->
+                        <div class="wrapper_yourMessage">
                           <div class="your_image">
-                            <img :src="message.created_by.get_avatar" class="img-fluid" />
+                            <!-- :src="message.created_by.get_avatar" -->
+                            <img src="" class="img-fluid" />
                           </div>
                           <div class="inner_myMessage">
                             <div class="content">
-                              <p class="text-sm">{{ message.body }}</p>
+                              <p class="text-sm">
+                                <!-- {{ message.body }} -->
+                                message.body
+                              </p>
                             </div>
-                            <span class="text-xs text-gray-500 leading-none"
-                              >{{ message.created_at_formatted }} ago</span
+                            <span class="text-xs text-gray-500 leading-none">
+                              <!-- {{ message.created_at_formatted }} -->
+                              message.created_at_formatted ago</span
                             >
                           </div>
                         </div>
@@ -662,12 +678,12 @@
                       </span>
                       <span class="options">
                         <span class="icon_search">
-                          <!-- <fa :icon="['fas', 'magnifying-glass']"></fa> -->
-                          <i class="fas fa-search fa-fw"></i>
+                          <fa :icon="['fas', 'magnifying-glass']"></fa>
+                          <!-- <i class="fas fa-search fa-fw"></i> -->
                         </span>
                         <span class="icon_dot">
-                          <!-- <fa :icon="['fas', 'ellipsis']"></fa> -->
-                          <i class="fas fa-ellipsis-h fa-fw"></i>
+                          <fa :icon="['fas', 'ellipsis']"></fa>
+                          <!-- <i class="fas fa-ellipsis-h fa-fw"></i> -->
                         </span>
                       </span>
                     </div>
@@ -718,3 +734,25 @@
     </div>
   </main>
 </template>
+<script>
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue'
+// Import Swiper styles
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
+// import required modules
+import { Pagination, Navigation } from 'swiper/modules'
+
+export default {
+  setup() {
+    return {
+      modules: [Pagination, Navigation]
+    }
+  },
+  components: {
+    Swiper,
+    SwiperSlide
+  }
+}
+</script>

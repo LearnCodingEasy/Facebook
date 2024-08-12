@@ -93,6 +93,7 @@ npm install -D sass
 npm install axios
 npm i --save @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome@latest @fortawesome/vue-fontawesome@prerelease @fortawesome/free-solid-svg-icons @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons
 npm install -D vite-plugin-pwa
+npm i swiper
 
 npm i unplugin-vue-components -D
 npm i @primevue/auto-import-resolver -D
