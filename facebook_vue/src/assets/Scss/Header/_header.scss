@@ -202,12 +202,12 @@ header {
         }
       }
       .header_center_section_link_home {
+        border-bottom: 3px solid var(--header_center_section_link_home_active_color);
         span {
           svg {
             color: var(--header_center_section_link_home_active_color);
           }
         }
-        border-bottom: 3px solid var(--header_center_section_link_home_active_color);
       }
     }
     //
