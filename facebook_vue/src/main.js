@@ -17,10 +17,19 @@ import { far } from "@fortawesome/free-regular-svg-icons";
 // Add Free Icons Styles To SVG Core
 library.add(fas, far, fab);
 
+// Axios
+// axios استيراد
+import axios from "axios"
+// Backend للاتصال مع ال URL افتراضية لجميع طلبات axios تعيين قاعدة
+axios.defaults.baseURL = "http://127.0.0.1:8000"
+
 const app = createApp(App)
 
 app.use(createPinia())
-app.use(router)
+
+// مع روابط الصفحات Axios استخدم  
+app.use(router, axios)
+
 // eslint-disable-next-line vue/multi-word-component-names
 app.component("fa", FontAwesomeIcon)
 app.mount('#app')

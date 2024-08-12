@@ -285,3 +285,20 @@ export default defineConfig({
 });
 
 ```
+
+
+### 16 Setup Axios
+```js
+// Axios
+// axios استيراد
+import axios from "axios"
+// Backend للاتصال مع ال URL افتراضية لجميع طلبات axios تعيين قاعدة
+axios.defaults.baseURL = "http://127.0.0.1:8000"
+
+// مع روابط الصفحات Axios استخدم  
+app.use(router, axios)
+```
+
+### 1 Create Page Sign Up
+```
+```
