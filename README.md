@@ -182,39 +182,27 @@ export default defineConfig({
     vue(),
     // For Pwa
     VitePWA({ 
-      // ليكون "تحديث تلقائي" Service Worker إعداد نوع التسجيل لـ 
       registerType: 'autoUpdate',
       workbox: {
-        // Service Worker أنماط الملفات التي سيتم تخزينها مسبقًا في الـ 
         globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
-        // يتحكم في كل العملاء الحاليين دون الحاجة لإعادة التحميل Service Worker يجعل الـ 
         clientsClaim: true,
-         //  Service Worker يتجاوز فترة الانتظار وينشط الـ 
         skipWaiting: true,
-        // ولا يُنظفها Cache يُبقي على النسخ القديمة من الـ 
         cleanupOutdatedCaches: false,
-        // للعمل أثناء عدم الاتصال بالإنترنت Google يتيح تحليلات 
         offlineGoogleAnalytics: true,
-        // (الخرائط المصدرية) لتسهيل تتبع الأخطاء sourcemaps تفعيل 
         sourcemap: true,
         runtimeCaching: [
           {
-            // أو نوع الطلبات التي سيتم تخزينها أثناء التشغيل URL تحديد نمط 
             urlPattern: ({ request }) => 
               request.destination === 'document' || 
               request.destination === 'script' || 
               request.destination === 'style' || 
               request.destination === 'image' || 
               request.destination === 'font',
-            // استراتيجية التخزين المؤقت التي تعرض النسخة المخزنة مؤقتًا أثناء الحصول على نسخة جديدة من الشبكة
             handler: 'StaleWhileRevalidate',
             options: {
-              // المستخدم لتخزين هذه الملفات (cache) اسم الكاش 
               cacheName: 'assets-cache',
               expiration: {
-                // عدد الملفات التي يمكن تخزينها في الكاش كحد أقصى
                 maxEntries: 100,
-                // مدة التخزين المؤقت لهذه الملفات (30 يومًا)
                 maxAgeSeconds: 60 * 60 * 24 * 30 
               }
             }
@@ -222,7 +210,6 @@ export default defineConfig({
         ],
       },
       devOptions: {
-         // PWA تمكين خيارات التطوير أثناء تطوير 
         enabled: true
       },
       injectRegister: 'auto',
