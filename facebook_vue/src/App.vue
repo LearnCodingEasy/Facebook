@@ -1,27 +1,49 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import { useDark } from '@vueuse/core'
-import { useToggle } from '@vueuse/core'
+
+import { useConfirm } from 'primevue/useconfirm'
+import { useToast } from 'primevue/usetoast'
 import { ref } from 'vue'
 
-let isDark = useDark()
-let toggleDark = useToggle(isDark)
+const confirm = useConfirm()
+const toast = useToast()
 
-// الحالة لتتبع الأيقونة الحالية
-const currentIcon = ref(['fas', 'moon'])
+const showTemplate = (event) => {
+  confirm.require({
+    target: event.currentTarget,
+    group: 'templating',
+    message: 'Please confirm to proceed moving forward.',
+    icon: 'pi pi-exclamation-circle',
+    rejectProps: {
+      icon: 'pi pi-times',
+      label: 'Cancel',
+      outlined: true
+    },
+    acceptProps: {
+      icon: 'pi pi-check',
+      label: 'Confirm'
+    },
+    accept: () => {
+      toast.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 })
+    },
+    reject: () => {
+      toast.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected', life: 3000 })
+    }
+  })
+}
+//
+const op = ref(null)
 
-// دالة تبديل الأيقونة عند الضغط على الزر
-const toggleDarkMode = () => {
-  toggleDark()
-  currentIcon.value = isDark.value ? ['fas', 'sun'] : ['fas', 'moon']
+const toggle = (event) => {
+  op.value.toggle(event)
 }
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <!-- Header -->
-      <header class="shadow-md">
+  <!-- Header -->
+  <prime_card class="header_wrapper">
+    <template #content>
+      <header class="card shadow-md">
         <div class="container mx-auto flex justify-between items-center">
           <!-- Left Section (Logo and Search Bar) -->
           <div class="header_left_section flex items-center space-x-1 basis-1/4">
@@ -184,23 +206,42 @@ const toggleDarkMode = () => {
                 </svg>
               </span>
             </RouterLink>
-            <img
-              src="./assets/image/user.png"
+            <!-- Avatar -->
+            <prime_avatar
+              image="./src/assets/image/user.png"
+              size="large"
+              shape="circle"
               alt="Profile Picture"
               class="w-10 h-10 rounded-full"
+              @click="toggle"
+              type="button"
+              aria-haspopup="true"
+              aria-controls="overlay_tmenu"
             />
+            <prime_popover ref="op">
+              <div class="w-[25rem]">
+                <div class="flex justify-between">
+                  <span class="font-medium mb-2">Toggle Theme</span>
+                  <ThemeSwitcher />
+                </div>
+              </div>
+            </prime_popover>
           </div>
         </div>
-        <!--  -->
-        <!-- Icon Change Theme -->
-        <button @click="toggleDarkMode()" class="wrapper-change-theme" style="display: none">
-          <fa class="change-theme" :icon="currentIcon"></fa>
-        </button>
       </header>
-    </div>
-  </header>
+    </template>
+  </prime_card>
+
+  <Button @click="showTemplate($event)" label="Save"></Button>
+  <Toast />
 
   <RouterView />
 </template>
 
-<style scoped></style>
+<style>
+.p-menubar {
+  padding: 0 !important;
+  border: none !important;
+  cursor: pointer;
+}
+</style>

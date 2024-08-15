@@ -159,7 +159,7 @@
                 <div class="inner_swiper">
                   <swiper
                     ref="swiperRef"
-                    :slidesPerView="3"
+                    :slidesPerView="4"
                     :spaceBetween="30"
                     :pagination="{
                       type: 'progressbar'
@@ -192,7 +192,7 @@
                         </div>
                       </div>
                     </swiper-slide>
-                    <swiper-slide>Slide 2</swiper-slide>
+                    <swiper-slide class="card">Slide 2</swiper-slide>
                     <swiper-slide>Slide 3</swiper-slide>
                     <swiper-slide>Slide 4</swiper-slide>
                     <swiper-slide>Slide 5</swiper-slide>
@@ -220,12 +220,8 @@
                   </div>
                   <div class="input">
                     <div class="like_input">
-                      <input
-                        @click="toggleAddPost"
-                        type="text"
-                        placeholder="What's on your mind, Hossam?"
-                        readonly
-                      />
+                      <!-- @click="toggleAddPost" -->
+                      <input type="text" placeholder="What's on your mind, Hossam?" readonly />
                     </div>
                   </div>
                 </div>
@@ -255,7 +251,7 @@
           <!-- All Posts Item -->
           <!-- 1 -->
           <div class="wapper_item_post">
-            <div class="wrapper_post_image_video">
+            <div class="wrapper_post_image_video card">
               <div class="inner_post_image_video">
                 <div class="content">
                   <div class="user_data_and_option_post">
@@ -328,9 +324,8 @@
                         </span>
                         <span class="userlikethisPost">
                           <span class="count_like_number">
-                            <span @mouseover="getAllUserLikePost(post.id)">
-                              You And 700 Others
-                            </span>
+                            <!-- @mouseover="getAllUserLikePost(post.id)" -->
+                            <span> You And 700 Others </span>
                           </span>
                         </span>
                       </div>
@@ -351,7 +346,8 @@
                   <div class="wrapper_add_like_coment_send_share">
                     <div class="inner_add_like_coment_send_share">
                       <div class="add_like">
-                        <div class="like" @click="likePost(post.id)">
+                        <!-- @click="likePost(post.id)" -->
+                        <div class="like">
                           <span class="icon like">
                             <!-- <i class="fas fa-thumbs-up"></i> -->
                             <!-- <img src="/image/home_content_post.png" class="" alt=""> -->
@@ -360,7 +356,8 @@
                         </div>
                       </div>
                       <!-- Togle Show   -->
-                      <div class="add_comment" @click="toggleAddCommentPost(post.id)">
+                      <!-- @click="toggleAddCommentPost(post.id)" -->
+                      <div class="add_comment">
                         <div class="comment">
                           <span class="icon comment">
                             <!-- <i class="fas fa-comment fa-fw"></i> -->
@@ -393,7 +390,7 @@
           </div>
           <!-- 2 -->
           <div class="wapper_item_post">
-            <div class="wrapper_post_image_video">
+            <div class="wrapper_post_image_video card">
               <div class="inner_post_image_video">
                 <div class="content">
                   <div class="user_data_and_option_post">
@@ -466,9 +463,8 @@
                         </span>
                         <span class="userlikethisPost">
                           <span class="count_like_number">
-                            <span @mouseover="getAllUserLikePost(post.id)">
-                              You And 700 Others
-                            </span>
+                            <!-- @mouseover="getAllUserLikePost(post.id)" -->
+                            <span> You And 700 Others </span>
                           </span>
                         </span>
                       </div>
@@ -487,7 +483,8 @@
                   <div class="wrapper_add_like_coment_send_share">
                     <div class="inner_add_like_coment_send_share">
                       <div class="add_like">
-                        <div class="like" @click="likePost(post.id)">
+                        <!-- @click="likePost(post.id)" -->
+                        <div class="like">
                           <span class="icon like">
                             <!-- <i class="fas fa-thumbs-up"></i> -->
                             <!-- <img src="/image/home_content_post.png" class="" alt=""> -->
@@ -496,7 +493,8 @@
                         </div>
                       </div>
                       <!-- Togle Show   -->
-                      <div class="add_comment" @click="toggleAddCommentPost(post.id)">
+                      <!-- @click="toggleAddCommentPost(post.id)" -->
+                      <div class="add_comment">
                         <div class="comment">
                           <span class="icon comment">
                             <!-- <i class="fas fa-comment fa-fw"></i> -->
@@ -527,6 +525,31 @@
               </div>
             </div>
           </div>
+          <!-- Card -->
+          <prime_card>
+            <template #header>
+              <img
+                alt="user header"
+                src="https://primefaces.org/cdn/primevue/images/usercard.png"
+              />
+            </template>
+            <template #title>Advanced Card</template>
+            <template #subtitle>Card subtitle</template>
+            <template #content>
+              <p class="m-0">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur
+                error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam
+                nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
+              </p>
+            </template>
+            <template #footer>
+              <div class="flex gap-4 mt-1">
+                <prime_button label="Cancel" severity="secondary" outlined class="w-full" />
+                <prime_button label="Save" class="w-full" />
+              </div>
+            </template>
+          </prime_card>
+
           <!-- Message -->
           <!-- v-if="showMessage" -->
           <div class="wrapper_message">
@@ -558,11 +581,11 @@
                       <fa :icon="['fas', 'video']"></fa>
                     </span>
                     <!-- @click="toggleShowMessage" -->
-                    <span class="icon_minus" @click="toggleShowMessage">
+                    <span class="icon_minus">
                       <fa :icon="['fas', 'minus']"></fa>
                     </span>
                     <!-- @click="toggleShowMessage" -->
-                    <span class="icon_cloose" @click="toggleShowMessage">
+                    <span class="icon_cloose">
                       <fa :icon="['fas', 'times']"></fa>
                     </span>
                   </div>

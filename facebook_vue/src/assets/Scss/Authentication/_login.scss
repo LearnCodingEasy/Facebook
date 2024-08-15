@@ -1,0 +1,55 @@
+.wrapper_login_page {
+  padding-top: 60px;
+  .inner_login_page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 94vh;
+    .container,
+    .container {
+      .flex {
+        .wrapper_text_login {
+          .inner {
+            // width: 70%;
+            // margin: auto;
+            .title {
+              color: #0866ff;
+              font-size: 8vh;
+              font-weight: bold;
+            }
+            .subtitle {
+              font-family: SFProDisplay-Regular, Helvetica, Arial, sans-serif;
+              font-size: 28px;
+              font-weight: normal;
+              line-height: 32px;
+              width: 500px;
+            }
+          }
+        }
+        .wrapper_form_login {
+          // background-color: #fff;
+          // padding: 1rem;
+          // border-radius: 1rem;
+          .form_login {
+            .p-card-body {
+              padding: 0 !important;
+              .p-password {
+                display: block !important;
+                input[type='password'] {
+                  width: 100% !important;
+                }
+              }
+            }
+          }
+          .button_signup {
+            // background-color: #42b72a;
+            // color: #fff;
+            // width: 50%;
+            display: block;
+            margin: 2rem auto;
+          }
+        }
+      }
+    }
+  }
+}

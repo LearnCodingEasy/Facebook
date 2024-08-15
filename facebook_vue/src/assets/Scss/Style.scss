@@ -1,7 +1,8 @@
 // Global Color Light Theme
 :root {
   /* Body */
-  --body-bg: #f0f2f5;
+  --body-bg-hr: #f0f2f5;
+  --body-bg: #f8fafc;
   // Header Style
   --header-height: 4rem;
   --header-bg: #fff;
@@ -48,12 +49,19 @@
 @import 'Header/header';
 // Index
 @import 'Index/index';
+// Authentication
+@import 'Authentication/login';
+// Frameworks
+@import 'Frameworks/Frameworks';
 // Style For Dark Mode
-html.dark {
+html.dark,
+html.p-dark {
   /* Body */
-  --body-bg: #0d121b;
+  // --body-bg: #0d121b;
+  --body-bg: #09090b;
 }
 body {
+  // background-color: var(--body-bg-hr);
   background-color: var(--body-bg);
   transition:
     background-color 0.95s linear,

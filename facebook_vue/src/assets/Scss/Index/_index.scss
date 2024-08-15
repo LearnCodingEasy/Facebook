@@ -77,7 +77,6 @@ main {
                     justify-content: center;
                   }
                   span.img {
-                    margin-right: 0.5rem;
                     height: 36px;
                     width: 36px;
                     img {
@@ -243,7 +242,7 @@ main {
             .wrapprt_swiper {
               .inner_swiper {
                 .swiper {
-                  height: 300px;
+                  height: 200px;
                   width: 100%;
                   margin: 20px auto;
 
@@ -262,20 +261,20 @@ main {
                       justify-content: center;
                       align-items: center;
                       margin-right: 10px !important;
-                      width: 200px !important;
+                      // width: 200px !important;
                       border-radius: 10px;
                       overflow: hidden;
                       &.swiper-slide-active {
                       }
                       .creat_story {
                         display: block;
-                        width: 250px;
+                        // width: 250px;
                         .user_create_story {
                           display: flex;
                           flex-direction: column;
                           position: relative;
                           .img {
-                            height: 240px;
+                            height: 140px;
                             overflow: hidden;
                             img {
                               display: block;
@@ -791,7 +790,7 @@ main {
 
 .wrapper_post_image_video {
   margin-top: 0.8rem;
-  background-color: var(--page-index-post-bg);
+  // background-color: var(--page-index-post-bg);
   border-radius: 1rem;
   .inner_post_image_video {
     .content {
@@ -801,7 +800,6 @@ main {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 1rem;
         padding: 1rem;
 
         .user_data {
@@ -874,7 +872,7 @@ main {
       }
       .post_content {
         .post_text {
-          margin: 0.7rem 0;
+          margin-bottom: 0.7rem;
           padding: 0 1rem;
 
           p {

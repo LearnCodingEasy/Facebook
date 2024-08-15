@@ -1,3 +1,4 @@
+// main.js
 // Tailwind
 import './assets/main.css'
 import './assets/Scss/Style.scss'
@@ -23,6 +24,45 @@ import axios from "axios"
 // Backend للاتصال مع ال URL افتراضية لجميع طلبات axios تعيين قاعدة
 axios.defaults.baseURL = "http://127.0.0.1:8000"
 
+// Prime Vue 
+import PrimeVue from "primevue/config";
+// Toast
+import ToastService from 'primevue/toastservice';
+// Popup
+import ConfirmationService from 'primevue/confirmationservice'
+import DialogService from 'primevue/dialogservice'
+// Button
+import Button from 'primevue/button';
+// Form
+import Fluid from 'primevue/fluid';
+import InputText from 'primevue/inputtext';
+import Password from 'primevue/password';
+import FloatLabel from 'primevue/floatlabel';
+import Checkbox from 'primevue/checkbox';
+import DatePicker from 'primevue/datepicker';
+import InputGroup from 'primevue/inputgroup';
+import InputGroupAddon from 'primevue/inputgroupaddon';
+
+
+// Menu
+import Menubar from 'primevue/menubar';
+import TieredMenu from 'primevue/tieredmenu';
+// Image
+import Avatar from 'primevue/avatar';
+import AvatarGroup from 'primevue/avatargroup';
+// Popup
+import Popover from 'primevue/popover';
+import Dialog from 'primevue/dialog';
+// Card
+import Card from 'primevue/card';
+// Theme
+import Noir from './presets/Noir.js';
+import ThemeSwitcher from './components/Theme/ThemeSwitcher.vue';
+// PrimeIcons أيقونات 
+import 'primeicons/primeicons.css'
+import 'tailwindcss/tailwind.css'
+
+
 const app = createApp(App)
 
 app.use(createPinia())
@@ -32,6 +72,43 @@ app.use(router, axios)
 
 // eslint-disable-next-line vue/multi-word-component-names
 app.component("fa", FontAwesomeIcon)
+
+// 
+app.component('ThemeSwitcher', ThemeSwitcher);
+// Prime Vue 
+app.use(PrimeVue, {
+  theme: {
+      preset: Noir,
+      options: {
+          prefix: 'p',
+          darkModeSelector: '.p-dark',
+          cssLayer: false,
+      }
+  }
+});
+app.use(ToastService);
+app.use(ConfirmationService);
+app.use(DialogService);
+app.component('prime_button', Button);
+// Form
+app.component('prime_fluid', Fluid);
+app.component('prime_input_text', InputText);
+app.component('prime_input_password', Password);
+app.component('prime_float_label', FloatLabel);
+app.component('prime_check_box', Checkbox);
+app.component('prime_date_picker', DatePicker);
+app.component('prime_input_group', InputGroup);
+app.component('prime_input_group_addon', InputGroupAddon);
+// Menu
+app.component('prime_menubar', Menubar);
+app.component('prime_tiered_menu', TieredMenu);
+app.component('prime_avatar', Avatar);
+app.component('prime_avatar_group', AvatarGroup);
+app.component('prime_popover', Popover);
+app.component('prime_card', Card);
+
+app.component('prime_dialog', Dialog);
+
 app.mount('#app')
 
 

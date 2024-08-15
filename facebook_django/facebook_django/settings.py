@@ -25,7 +25,7 @@ WEBSITE_URL = "http://127.0.0.1:8000"
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # AUTH_USER_MODEL ده اللي بنحدد فيه موديل المستخدمين اللي شغالين عليه
-# AUTH_USER_MODEL = "account.User"
+AUTH_USER_MODEL = "account.User"
 
 # SIMPLE_JWT دي إعدادات مكتبة JWT اللي بنستخدمها لإدارة التوكينات
 SIMPLE_JWT = {
@@ -75,11 +75,18 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Apps
+    "account",
+    # Libraries
+    "rest_framework",
+    "rest_framework_simplejwt",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",

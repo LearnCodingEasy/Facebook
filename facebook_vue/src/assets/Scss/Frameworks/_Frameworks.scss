@@ -1,0 +1,86 @@
+// Font
+.font-bold,
+.font_bold {
+  font-weight: bold;
+}
+
+// Display
+.d_none,
+.d-none {
+  display: none;
+}
+.d_flex,
+.d-flex {
+  display: flex;
+}
+
+.d_grid,
+.d-grid {
+  display: grid;
+}
+.d_block,
+.d-block {
+  display: block;
+}
+.d_block_important,
+.d-block-important {
+  display: block !important;
+}
+
+/* Width */
+
+.w_25,
+.w-25 {
+  width: 25%;
+}
+.w_33,
+.w-33 {
+  width: 33%;
+}
+.w_50,
+.w-50 {
+  width: 50%;
+}
+.w_75,
+.w-75 {
+  width: 75%;
+}
+
+.w_80,
+.w-80 {
+  width: 80%;
+}
+.w_85,
+.w-85 {
+  width: 85%;
+}
+.w_90,
+.w-90 {
+  width: 90%;
+}
+.w_95,
+.w-95 {
+  width: 95%;
+}
+.w_100,
+.w-100 {
+  width: 100%;
+}
+
+/* Color */
+.text_facebook_color_1,
+.text-facebook-color-1 {
+  color: #0866ff;
+}
+.text_facebook_color_1_important,
+.text-facebook-color-1-important {
+  color: #0866ff !important;
+}
+.bg_facebook_color_1,
+.bg-facebook-color-1 {
+  background-color: #0866ff;
+}
+.bg_facebook_color_1_important,
+.bg-facebook-color-1-important {
+  background-color: #0866ff !important;
+}

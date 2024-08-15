@@ -73,7 +73,7 @@ Done. Now run:
   npm run dev
 
 ```
-
+__________________________________________________
 ### 10 Go To Project [ Install & Run Dev ]
 ```
 cd facebook_vue
@@ -82,13 +82,14 @@ npm run format
 npm run build
 npm run dev
 ```
-
+__________________________________________________
 ### 11  Install Vue Libraries [ 1 - Tailwind | 2 - PrimeVue | 3 - vueuse | 4 - scss | 5 - Axios | 6 - Font Awesome | 7 - Pwa | 8 - | 9 - |  ]
 ```
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 npm install primevue primeicons
-npm i @vueuse/core
+npm install @primevue/themes
+
 npm install -D sass
 npm install axios
 npm i --save @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome@latest @fortawesome/vue-fontawesome@prerelease @fortawesome/free-solid-svg-icons @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons
@@ -99,7 +100,7 @@ npm i unplugin-vue-components -D
 npm i @primevue/auto-import-resolver -D
 
 ```
-
+__________________________________________________
 ### 12 Configure Tailwind
 * tailwind.config.js
 ```js
@@ -129,45 +130,7 @@ library.add(fas, far, fab);
 app.component("fa", FontAwesomeIcon)
 ```
 
-### 14 Vue Theme
-```html
-<!-- Icon Change Theme -->
-<button @click="toggleDarkMode()" class="wrapper-change-theme">
-  <fa class="change-theme" :icon="currentIcon"></fa>
-</button>
-```
-```js
-<script setup>
-import { useDark } from '@vueuse/core'
-import { useToggle } from '@vueuse/core'
-import { ref } from 'vue'
-
-let isDark = useDark()
-let toggleDark = useToggle(isDark)
-
-const currentIcon = ref(['fas', 'moon'])
-
-const toggleDarkMode = () => {
-  toggleDark()
-  currentIcon.value = isDark.value ? ['fas', 'sun'] : ['fas', 'moon']
-}
-</script>
-```
-```css
-// Global Color Light Theme
-:root {
-  /* Body */
-  --body-bg: #f0f2f5;
-}
-
-// Style For Dark Mode
-html.dark {
-  --body-bg: #0d121b;
-}
-body {
-  background-color: var(--body-bg);
-}
-```
+__________________________________________________
 ### 15 Add Pwa To Vue 
 *  
 ```js
@@ -285,8 +248,7 @@ export default defineConfig({
 });
 
 ```
-
-
+__________________________________________________
 ### 16 Setup Axios
 ```js
 // Axios
@@ -296,6 +258,55 @@ axios.defaults.baseURL = "http://127.0.0.1:8000"
 
 app.use(router, axios)
 ```
+__________________________________________________
+### 17 Setup PrimeVue
+```js
+// main.js
+// Prime Vue 
+import PrimeVue from "primevue/config";
+// Toast
+import ToastService from 'primevue/toastservice';
+// Popup
+import ConfirmationService from 'primevue/confirmationservice'
+import DialogService from 'primevue/dialogservice'
+// Element
+import Button from 'primevue/button';
+import InputText from 'primevue/inputtext';
+import Password from 'primevue/password';
+import FloatLabel from 'primevue/floatlabel';
+// PrimeIcons أيقونات 
+import 'primeicons/primeicons.css'
+import 'tailwindcss/tailwind.css'
+// Theme
+import Noir from './presets/Noir.js';
+// Prime Vue 
+app.use(PrimeVue, {
+  theme: {
+      preset: Noir,
+      options: {
+          prefix: 'p',
+          darkModeSelector: '.p-dark',
+          cssLayer: false,
+      }
+  }
+});
+app.use(ToastService);
+app.use(ConfirmationService);
+app.use(DialogService);
+app.component('prime_button', Button);
+app.component('prime_input_text', InputText);
+app.component('prime_input_password', Password);
+app.component('prime_float_label', FloatLabel);
+```
+__________________________________________________
+### 14 Vue Theme
+```html
+
+```
+```js
+
+```
+__________________________________________________
 
 ### 17 Setup Djang Libraries
 ```python
@@ -340,7 +351,26 @@ MIDDLEWARE = [
 ]
 ```
 
-### 
+### 18 Create App [ Account And Setup It ]
+``` python
+python manage.py startapp account
+```
+```pyhone
+# Page [ account/models.py ]
+```
+```pyhone
+# Page [ account/serializers.py ]
+```
+```pyhone
+# Page [ account/forms.py ]
+```
+```pyhone
+# Page [ account/api.py ]
+```
+```pyhone
+# Page [ account/urls.py ]
+```
+
 ### 
 ### 
 ### 
