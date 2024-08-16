@@ -89,30 +89,49 @@
                     >
                     <prime_fluid>
                       <div class="grid grid-cols-2 gap-4">
+                        <!-- First name personal_phone -->
                         <div>
-                          v-model="form.name"
                           <prime_input_text placeholder="First name" v-model="formSignup.name" />
                         </div>
+                        <!-- Surname -->
                         <div>
                           <prime_input_text placeholder="Surname" />
                         </div>
+                        <!-- Mobile number or email address -->
                         <div class="col-span-full">
-                          <prime_input_text placeholder="Mobile number or email address" />
+                          <prime_input_text
+                            placeholder="Mobile number or email address"
+                            v-model="formSignup.email"
+                          />
                         </div>
+                        <!-- password1 -->
                         <div class="col-span-full">
-                          <prime_input_password placeholder="New Password" />
+                          <prime_input_password
+                            placeholder="New Password"
+                            v-model="formSignup.password1"
+                          />
+                        </div>
+                        <!-- password2 -->
+                        <div class="col-span-full">
+                          <prime_input_password
+                            placeholder="New Password"
+                            v-model="formSignup.password2"
+                          />
                         </div>
                         <div class="col-span-full">Date of birth</div>
                         <div class="col-span-full">
                           <div class="flex flex-col md:flex-row gap-2">
+                            <!-- Day -->
                             <prime_input_group>
-                              <prime_date_picker v-model="date" :placeholder="date" />
+                              <prime_date_picker v-model="date" view="day" dateFormat="dd" />
                             </prime_input_group>
+                            <!-- Month -->
                             <prime_input_group>
-                              <prime_date_picker v-model="date" :placeholder="date" />
+                              <prime_date_picker v-model="date" view="month" dateFormat="mm" />
                             </prime_input_group>
+                            <!-- Year -->
                             <prime_input_group>
-                              <prime_date_picker v-model="date" :placeholder="date" />
+                              <prime_date_picker v-model="date" view="year" dateFormat="yy" />
                             </prime_input_group>
                           </div>
                         </div>
@@ -235,27 +254,27 @@ export default {
       }
     },
     submitFormSignup() {
-      this.errors = []
+      this.errorsSignup = []
       if (this.formSignup.email === '') {
-        this.errors.push('Your e-mail is missing')
+        this.errorsSignup.push('Your e-mail is missing')
       }
       if (this.formSignup.name === '') {
-        this.errors.push('Your name is missing')
+        this.errorsSignup.push('Your name is missing')
       }
-      if (this.formSignup.personal_phone === '') {
-        this.errors.push('Your Personal Phone is missing')
-      }
-      if (this.formSignup.public_phone === '') {
-        this.errors.push('Your Public Phone is missing')
-      }
+      // if (this.formSignup.personal_phone === '') {
+      //   this.errorsSignup.push('Your Personal Phone is missing')
+      // }
+      // if (this.formSignup.public_phone === '') {
+      //   this.errorsSignup.push('Your Public Phone is missing')
+      // }
       if (this.form.address === '') {
-        this.errors.push('Your Address is missing')
+        this.errorsSignup.push('Your Address is missing')
       }
       if (this.formSignup.password1 === '') {
-        this.errors.push('Your password is missing')
+        this.errorsSignup.push('Your password is missing')
       }
       if (this.formSignup.password1 !== this.formSignup.password2) {
-        this.errors.push('The password does not match')
+        this.errorsSignup.push('The password does not match')
       }
       if (this.errorsSignup.length === 0) {
         axios
@@ -275,6 +294,7 @@ export default {
               this.formSignup.password1 = ''
               this.formSignup.password2 = ''
               // this.$router.push('/loginView')
+              window.location.reload()
             } else {
               const data = JSON.parse(response.data.message)
               for (const key in data) {

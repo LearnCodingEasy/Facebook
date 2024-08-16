@@ -68,11 +68,16 @@ class CustomUserManager(UserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-
-    # email: البريد الإلكتروني الخاص بالمستخدم
-    email = models.EmailField(unique=True)
+    # حقل يتم تعبئة من المستخدام
+    # تسجيل الدخول
     # name: الاسم الخاص بالمستخدم
     name = models.CharField(max_length=255, blank=True, default="")
+    # surname: الاسم العائلةالخاص بالمستخدم
+    surname = models.CharField(max_length=255, blank=True, default="")
+    # email: البريد الإلكتروني الخاص بالمستخدم
+    email = models.EmailField(unique=True)
+    # Date of birth تاريخ الميلاد
+    date_of_birth = models.DateField(default=timezone.now)
 
     # avatar: الصورة الشخصية للمستخدم
     avatar = models.ImageField(upload_to="avatars", blank=True, null=True)
@@ -92,8 +97,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     public_phone = models.CharField(max_length=15, blank=True, null=True)
     # address: العنوان الخاص بالمستخدم
     address = models.CharField(max_length=255, blank=True, default="")
-    # Date of birth تاريخ الميلاد
-    date_of_birth = models.DateField(default=timezone.now)
+
     # Gender الجنس المستخدم
     gender = models.CharField(max_length=15, blank=True, null=True)
     # workplace
