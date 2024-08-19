@@ -184,7 +184,6 @@
                   </template>
                 </form>
               </div>
-              <button @click="submitFormTest">test</button>
             </div>
           </div>
         </div>
@@ -231,11 +230,24 @@ export default {
   },
   methods: {
     async submitFormLogin() {
+      console.log(`Yes`)
       this.errorsLogin = []
       if (this.formLogin.email === '') {
+        this.$toast.add({
+          severity: 'error',
+          summary: 'User Name missing',
+          detail: 'Your name is missing',
+          life: 3000
+        })
         this.errorsLogin.push('Your e-mail is missing')
       }
       if (this.formLogin.password === '') {
+        this.$toast.add({
+          severity: 'error',
+          summary: 'User password is missing',
+          detail: 'Your password is missing',
+          life: 3000
+        })
         this.errorsLogin.push('Your password is missing')
       }
       if (this.errorsLogin.length === 0) {
@@ -243,6 +255,7 @@ export default {
           .post('/api/login/', this.formLogin)
           .then((response) => {
             this.userStore.setToken(response.data)
+            console.log('response.data: ', response.data)
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.access
           })
           .catch((error) => {
