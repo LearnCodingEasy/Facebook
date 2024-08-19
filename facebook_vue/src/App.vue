@@ -1,36 +1,8 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 
-import { useConfirm } from 'primevue/useconfirm'
-import { useToast } from 'primevue/usetoast'
 import { ref } from 'vue'
 
-const confirm = useConfirm()
-const toast = useToast()
-
-const showTemplate = (event) => {
-  confirm.require({
-    target: event.currentTarget,
-    group: 'templating',
-    message: 'Please confirm to proceed moving forward.',
-    icon: 'pi pi-exclamation-circle',
-    rejectProps: {
-      icon: 'pi pi-times',
-      label: 'Cancel',
-      outlined: true
-    },
-    acceptProps: {
-      icon: 'pi pi-check',
-      label: 'Confirm'
-    },
-    accept: () => {
-      toast.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 })
-    },
-    reject: () => {
-      toast.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected', life: 3000 })
-    }
-  })
-}
 //
 const op = ref(null)
 
@@ -232,8 +204,7 @@ const toggle = (event) => {
     </template>
   </prime_card>
 
-  <Button @click="showTemplate($event)" label="Save"></Button>
-  <Toast />
+  <prime_toast />
 
   <RouterView />
 </template>

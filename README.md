@@ -1,5 +1,5 @@
 # Facebook
-👋 Hello! 🗣️ Design presentation about online Social project named “Faceb ook”.
+👋 Hello! 🗣️ Design presentation about online Social project named “Facebook”.
 
 🎨 Design motivation for an online Facebook project.
 
@@ -12,3 +12,16 @@
 
 # Preview Login
 ![This is an image](https://raw.githubusercontent.com/learncodingeasy/Facebook/main/facebook_vue/src/assets/image/Login.png)
+
+# Preview Login
+![This is an image](https://raw.githubusercontent.com/learncodingeasy/Facebook/main/facebook_vue/src/assets/image/Login.png)
+
+# Preview Login
+![This is an image](https://raw.githubusercontent.com/learncodingeasy/Facebook/main/facebook_vue/src/assets/image/Login.png)
+
+# Preview Login
+![This is an image](https://raw.githubusercontent.com/learncodingeasy/Facebook/main/facebook_vue/src/assets/image/Login.png)
+
+# Preview Login
+![This is an image](https://raw.githubusercontent.com/learncodingeasy/Facebook/main/facebook_vue/src/assets/image/Login.png)
+

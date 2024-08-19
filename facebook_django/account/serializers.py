@@ -2,7 +2,9 @@
 
 from rest_framework import serializers
 
-from .models import User, FriendshipRequest
+from .models import User
+
+# , FriendshipRequest
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -11,30 +13,31 @@ class UserSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "name",
+            "surname",
             "email",
-            "personal_phone",
-            "public_phone",
-            "address",
-            "gender",
-            "workplace_company",
-            "workplace_position",
-            "workplace_city_town",
-            "workplace_description",
-            "workplace_time_period",
             "date_of_birth",
-            "get_avatar",
-            "get_cover",
-            "friends_count",
-            "posts_count",
+            "gender",
+            # "personal_phone",
+            # "public_phone",
+            # "address",
+            # "workplace_company",
+            # "workplace_position",
+            # "workplace_city_town",
+            # "workplace_description",
+            # "workplace_time_period",
+            # "get_avatar",
+            # "get_cover",
+            # "friends_count",
+            # "posts_count",
         )
 
 
-class FriendshipRequestSerializer(serializers.ModelSerializer):
-    created_by = UserSerializer(read_only=True)
+# class FriendshipRequestSerializer(serializers.ModelSerializer):
+#     created_by = UserSerializer(read_only=True)
 
-    class Meta:
-        model = FriendshipRequest
-        fields = (
-            "id",
-            "created_by",
-        )
+#     class Meta:
+#         model = FriendshipRequest
+#         fields = (
+#             "id",
+#             "created_by",
+#         )

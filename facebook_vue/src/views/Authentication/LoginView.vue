@@ -15,17 +15,16 @@
             </div>
             <div class="wrapper_form_login shadow-2xl rounded-lg">
               <!-- Log in -->
-              <form class="form_login" v-on:submit.prevent="submitForm">
+              <form class="form_login" v-on:submit.prevent="submitFormLogin">
                 <prime_card class="p-3">
                   <template #header>
                     <div class="my-5 font-bold text-3xl">Log in</div>
                   </template>
-
                   <template #title>
                     <prime_float_label class="mt-5">
                       <prime_input_text
                         id="emailAddress"
-                        v-model="form.email"
+                        v-model="formLogin.email"
                         class="block w_100"
                       />
                       <label for="emailAddress" class="text-base">Your E-mail Address</label>
@@ -35,8 +34,7 @@
                     <prime_float_label class="mt-5">
                       <prime_input_password
                         id="password"
-                        v-model="form.password"
-                        class=""
+                        v-model="formLogin.password"
                         :feedback="false"
                       />
                       <label for="password">password</label>
@@ -45,20 +43,18 @@
                   <template #footer>
                     <div class="row">
                       <!-- Errors -->
-                      <template v-if="errors.length > 0">
-                        <div class="alert alert-danger" role="alert">
-                          <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
-                        </div>
+                      <template v-if="errorsLogin.length > 0">
+                        <prime_toast></prime_toast>
                       </template>
-
                       <!-- Login -->
                       <div class="mt-3">
-                        <prime_button
-                          type="button"
-                          label="Log In"
-                          severity="info"
-                          class="!block w_100 bg_facebook_color_1_important"
-                        />
+                        <button
+                          type="submit"
+                          class="d_block_important mt-5 mb-3 mx-auto w_100 bg-blue-500 py-3 px-5 rounded text-white"
+                          @click.prevent="submitFormLogin"
+                        >
+                          Log In
+                        </button>
                         <a href="#" class="text-blue-600 mx-auto my-4 block text-center"
                           >Forgotten password?</a
                         >
@@ -77,7 +73,9 @@
               </form>
               <!-- Signup -->
               <div class="card flex justify-center">
-                <form class="space-y-6" v-on:submit.prevent="submitFormSignup">
+                <!-- @submit.prevent="submitFormSignup" -->
+                <form class="space-y-6">
+                  <!-- <form class="space-y-6" @submit.prevent="submitFormSignup"> -->
                   <prime_dialog
                     v-model:visible="visible"
                     modal
@@ -89,13 +87,13 @@
                     >
                     <prime_fluid>
                       <div class="grid grid-cols-2 gap-4">
-                        <!-- First name personal_phone -->
+                        <!-- First name -->
                         <div>
                           <prime_input_text placeholder="First name" v-model="formSignup.name" />
                         </div>
                         <!-- Surname -->
                         <div>
-                          <prime_input_text placeholder="Surname" />
+                          <prime_input_text placeholder="Surname" v-model="formSignup.surname" />
                         </div>
                         <!-- Mobile number or email address -->
                         <div class="col-span-full">
@@ -114,32 +112,34 @@
                         <!-- password2 -->
                         <div class="col-span-full">
                           <prime_input_password
-                            placeholder="New Password"
+                            placeholder="Repeat password"
                             v-model="formSignup.password2"
                           />
                         </div>
+                        <!-- Date of birth -->
                         <div class="col-span-full">Date of birth</div>
                         <div class="col-span-full">
                           <div class="flex flex-col md:flex-row gap-2">
                             <!-- Day -->
                             <prime_input_group>
-                              <prime_date_picker v-model="date" view="day" dateFormat="dd" />
+                              <prime_date_picker v-model="day" view="day" dateFormat="dd" />
                             </prime_input_group>
                             <!-- Month -->
                             <prime_input_group>
-                              <prime_date_picker v-model="date" view="month" dateFormat="mm" />
+                              <prime_date_picker v-model="month" view="month" dateFormat="mm" />
                             </prime_input_group>
                             <!-- Year -->
                             <prime_input_group>
-                              <prime_date_picker v-model="date" view="year" dateFormat="yy" />
+                              <prime_date_picker v-model="year" view="year" dateFormat="yy" />
                             </prime_input_group>
                           </div>
                         </div>
+                        <!-- Gender -->
                         <div class="col-span-full">Gender</div>
                         <div class="flex flex-col md:flex-row gap-2">
                           <prime_input_group>
                             <prime_check_box
-                              v-model="gender"
+                              v-model="formSignup.gender"
                               inputId="ingredient1"
                               name="gender"
                               value="Female"
@@ -148,7 +148,7 @@
                           </prime_input_group>
                           <prime_input_group>
                             <prime_check_box
-                              v-model="gender"
+                              v-model="formSignup.gender"
                               inputId="ingredient2"
                               name="gender"
                               value="Male"
@@ -158,7 +158,7 @@
 
                           <prime_input_group>
                             <prime_check_box
-                              v-model="gender"
+                              v-model="formSignup.gender"
                               inputId="ingredient3"
                               name="gender"
                               value="Custom"
@@ -169,20 +169,28 @@
                       </div>
                     </prime_fluid>
                     <div class="flex justify-center gap-2">
-                      <prime_button
-                        label="Signup"
-                        severity="success"
-                        class="d_block_important mt-5 mb-3 mx-auto w_50"
-                      />
+                      <button
+                        type="submit"
+                        class="d_block_important mt-5 mb-3 mx-auto w_50 bg-green-500 py-3 px-5 rounded text-white"
+                        @click.prevent="submitFormSignup"
+                      >
+                        Submit
+                      </button>
                     </div>
                   </prime_dialog>
+                  <!-- Errors -->
+                  <template v-if="errorsSignup.length > 0">
+                    <prime_toast />
+                  </template>
                 </form>
               </div>
+              <button @click="submitFormTest">test</button>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <prime_toast />
   </div>
 </template>
 
@@ -198,39 +206,41 @@ export default {
   },
   data() {
     return {
-      form: {
+      formLogin: {
         email: '',
         password: ''
       },
-      errors: [],
+      errorsLogin: [],
+      // visible Signup
       visible: false,
-      // For Date
-      date: null,
       // Signup
       formSignup: {
-        email: '',
         name: '',
-        personal_phone: '',
-        public_phone: '',
-        address: '',
+        surname: '',
+        email: '',
+        date_of_birth: null,
+        gender: '',
         password1: '',
         password2: ''
       },
+      day: '',
+      month: '',
+      year: '',
       errorsSignup: []
     }
   },
   methods: {
-    async submitForm() {
-      this.errors = []
-      if (this.form.email === '') {
-        this.errors.push('Your e-mail is missing')
+    async submitFormLogin() {
+      this.errorsLogin = []
+      if (this.formLogin.email === '') {
+        this.errorsLogin.push('Your e-mail is missing')
       }
-      if (this.form.password === '') {
-        this.errors.push('Your password is missing')
+      if (this.formLogin.password === '') {
+        this.errorsLogin.push('Your password is missing')
       }
-      if (this.errors.length === 0) {
+      if (this.errorsLogin.length === 0) {
         await axios
-          .post('/api/login/', this.form)
+          .post('/api/login/', this.formLogin)
           .then((response) => {
             this.userStore.setToken(response.data)
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.access
@@ -241,7 +251,7 @@ export default {
             this.errors.push('The email or password is incorrect! Or the user is not activated!')
           })
       }
-      if (this.errors.length === 0) {
+      if (this.errorsLogin.length === 0) {
         await axios
           .get('/api/me/')
           .then((response) => {
@@ -255,25 +265,58 @@ export default {
     },
     submitFormSignup() {
       this.errorsSignup = []
-      if (this.formSignup.email === '') {
-        this.errorsSignup.push('Your e-mail is missing')
-      }
+
+      // استخراج اليوم، الشهر، والسنة من كائنات Date وتنسيقها
+      const day = this.day.getDate().toString().padStart(2, '0')
+      const month = (this.month.getMonth() + 1).toString().padStart(2, '0')
+      const year = this.year.getFullYear()
+
+      const formattedDate = `${year}-${month}-${day}`
+      this.formSignup.date_of_birth = formattedDate
+
       if (this.formSignup.name === '') {
+        this.$toast.add({
+          severity: 'error',
+          summary: 'User Name missing',
+          detail: 'Your name is missing',
+          life: 3000
+        })
         this.errorsSignup.push('Your name is missing')
       }
-      // if (this.formSignup.personal_phone === '') {
-      //   this.errorsSignup.push('Your Personal Phone is missing')
-      // }
-      // if (this.formSignup.public_phone === '') {
-      //   this.errorsSignup.push('Your Public Phone is missing')
-      // }
-      if (this.form.address === '') {
-        this.errorsSignup.push('Your Address is missing')
+      if (this.formSignup.surname === '') {
+        this.$toast.add({
+          severity: 'error',
+          summary: 'User Surname missing',
+          detail: 'Your Surname is missing',
+          life: 3000
+        })
+        this.errorsSignup.push('Your surname is missing')
+      }
+      if (this.formSignup.email === '') {
+        this.$toast.add({
+          severity: 'error',
+          summary: 'User Is missing',
+          detail: 'Your e-mail is missing',
+          life: 3000
+        })
+        this.errorsSignup.push('Your e-mail is missing')
       }
       if (this.formSignup.password1 === '') {
+        this.$toast.add({
+          severity: 'error',
+          summary: 'User passwordIs missing',
+          detail: 'Your password is missing',
+          life: 3000
+        })
         this.errorsSignup.push('Your password is missing')
       }
       if (this.formSignup.password1 !== this.formSignup.password2) {
+        this.$toast.add({
+          severity: 'error',
+          summary: 'User  password does not match',
+          detail: 'Your password  does not match',
+          life: 3000
+        })
         this.errorsSignup.push('The password does not match')
       }
       if (this.errorsSignup.length === 0) {
@@ -281,30 +324,36 @@ export default {
           .post('/api/signup/', this.formSignup)
           .then((response) => {
             if (response.data.message === 'success') {
-              // this.toastStore.showToast(
-              //   5000,
-              //   'The user is registered. Please activate your account by clicking your email link.',
-              //   'bg-emerald-500'
-              // )
-              this.formSignup.email = ''
+              this.$toast.add({
+                severity: 'success',
+                summary: 'User Is Registered',
+                detail: 'Please activate your account by clicking your email link',
+                life: 3000
+              })
               this.formSignup.name = ''
-              this.formSignup.personal_phone = ''
-              this.formSignup.public_phone = ''
-              this.formSignup.address = ''
+              this.formSignup.surname = ''
+              this.formSignup.email = ''
+              this.formSignup.date_of_birth = ''
+              this.formSignup.gender = ''
               this.formSignup.password1 = ''
               this.formSignup.password2 = ''
               // this.$router.push('/loginView')
               window.location.reload()
             } else {
               const data = JSON.parse(response.data.message)
+              this.$toast.add({
+                severity: 'error',
+                summary: 'Error Message',
+                detail: 'Message Content Something went wrong. Please try again',
+                life: 6000
+              })
               for (const key in data) {
                 this.errors.push(data[key][0].message)
               }
-              // this.toastStore.showToast(
-              //   5000,
-              //   'Something went wrong. Please try again',
-              //   'bg-red-300'
-              // )
+              console.log(`Bad`, this.formSignup.date_of_birth)
+              console.log(`Day`, this.day)
+              console.log(`month`, this.month)
+              console.log(`year`, this.year)
             }
           })
           .catch((error) => {

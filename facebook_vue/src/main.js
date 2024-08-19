@@ -26,8 +26,6 @@ axios.defaults.baseURL = "http://127.0.0.1:8000"
 
 // Prime Vue 
 import PrimeVue from "primevue/config";
-// Toast
-import ToastService from 'primevue/toastservice';
 // Popup
 import ConfirmationService from 'primevue/confirmationservice'
 import DialogService from 'primevue/dialogservice'
@@ -58,6 +56,14 @@ import Card from 'primevue/card';
 // Theme
 import Noir from './presets/Noir.js';
 import ThemeSwitcher from './components/Theme/ThemeSwitcher.vue';
+// Toast
+import Toast from 'primevue/toast';
+import ToastService from 'primevue/toastservice';
+
+// Message
+import Message from 'primevue/message';
+
+
 // PrimeIcons أيقونات 
 import 'primeicons/primeicons.css'
 import 'tailwindcss/tailwind.css'
@@ -86,7 +92,6 @@ app.use(PrimeVue, {
       }
   }
 });
-app.use(ToastService);
 app.use(ConfirmationService);
 app.use(DialogService);
 app.component('prime_button', Button);
@@ -108,7 +113,13 @@ app.component('prime_popover', Popover);
 app.component('prime_card', Card);
 
 app.component('prime_dialog', Dialog);
-
+// Toast
+// app.use(Toast);
+app.component('prime_toast', Toast);
+app.use(ToastService);
+// Message
+// app.use(Message);
+app.component('prime_message', Message);
 app.mount('#app')
 
 
