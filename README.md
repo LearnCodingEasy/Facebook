@@ -13,15 +13,7 @@
 # Preview Login
 ![This is an image](https://raw.githubusercontent.com/learncodingeasy/Facebook/main/facebook_vue/src/assets/image/Login.png)
 
-# Preview Login
-![This is an image](https://raw.githubusercontent.com/learncodingeasy/Facebook/main/facebook_vue/src/assets/image/Login.png)
+# Preview Signup
+![This is an image](https://raw.githubusercontent.com/learncodingeasy/Facebook/main/facebook_vue/src/assets/image/Signup.png)
 
-# Preview Login
-![This is an image](https://raw.githubusercontent.com/learncodingeasy/Facebook/main/facebook_vue/src/assets/image/Login.png)
-
-# Preview Login
-![This is an image](https://raw.githubusercontent.com/learncodingeasy/Facebook/main/facebook_vue/src/assets/image/Login.png)
-
-# Preview Login
-![This is an image](https://raw.githubusercontent.com/learncodingeasy/Facebook/main/facebook_vue/src/assets/image/Login.png)
 
