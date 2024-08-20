@@ -236,6 +236,17 @@
 }
 
 // Popup User Option
+.div_wrapper_profile {
+  a {
+    align-items: center;
+    margin-bottom: 1rem;
+    .user_img {
+      margin-right: 12px;
+    }
+    .user_name {
+    }
+  }
+}
 .div_wrapper_logout {
   align-items: center;
   .icon_logout {
@@ -250,7 +261,6 @@
     align-items: center;
   }
 }
-
 .div_wrapper_toggle_theme {
   align-items: center;
   margin-top: 1rem;

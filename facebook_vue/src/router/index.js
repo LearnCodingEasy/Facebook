@@ -2,8 +2,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
+// Authentication
 import LoginView from '../views/Authentication/LoginView.vue'
 
+// Account
+import ProfileView from '../views/Account/ProfileView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -18,6 +21,15 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginView
+    },
+    // Account
+    {
+      path: '/profile/:id',
+      name: 'profile',
+      component: ProfileView,
+      meta: {
+        requireLogin: true
+      }
     },
     {
       path: '/about',

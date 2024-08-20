@@ -2,18 +2,47 @@
 import { RouterLink, RouterView } from 'vue-router'
 
 import { ref } from 'vue'
-
 //
-const op = ref(null)
+import { onMounted } from 'vue'
+import { useUserStore } from '@/stores/user'
+import { useRouter } from 'vue-router'
 
+const userStore = useUserStore()
+userStore.initStore()
+const router = useRouter()
+
+onMounted(() => {
+  // Perform any necessary operations on component mount
+  if (!userStore.user.access) {
+    console.log('User Data: ', userStore.user.access)
+    // Replace '/login' with your actual login route
+    router.push('/login')
+  } else {
+    // Set default Authorization header for axios
+    axios.defaults.headers.common['Authorization'] = `Bearer ${userStore.user.access}`
+    // console.log('User Data: ', userStore.user)
+  }
+})
+
+// For Toggle Theme
+const op = ref(null)
 const toggle = (event) => {
   op.value.toggle(event)
+}
+// Log Out
+let logout = () => {
+  console.log('User Log out')
+  userStore.removeToken()
+  // توجيه المستخدم إلى صفحة تسجيل الدخول
+  setTimeout(() => {
+    router.push('/login').then(() => {})
+  }, 10)
 }
 </script>
 
 <template>
   <!-- Header -->
-  <prime_card class="header_wrapper">
+  <prime_card class="header_wrapper" v-if="userStore.user.isAuthenticated">
     <template #content>
       <header class="card shadow-md fixed top-0 left-0 right-0">
         <div class="container mx-auto flex justify-between items-center">
@@ -193,6 +222,27 @@ const toggle = (event) => {
             <!-- Popup User Option -->
             <prime_popover ref="op">
               <div class="w-[25rem]">
+                <!-- User Profile -->
+                <div class="div_wrapper_profile">
+                  <RouterLink
+                    class="flex align-middle"
+                    v-if="userStore.user.id"
+                    :to="{ name: 'profile', params: { id: userStore.user.id } }"
+                  >
+                    <span class="user_img">
+                      <!-- v-if="userStore.user.avatar" -->
+                      <img
+                        v-if="userStore.user.avatar"
+                        :src="userStore.user.avatar"
+                        class="rounded-full"
+                        alt=""
+                      />
+                      <!-- v-else  -->
+                      <img v-else src="./assets/image/user.png" class="rounded-full" alt="" />
+                    </span>
+                    <span class="user_name">{{ userStore.user.name }}</span>
+                  </RouterLink>
+                </div>
                 <!-- Log Out -->
                 <div class="div_wrapper_logout flex align-middle">
                   <div class="icon_logout flex justify-center align-middle">
@@ -219,29 +269,13 @@ const toggle = (event) => {
 </template>
 
 <script>
-// import axios from 'axios'
-import { useUserStore } from '@/stores/user'
+import axios from 'axios'
 
 export default {
   setup() {
-    const userStore = useUserStore()
-
-    return {
-      userStore
-    }
+    return {}
   },
-  methods: {
-    logout() {
-      console.log('Log out')
-
-      this.userStore.removeToken()
-
-      // توجيه المستخدم إلى صفحة تسجيل الدخول
-      setTimeout(() => {
-        this.$router.push('/login').then(() => {})
-      }, 10)
-    }
-  }
+  methods: {}
 }
 </script>
 

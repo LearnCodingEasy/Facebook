@@ -1,5 +1,7 @@
 <script setup>
-// import TheWelcome from '../components/TheWelcome.vue'
+import { useUserStore } from '@/stores/user'
+const userStore = useUserStore()
+userStore.initStore()
 </script>
 
 <template>
@@ -13,12 +15,24 @@
               <ul>
                 <!-- user -->
                 <li class="li_user">
-                  <a class="" href="#">
+                  <RouterLink
+                    v-if="userStore.user.id"
+                    :to="{ name: 'profile', params: { id: userStore.user.id } }"
+                  >
                     <span class="img">
-                      <img src="../assets/image/user.png" class="" alt="" />
+                      <!-- v-if="userStore.user.avatar" -->
+                      <img
+                        v-if="userStore.user.avatar"
+                        :src="userStore.user.avatar"
+                        class=""
+                        :alt="userStore.user.name"
+                      />
+                      <!-- v-else -->
+                      <img v-else src="../assets/image/user.png" class="" alt="" />
                     </span>
-                    <span class="text"> User Name </span>
-                  </a>
+                    <span class="text" v-if="userStore.user.name"> {{ userStore.user.name }} </span>
+                    <span class="text" v-else> User Name </span>
+                  </RouterLink>
                 </li>
                 <!-- Find friends -->
                 <li>
@@ -153,6 +167,7 @@
         </div>
         <!-- Center -->
         <div class="content basis-1/2 lg:basis-1/2 md:basis-1/2 sm:basis-full">
+          <!-- Creat Story -->
           <div class="wrapper_creat_story">
             <div class="inner_creat_story">
               <div class="wrapprt_swiper">
@@ -179,7 +194,15 @@
                         <div class="user_create_story">
                           <div class="img">
                             <!-- :src="userStore.user.avatar" -->
-                            <img src="" class="" alt="" />
+                            <!-- v-if="userStore.user.avatar" -->
+                            <img
+                              v-if="userStore.user.avatar"
+                              :src="userStore.user.avatar"
+                              class=""
+                              :alt="userStore.user.name"
+                            />
+                            <!-- v-else -->
+                            <img v-else src="../assets/image/user.png" class="" alt="" />
                           </div>
                           <div class="icon">
                             <span class="">
@@ -249,303 +272,282 @@
             </div>
           </div>
           <!-- All Posts Item -->
-          <!-- 1 -->
-          <div class="wapper_item_post">
-            <div class="wrapper_post_image_video card">
-              <div class="inner_post_image_video">
-                <div class="content">
-                  <div class="user_data_and_option_post">
-                    <div class="user_data">
-                      <div class="img">
-                        <img src="../assets/image/user.png" class="" alt="" />
-                      </div>
-                      <div class="user_info">
-                        <a class="user_view_profile" href="/">
-                          <div class="user_name">post created_by name</div>
-                        </a>
-                        <div class="add_at_trand">
-                          <span class="trand"> Suggested for you </span>
-                          <span class="add_at">
-                            <span class="time_post_trand"> 10 minutes ago</span>
-                            <span class="icone_post_trand">
-                              <i class="fas fa-globe fa-fw"></i>
-                            </span>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="option_post">
-                      <div class="option">
-                        <i class="fas fa-ellipsis-h fa-fw"></i>
-                      </div>
-                      <div class="close">
-                        <i class="fas fa-times fa-fw"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="post_content">
-                    <!-- v-if="post.body" -->
-                    <div class="post_text">
-                      <p class="text-base font-normal">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda doloribus
-                        quis cum, earum qui deserunt. Maxime quasi tenetur fugiat consequatur.
-                        Voluptates perferendis officia impedit deleniti blanditiis unde quisquam
-                        labore sint.
-                      </p>
-                    </div>
-                    <!-- v-if="post.image" -->
-                    <div class="post_img_or_video">
-                      <div>
-                        <a href="/">
-                          <img src="../assets/image/suits_arbice_1.jpg" class="img-fluid" />
-                        </a>
-                      </div>
-                    </div>
-                    <!-- v-if="post.video" -->
-                    <!-- <div class="post_img_or_video">
-                        <div>
-                          <a href="/">
-                            <video
-                              src="/video/Facebook.mp4"
-                              class="img-fluid"
-                              controls
-                            />
-                          </a>
-                        </div>
-                      </div> -->
-                    <!--  -->
-                    <div class="post_count_like_comment_share">
-                      <div class="count_like flex items-center">
-                        <span class="icon_like">
-                          <img src="../assets/image/like.png" class="image_like" alt="" />
-                        </span>
-                        <span class="icon_heart">
-                          <img src="../assets/image/heart.png" class="image_heart" alt="" />
-                        </span>
-                        <span class="userlikethisPost">
-                          <span class="count_like_number">
-                            <!-- @mouseover="getAllUserLikePost(post.id)" -->
-                            <span> You And 700 Others </span>
-                          </span>
-                        </span>
-                      </div>
-                      <div class="count_comment_share">
-                        <div class="comment">
-                          <span class="count_like">5 </span>
-                          <span class="icon_comment"> <i class="fas fa-comment fa-fw"></i> </span>
-                          <span class="text_comment"> comments </span>
-                        </div>
-                        <div class="share">
-                          <span class="count_like">1 </span>
-                          <span class="icon_share"><i class="fas fa-share fa-fw"></i> </span>
-                          <span class="text_share">shares </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="wrapper_add_like_coment_send_share">
-                    <div class="inner_add_like_coment_send_share">
-                      <div class="add_like">
-                        <!-- @click="likePost(post.id)" -->
-                        <div class="like">
-                          <span class="icon like">
-                            <!-- <i class="fas fa-thumbs-up"></i> -->
-                            <!-- <img src="/image/home_content_post.png" class="" alt=""> -->
-                          </span>
-                          <span class="text"> like </span>
-                        </div>
-                      </div>
-                      <!-- Togle Show   -->
-                      <!-- @click="toggleAddCommentPost(post.id)" -->
-                      <div class="add_comment">
-                        <div class="comment">
-                          <span class="icon comment">
-                            <!-- <i class="fas fa-comment fa-fw"></i> -->
-                          </span>
-                          <span class="text"> comment </span>
-                        </div>
-                      </div>
 
-                      <div class="add_send">
-                        <div class="send">
-                          <span class="icon send">
-                            <!-- <i class="fab fa-whatsapp fa-fw"></i> -->
-                          </span>
-                          <span class="text"> send </span>
-                        </div>
-                      </div>
-                      <div class="add_share">
-                        <div class="share">
-                          <span class="icon share">
-                            <!-- <i class="fas fa-share fa-fw"></i> -->
-                          </span>
-                          <span class="text"> share </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- 2 -->
-          <div class="wapper_item_post">
-            <div class="wrapper_post_image_video card">
-              <div class="inner_post_image_video">
-                <div class="content">
-                  <div class="user_data_and_option_post">
-                    <div class="user_data">
-                      <div class="img">
-                        <img src="../assets/image/user.png" class="" alt="" />
-                      </div>
-                      <div class="user_info">
-                        <a class="user_view_profile" href="/">
-                          <div class="user_name">post created_by name</div>
-                        </a>
-                        <div class="add_at_trand">
-                          <span class="trand"> Suggested for you </span>
-                          <span class="add_at">
-                            <span class="time_post_trand"> 10 minutes ago</span>
-                            <span class="icone_post_trand">
-                              <i class="fas fa-globe fa-fw"></i>
-                            </span>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="option_post">
-                      <div class="option">
-                        <i class="fas fa-ellipsis-h fa-fw"></i>
-                      </div>
-                      <div class="close">
-                        <i class="fas fa-times fa-fw"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="post_content">
-                    <!-- v-if="post.body" -->
-                    <div class="post_text">
-                      <p class="text-base font-normal">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda doloribus
-                        quis cum, earum qui deserunt. Maxime quasi tenetur fugiat consequatur.
-                        Voluptates perferendis officia impedit deleniti blanditiis unde quisquam
-                        labore sint.
-                      </p>
-                    </div>
-                    <!-- v-if="post.image" -->
-                    <div class="post_img_or_video">
-                      <div>
-                        <a href="/">
-                          <img src="../assets/image/Asser_Yassin.jpg" class="img-fluid" />
-                        </a>
-                      </div>
-                    </div>
-                    <!-- v-if="post.video" -->
-                    <!-- <div class="post_img_or_video">
-                        <div>
-                          <a href="/">
-                            <video
-                              src="/video/Facebook.mp4"
-                              class="img-fluid"
-                              controls
-                            />
-                          </a>
-                        </div>
-                      </div> -->
-                    <!--  -->
-                    <div class="post_count_like_comment_share">
-                      <div class="count_like flex items-center">
-                        <span class="icon_like">
-                          <img src="../assets/image/like.png" class="image_like" alt="" />
-                        </span>
-                        <span class="icon_heart">
-                          <img src="../assets/image/heart.png" class="image_heart" alt="" />
-                        </span>
-                        <span class="userlikethisPost">
-                          <span class="count_like_number">
-                            <!-- @mouseover="getAllUserLikePost(post.id)" -->
-                            <span> You And 700 Others </span>
-                          </span>
-                        </span>
-                      </div>
-                      <div class="count_comment_share">
-                        <div class="comment">
-                          <span class="count_like">5 </span>
-                          <span class="text_comment"> comments </span>
-                        </div>
-                        <div class="share">
-                          <span class="count_like">1 </span>
-                          <span class="icon_share">shares </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="wrapper_add_like_coment_send_share">
-                    <div class="inner_add_like_coment_send_share">
-                      <div class="add_like">
-                        <!-- @click="likePost(post.id)" -->
-                        <div class="like">
-                          <span class="icon like">
-                            <!-- <i class="fas fa-thumbs-up"></i> -->
-                            <!-- <img src="/image/home_content_post.png" class="" alt=""> -->
-                          </span>
-                          <span class="text"> like </span>
-                        </div>
-                      </div>
-                      <!-- Togle Show   -->
-                      <!-- @click="toggleAddCommentPost(post.id)" -->
-                      <div class="add_comment">
-                        <div class="comment">
-                          <span class="icon comment">
-                            <!-- <i class="fas fa-comment fa-fw"></i> -->
-                          </span>
-                          <span class="text"> comment </span>
-                        </div>
-                      </div>
-
-                      <div class="add_send">
-                        <div class="send">
-                          <span class="icon send">
-                            <!-- <i class="fab fa-whatsapp fa-fw"></i> -->
-                          </span>
-                          <span class="text"> send </span>
-                        </div>
-                      </div>
-                      <div class="add_share">
-                        <div class="share">
-                          <span class="icon share">
-                            <!-- <i class="fas fa-share fa-fw"></i> -->
-                          </span>
-                          <span class="text"> share </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Card -->
-          <prime_card>
+          <!-- Card 1 -->
+          <prime_card class="wapper_item_post">
             <template #header>
-              <img
-                alt="user header"
-                src="https://primefaces.org/cdn/primevue/images/usercard.png"
-              />
+              <div class="user_data_and_option_post">
+                <div class="user_data">
+                  <div class="img">
+                    <img src="../assets/image/user.png" class="" alt="" />
+                  </div>
+                  <div class="user_info">
+                    <a class="user_view_profile" href="/">
+                      <div class="user_name">post created_by name</div>
+                    </a>
+                    <div class="add_at_trand">
+                      <span class="trand"> Suggested for you </span>
+                      <span class="add_at">
+                        <span class="time_post_trand"> 10 minutes ago</span>
+                        <span class="icone_post_trand">
+                          <i class="fas fa-globe fa-fw"></i>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="option_post">
+                  <div class="option">
+                    <!-- <i class="fas fa-ellipsis-h fa-fw"></i> -->
+                    <i class="text-lg text-surface-500 dark:text-surface-400 pi pi-ellipsis-h"></i>
+                  </div>
+                  <div class="close">
+                    <!-- <i class="fas fa-times fa-fw"></i> -->
+                    <i class="text-lg ml-4 text-surface-500 dark:text-surface-400 pi pi-times"></i>
+                  </div>
+                </div>
+              </div>
             </template>
-            <template #title>Advanced Card</template>
-            <template #subtitle>Card subtitle</template>
             <template #content>
-              <p class="m-0">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur
-                error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam
-                nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
-              </p>
+              <div class="post_content">
+                <!-- v-if="post.body" -->
+                <div class="post_text">
+                  <p class="text-base font-normal">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda doloribus
+                    quis cum, earum qui deserunt. Maxime quasi tenetur fugiat consequatur.
+                    Voluptates perferendis officia impedit deleniti blanditiis unde quisquam labore
+                    sint.
+                  </p>
+                </div>
+                <!-- v-if="post.image" -->
+                <div class="post_img_or_video">
+                  <div>
+                    <a href="/">
+                      <img src="../assets/image/Asser_Yassin.jpg" class="img-fluid" />
+                    </a>
+                  </div>
+                </div>
+                <!-- v-if="post.video" -->
+                <!-- <div class="post_img_or_video">
+                        <div>
+                          <a href="/">
+                            <video
+                              src="/video/Facebook.mp4"
+                              class="img-fluid"
+                              controls
+                            />
+                          </a>
+                        </div>
+                      </div> -->
+                <!--  -->
+                <div class="post_count_like_comment_share">
+                  <div class="count_like flex items-center">
+                    <span class="icon_like">
+                      <img src="../assets/image/like.png" class="image_like" alt="" />
+                    </span>
+                    <span class="icon_heart">
+                      <img src="../assets/image/heart.png" class="image_heart" alt="" />
+                    </span>
+                    <span class="userlikethisPost">
+                      <span class="count_like_number">
+                        <!-- @mouseover="getAllUserLikePost(post.id)" -->
+                        <span> You And 700 Others </span>
+                      </span>
+                    </span>
+                  </div>
+                  <div class="count_comment_share">
+                    <div class="comment">
+                      <span class="count_like">5 </span>
+                      <span class="text_comment"> comments </span>
+                    </div>
+                    <div class="share">
+                      <span class="count_like">1 </span>
+                      <span class="icon_share">shares </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </template>
             <template #footer>
-              <div class="flex gap-4 mt-1">
-                <prime_button label="Cancel" severity="secondary" outlined class="w-full" />
-                <prime_button label="Save" class="w-full" />
+              <div class="wrapper_add_like_coment_send_share">
+                <div class="inner_add_like_coment_send_share">
+                  <div class="add_like">
+                    <!-- @click="likePost(post.id)" -->
+                    <div class="like">
+                      <span class="icon like">
+                        <!-- <i class="fas fa-thumbs-up"></i> -->
+                        <!-- <img src="/image/home_content_post.png" class="" alt=""> -->
+                      </span>
+                      <span class="text"> like </span>
+                    </div>
+                  </div>
+                  <!-- Togle Show   -->
+                  <!-- @click="toggleAddCommentPost(post.id)" -->
+                  <div class="add_comment">
+                    <div class="comment">
+                      <span class="icon comment">
+                        <!-- <i class="fas fa-comment fa-fw"></i> -->
+                      </span>
+                      <span class="text"> comment </span>
+                    </div>
+                  </div>
+
+                  <div class="add_send">
+                    <div class="send">
+                      <span class="icon send">
+                        <!-- <i class="fab fa-whatsapp fa-fw"></i> -->
+                      </span>
+                      <span class="text"> send </span>
+                    </div>
+                  </div>
+                  <div class="add_share">
+                    <div class="share">
+                      <span class="icon share">
+                        <!-- <i class="fas fa-share fa-fw"></i> -->
+                      </span>
+                      <span class="text"> share </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </prime_card>
+          <!-- Card 2 -->
+          <prime_card class="wapper_item_post">
+            <template #header>
+              <div class="user_data_and_option_post">
+                <div class="user_data">
+                  <div class="img">
+                    <img src="../assets/image/user.png" class="" alt="" />
+                  </div>
+                  <div class="user_info">
+                    <a class="user_view_profile" href="/">
+                      <div class="user_name">post created_by name</div>
+                    </a>
+                    <div class="add_at_trand">
+                      <span class="trand"> Suggested for you </span>
+                      <span class="add_at">
+                        <span class="time_post_trand"> 10 minutes ago</span>
+                        <span class="icone_post_trand">
+                          <i class="fas fa-globe fa-fw"></i>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="option_post">
+                  <div class="option">
+                    <!-- <i class="fas fa-ellipsis-h fa-fw"></i> -->
+                    <i class="text-lg text-surface-500 dark:text-surface-400 pi pi-ellipsis-h"></i>
+                  </div>
+                  <div class="close">
+                    <!-- <i class="fas fa-times fa-fw"></i> -->
+                    <i class="text-lg ml-4 text-surface-500 dark:text-surface-400 pi pi-times"></i>
+                  </div>
+                </div>
+              </div>
+            </template>
+            <template #content>
+              <div class="post_content">
+                <!-- v-if="post.body" -->
+                <div class="post_text">
+                  <p class="text-base font-normal">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda doloribus
+                    quis cum, earum qui deserunt. Maxime quasi tenetur fugiat consequatur.
+                    Voluptates perferendis officia impedit deleniti blanditiis unde quisquam labore
+                    sint.
+                  </p>
+                </div>
+                <!-- v-if="post.image" -->
+                <div class="post_img_or_video">
+                  <div>
+                    <a href="/">
+                      <img src="../assets/image/suits_arbice_1.jpg" class="img-fluid" />
+                    </a>
+                  </div>
+                </div>
+                <!-- v-if="post.video" -->
+                <!-- <div class="post_img_or_video">
+                        <div>
+                          <a href="/">
+                            <video
+                              src="/video/Facebook.mp4"
+                              class="img-fluid"
+                              controls
+                            />
+                          </a>
+                        </div>
+                      </div> -->
+                <!--  -->
+                <div class="post_count_like_comment_share">
+                  <div class="count_like flex items-center">
+                    <span class="icon_like">
+                      <img src="../assets/image/like.png" class="image_like" alt="" />
+                    </span>
+                    <span class="icon_heart">
+                      <img src="../assets/image/heart.png" class="image_heart" alt="" />
+                    </span>
+                    <span class="userlikethisPost">
+                      <span class="count_like_number">
+                        <!-- @mouseover="getAllUserLikePost(post.id)" -->
+                        <span> You And 700 Others </span>
+                      </span>
+                    </span>
+                  </div>
+                  <div class="count_comment_share">
+                    <div class="comment">
+                      <span class="count_like">5 </span>
+                      <span class="text_comment"> comments </span>
+                    </div>
+                    <div class="share">
+                      <span class="count_like">1 </span>
+                      <span class="icon_share">shares </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </template>
+            <template #footer>
+              <div class="wrapper_add_like_coment_send_share">
+                <div class="inner_add_like_coment_send_share">
+                  <div class="add_like">
+                    <!-- @click="likePost(post.id)" -->
+                    <div class="like">
+                      <span class="icon like">
+                        <!-- <i class="fas fa-thumbs-up"></i> -->
+                        <!-- <img src="/image/home_content_post.png" class="" alt=""> -->
+                      </span>
+                      <span class="text"> like </span>
+                    </div>
+                  </div>
+                  <!-- Togle Show   -->
+                  <!-- @click="toggleAddCommentPost(post.id)" -->
+                  <div class="add_comment">
+                    <div class="comment">
+                      <span class="icon comment">
+                        <!-- <i class="fas fa-comment fa-fw"></i> -->
+                      </span>
+                      <span class="text"> comment </span>
+                    </div>
+                  </div>
+
+                  <div class="add_send">
+                    <div class="send">
+                      <span class="icon send">
+                        <!-- <i class="fab fa-whatsapp fa-fw"></i> -->
+                      </span>
+                      <span class="text"> send </span>
+                    </div>
+                  </div>
+                  <div class="add_share">
+                    <div class="share">
+                      <span class="icon share">
+                        <!-- <i class="fas fa-share fa-fw"></i> -->
+                      </span>
+                      <span class="text"> share </span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </template>
           </prime_card>
@@ -671,10 +673,19 @@
                 </div>
                 <div class="user">
                   <div class="img">
-                    <img src="../assets/image/user.png" class="" alt="" />
+                    <!-- v-if="userStore.user.avatar" -->
+                    <img
+                      v-if="userStore.user.avatar"
+                      :src="userStore.user.avatar"
+                      class=""
+                      alt=""
+                    />
+                    <!-- v-else  -->
+                    <img v-else src="../assets/image/user.png" class="" alt="" />
                   </div>
                   <div class="user_info">
-                    <span class=""> User Name </span>
+                    <span class="" v-if="userStore.user.name"> {{ userStore.user.name }} </span>
+                    <span class="" v-else> User Name </span>
                   </div>
                 </div>
                 <div class="Switch_to_Page">
