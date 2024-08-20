@@ -28,6 +28,17 @@
 
 ## Website Build
 
+# Facebook
+👋 Hello! 🗣️ Design presentation about online Social project named “Faceb ook”.
+
+🎨 Design motivation for an online Facebook project.
+
+💖 Please click like and appreciate.
+
+🙏 Thank you for supporting and appreciating my efforts
+
+## Website Build
+
 
 ### 1 Git Clone Project
 ```
@@ -70,354 +81,220 @@ django-admin startproject facebook_django
 __________________________________________________
 ### 7 Create Django App
 ```cmd
+cd facebook_django
+```
+```cmd
 python manage.py startapp account
 ```
+__________________________________________________
+### 8 Setup Djang Libraries
 ```python
-python manage.py startapp account
-```
+# Page [facebook/facebook_django/facebook_django/settings.py]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### 8 Create Vue Project
-```
-npm create vue@latest
-```
-
-### 9 Choose Vite [ Project name & Select a framework ]
-```
-√ Project name: ... facebook_vue
-√ Add TypeScript? ... No / Yes
-√ Add JSX Support? ... No / Yes
-√ Add Vue Router for Single Page Application development? ... No / Yes
-√ Add Pinia for state management? ... No / Yes
-√ Add Vitest for Unit Testing? ... No / Yes
-√ Add an End-to-End Testing Solution? » No
-√ Add ESLint for code quality? ... No / Yes
-√ Add Prettier for code formatting? ... No / Yes
-√ Add Vue DevTools 7 extension for debugging? (experimental) ... No / Yes
-
-Scaffolding project in E:\Projects\Facebook\facebook_vue...
-
-Done. Now run:
-
-  cd facebook_vue
-  npm install
-  npm run format
-  npm run dev
-
-```
-__________________________________________________
-### 10 Go To Project [ Install & Run Dev ]
-```
-cd facebook_vue
-npm install
-npm run format
-npm run build
-npm run dev
-```
-__________________________________________________
-### 11  Install Vue Libraries [ 1 - Tailwind | 2 - PrimeVue | 3 - vueuse | 4 - scss | 5 - Axios | 6 - Font Awesome | 7 - Pwa | 8 - | 9 - |  ]
-```
-npm install -D tailwindcss postcss autoprefixer
-npx tailwindcss init -p
-npm install primevue primeicons
-npm install @primevue/themes
-
-npm install -D sass
-npm install axios
-npm i --save @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome@latest @fortawesome/vue-fontawesome@prerelease @fortawesome/free-solid-svg-icons @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons
-npm install -D vite-plugin-pwa
-npm i swiper
-
-npm i unplugin-vue-components -D
-npm i @primevue/auto-import-resolver -D
-
-```
-__________________________________________________
-### 12 Configure Tailwind
-* tailwind.config.js
-```js
-content: [
-"./index.html",
-"./src/**/*.{vue,js,ts,jsx,tsx}",
-],
-```
-* style.css
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-
-### 13 Import Font Awesome
-```js
-// Font Awesome
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fas } from "@fortawesome/free-solid-svg-icons";
-import { fab } from "@fortawesome/free-brands-svg-icons";
-import { far } from "@fortawesome/free-regular-svg-icons";
-// Add Free Icons Styles To SVG Core
-library.add(fas, far, fab);
-
-app.component("fa", FontAwesomeIcon)
-```
-
-__________________________________________________
-### 15 Add Pwa To Vue 
-*  
-```js
-// vite.config.js
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
-// For Pwa
-// https://vite-pwa-org.netlify.app/guide/
-import { VitePWA } from 'vite-plugin-pwa'
-
-export default defineConfig({
-  plugins: [
-    vue(),
-    // For Pwa
-    VitePWA({ 
-      registerType: 'autoUpdate',
-      workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
-        clientsClaim: true,
-        skipWaiting: true,
-        cleanupOutdatedCaches: false,
-        offlineGoogleAnalytics: true,
-        sourcemap: true,
-        runtimeCaching: [
-          {
-            urlPattern: ({ request }) => 
-              request.destination === 'document' || 
-              request.destination === 'script' || 
-              request.destination === 'style' || 
-              request.destination === 'image' || 
-              request.destination === 'font',
-            handler: 'StaleWhileRevalidate',
-            options: {
-              cacheName: 'assets-cache',
-              expiration: {
-                maxEntries: 100,
-                maxAgeSeconds: 60 * 60 * 24 * 30 
-              }
-            }
-          }
-        ],
-      },
-      devOptions: {
-        enabled: true
-      },
-      injectRegister: 'auto',
-      includeAssets: ["**/*"],
-      manifest: {
-        name: 'Facebook',
-        short_name: 'Facebook',
-        description: 'My Awesome App Facebook',
-        theme_color: '#ffffff',
-        icons: [
-                {
-                  "src": "./images/icons/facebook_icon_72x72.png",
-                  "type": "image/png",
-                  "sizes": "72x72",
-                  "purpose": "any maskable"
-                },
-                {
-                  "src": "./images/icons/facebook_icon_96x96.png",
-                  "type": "image/png",
-                  "sizes": "96x96",
-                  "purpose": "any maskable"
-                },
-                {
-                  "src": "./images/icons/facebook_icon_128x128.png",
-                  "type": "image/png",
-                  "sizes": "128x128",
-                  "purpose": "any maskable"
-                },
-                {
-                  "src": "./images/icons/facebook_icon_144x144.png",
-                  "type": "image/png",
-                  "sizes": "144x144",
-                  "purpose": "any maskable"
-                },
-                {
-                  "src": "./images/icons/facebook_icon_152x152.png",
-                  "type": "image/png",
-                  "sizes": "152x152",
-                  "purpose": "any maskable"
-                },
-                {
-                  "src": "./images/icons/facebook_icon_192x192.png",
-                  "type": "image/png",
-                  "sizes": "192x192",
-                  "purpose": "any maskable"
-                },
-                {
-                  "src": "./images/icons/facebook_icon_384x384.png",
-                  "type": "image/png",
-                  "sizes": "384x384",
-                  "purpose": "any maskable"
-                },
-                {
-                  "src": "./images/icons/facebook_icon_512x512.png",
-                  "type": "image/png",
-                  "sizes": "512x512",
-                  "purpose": "any maskable"
-                }
-              ],
-              screenshots: [
-                {
-                  "src": "./images/screenshots/screenshots.png",
-                  "sizes": "640x480",
-                  "type": "image/png",
-                  "form_factor": "wide"
-                  // "form_factor": "narrow"
-                }
-              ]
-      },
-    })
-  ]
-});
-
-```
-__________________________________________________
-### 16 Setup Axios
-```js
-// Axios
-// axios استيراد
-import axios from "axios"
-axios.defaults.baseURL = "http://127.0.0.1:8000"
-
-app.use(router, axios)
-```
-__________________________________________________
-### 17 Setup PrimeVue
-```js
-// main.js
-// Prime Vue 
-import PrimeVue from "primevue/config";
-// Toast
-import ToastService from 'primevue/toastservice';
-// Popup
-import ConfirmationService from 'primevue/confirmationservice'
-import DialogService from 'primevue/dialogservice'
-// Element
-import Button from 'primevue/button';
-import InputText from 'primevue/inputtext';
-import Password from 'primevue/password';
-import FloatLabel from 'primevue/floatlabel';
-// PrimeIcons أيقونات 
-import 'primeicons/primeicons.css'
-import 'tailwindcss/tailwind.css'
-// Theme
-import Noir from './presets/Noir.js';
-// Prime Vue 
-app.use(PrimeVue, {
-  theme: {
-      preset: Noir,
-      options: {
-          prefix: 'p',
-          darkModeSelector: '.p-dark',
-          cssLayer: false,
-      }
-  }
-});
-app.use(ToastService);
-app.use(ConfirmationService);
-app.use(DialogService);
-app.component('prime_button', Button);
-app.component('prime_input_text', InputText);
-app.component('prime_input_password', Password);
-app.component('prime_float_label', FloatLabel);
-```
-__________________________________________________
-### 14 Vue Theme
-```html
-
-```
-```js
-
-```
-__________________________________________________
-
-### 17 Setup Djang Libraries
-```python
+# استيراد مكتبة timedelta عشان نحدد مدة صلاحية التوكين
 from datetime import timedelta
 
+# ALLOWED_HOSTS ده المتغير اللي بنحدد فيه الدومينات أو الآيبيهات اللي مسموح لها تشغل المشروع
+ALLOWED_HOSTS = []
+
+# URL أو على سيرفر حقيقي (localhost) الموقع اللي بنشتغل عليه سواء كان محلي
 WEBSITE_URL = "http://127.0.0.1:8000"
 
+# EMAIL_BACKEND ده اللي بيحدد طريقة إرسال الإيميلات من خلال Django، هنا مختار انه يطبع الإيميلات في الكونسل
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+# AUTH_USER_MODEL ده اللي بنحدد فيه موديل المستخدمين اللي شغالين عليه
+AUTH_USER_MODEL = "account.User"
+
+# SIMPLE_JWT دي إعدادات مكتبة JWT اللي بنستخدمها لإدارة التوكينات
 SIMPLE_JWT = {
-  "ACCESS_TOKEN_LIFETIME": timedelta(days=30),
-  "REFRESH_TOKEN_LIFETIME": timedelta(days=180),
-  "ROTATE_REFRESH_TOKENS": False,
+    # ACCESS_TOKEN_LIFETIME ده اللي بيحدد مدة صلاحية توكين الدخول
+    # (Access Token)، هنا مدته 30 يوم
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=30),
+    # REFRESH_TOKEN_LIFETIME ده اللي بيحدد مدة صلاحية توكين التحديث
+    # (Refresh Token)، هنا مدته 180 يوم
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=180),
+    # ROTATE_REFRESH_TOKENS ده اللي بيحدد لو التوكين بيتجدد مع كل تحديث للتوكين ولا لأ، هنا مش بيتجدد
+    "ROTATE_REFRESH_TOKENS": False,
 }
 
+# REST_FRAMEWORK دي إعدادات مكتبة Django Rest Framework
 REST_FRAMEWORK = {
-  "DEFAULT_AUTHENTICATION_CLASSES": (
-      "rest_framework_simplejwt.authentication.JWTAuthentication",
-  ),
-  "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    # DEFAULT_AUTHENTICATION_CLASSES دي اللي بتحدد نوع المصادقة الافتراضية اللي هتكون JWT
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    # DEFAULT_PERMISSION_CLASSES دي بتحدد الإذن الافتراضي اللي هو أن المستخدم لازم يكون مصدق عليه (Authenticated)
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
 }
 
+# CORS_ALLOWED_ORIGINS دي بنحدد فيها الأصول المسموح لها تتواصل مع السيرفر بتاعنا
 CORS_ALLOWED_ORIGINS = [
+    # أصل خاص بـ Vue.js على بورت 5173
     "http://localhost:5173",
+    # أصل خاص بـ Vue.js على بورت 5174
     "http://localhost:5174",
 ]
 
+# CSRF_TRUSTED_ORIGINS دي بنحدد فيها الأصول الموثوقة اللي بنسمح لها تستخدم
+# CSRF مع السيرفر
 CSRF_TRUSTED_ORIGINS = [
+    # أصل خاص بـ Vue.js على بورت 5173
     "http://localhost:5173",
+    # أصل خاص بـ Vue.js على بورت 5174
     "http://localhost:5174",
 ]
 
+# Django اللي متضافه لمشروع (Libraries) والمكتبات (Apps) دي قائمة بالتطبيقات 
 INSTALLED_APPS = [
     # ...
+    # Apps
+    "account",
     # Libraries
     "rest_framework",
     "rest_framework_simplejwt",
     "corsheaders",
 ]
+
+# 🛡️ (requests) هي عبارة عن مكونات أو طبقات بتتعامل مع الطلبات Middleware الـ
+# اللي بتجيلك من المستخدمين قبل ما توصل لوجهتها النهائية في السرفر
 MIDDLEWARE = [
     # ...
     "corsheaders.middleware.CorsMiddleware",
     # ...
 ]
-```
 
-### 18 Create App [ Account And Setup It ]
-``` python
-python manage.py startapp account
+# - 🌐 `STATIC_URL` بيحدد الرابط اللي هتعرض عليه الملفات الثابتة.
+STATIC_URL = "static/"
+# - 📷 `MEDIA_URL` بيحدد الرابط اللي هتعرض عليه ملفات الميديا اللي بيرفعها المستخدمين.
+MEDIA_URL = "media/"
+# - 💾 `MEDIA_ROOT` بيحدد مكان تخزين ملفات الميديا الفعلي على جهاز السيرفر
+MEDIA_ROOT = BASE_DIR / "media"
 ```
+__________________________________________________
+### 9 Setup App [ Account ]
 ```pyhone
-# Page [ account/models.py ]
+# Page [ facebook/facebook_django/account/models.py ]
+# uuid: يُستخدم لإنشاء معرّفات فريدة عالمياً
+# (UUID) التي يمكن استخدامها لتعريف المستخدمين
+import uuid
+
+# settings: لاستيراد إعدادات
+# Django الخاصة بالمشروع
+from django.conf import settings
+
+# AbstractBaseUser, PermissionsMixin: لإنشاء نموذج مستخدم مخصص
+# UserManager: لإدارة إنشاء المستخدمين
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
+
+# models: Django لإنشاء نماذج
+from django.db import models
+
+# timezone: للتعامل مع التوقيتات
+from django.utils import timezone
+
+# 🔧 لإدارة المستخدمين المخصص CustomUserManager تم إنشاء كلاس باسم
+# Django المتوفر افتراضيًا في UserManager وهو يرث من كلاس
+class CustomUserManager(UserManager):
+    """
+    _create_user دالة داخلية لإنشاء مستخدم جديد
+    name: اسم المستخدم
+    email: البريد الإلكتروني للمستخدم
+    password: كلمة المرور
+    **extra_fields: أي حقول إضافية
+    """
+
+    def _create_user(self, name, email, password, **extra_fields):
+        # الجزء ده بيتأكد إن الإيميل مش فاضي، ولو كان فاضي سيتم رفع خطأ
+        if not email:
+            raise ValueError("You have not provided a valid e-mail address")
+        # ومظبوط small letters هنا بنعمل عملية تنسيق للإيميل بحيث يبقى كله
+        # normalize_email باستخدام
+        email = self.normalize_email(email)
+        # هنا بنعمل إنشاء للمستخدم نفسه وبنمرر الاسم والإيميل وبقية الحقول الإضافية
+        user = self.model(email=email, name=name, **extra_fields)
+        # هنا بنعمل إعداد كلمة السر للمستخدم
+        user.set_password(password)
+        # database وأخيرًا هنا بنحفظ المستخدم في قاعدة البيانات باستخدام الـ
+        # اللي إحنا شغالين عليها
+        user.save(using=self._db)
+        # وبعدين بنرجع المستخدم اللي اتعمله إنشاء
+        return user
+
+    # عشان تعمل إنشاء مستخدم عادي create_user هنا بنعرف ميثود جديدة اللي هي
+    def create_user(self, name=None, email=None, password=None, **extra_fields):
+        # هنا بنحدد أن المستخدم العادي مش هيبقى
+        # staff ومش هيبقى superuser
+        extra_fields.setdefault("is_staff", False)
+        extra_fields.setdefault("is_superuser", False)
+        # _create_user وبعدين بننادي على الميثود اللي عملناها فوق
+        # عشان تكمل عملية الإنشاء
+        return self._create_user(name, email, password, **extra_fields)
+
+    # create_superuser هنا بنعرف ميثود جديدة اللي هي
+    # superuser عشان تعمل إنشاء للمستخدم اللي هو
+    def create_superuser(self, name=None, email=None, password=None, **extra_fields):
+        # هنا بنحدد أن المستخدم ده هيبقى
+        # staff وكمان هيبقى superuser
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_superuser", True)
+        # _create_user وبعدين برضه بننادي على الميثود
+        # superuse عشان تكمل عملية الإنشاء بس للمستخدم اللي هو
+        return self._create_user(name, email, password, **extra_fields)
+
+
+        # اللي هو المستخدم User بنعمل كلاس اسمه
+        # AbstractBaseUser و PermissionsMixin وده بيورث من
+        # Djangoاللي فيهم أساسيات المستخدم في
+        class User(AbstractBaseUser, PermissionsMixin):
+            # id: اللي بيكون مفتاح أساسي للمستخدم، عشان يكون فريد لكل مستخدم UUID ده الـ
+            id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+            # ___________________
+            # حقل يتم تعبئة من المستخدام
+            # ___________________
+            # تسجيل الدخول
+            # name: الاسم الخاص بالمستخدم
+            name = models.CharField(max_length=255, blank=True, default="")
+            # surname: الاسم العائلةالخاص بالمستخدم
+            surname = models.CharField(max_length=255, blank=True, default="")
+            # email: البريد الإلكتروني الخاص بالمستخدم
+            email = models.EmailField(unique=True)
+            # Date of birth تاريخ الميلاد
+            date_of_birth = models.DateField(default=timezone.now)
+            # Gender الجنس المستخدم
+            gender = models.CharField(max_length=15, blank=True, null=True)
+            # avatar: الصورة الشخصية للمستخدم
+            avatar = models.ImageField(upload_to="avatars", blank=True, null=True)
+            # cover: الصورة الغلاف للمستخدم
+            cover = models.ImageField(upload_to="covers", blank=True, null=True)
+        
+            # is_active: حالة تفعيل المستخدم
+            is_active = models.BooleanField(default=True)
+            # is_superuser: حالة المستخدم كمشرف
+            is_superuser = models.BooleanField(default=False)
+            # is_staff: حالة المستخدم كموظف
+            is_staff = models.BooleanField(default=False)
+        
+            # ___________________
+            # حقل يتم تعبئة تلقائي
+            # ___________________
+            # date_joined: تاريخ انضمام المستخدم
+            date_joined = models.DateTimeField(default=timezone.now)
+            # last_login: تاريخ آخر تسجيل دخول للمستخدم
+            last_login = models.DateTimeField(blank=True, null=True)
+        
+            # تخصيص السلوك في إدارة المستخدمين بشكل مرن ومنظم
+            objects = CustomUserManager()
+        
+            # email يحدد الحقل الذي سيتم استخدامه لتسجيل الدخول. في هذه الحالة، هو
+            USERNAME_FIELD = "email"
+            # يحدد الحقل الذي يتم استخدامه كالبريد الإلكتروني الرئيسي للمستخدم. في هذه الحالة، هو email.
+            EMAIL_FIELD = "email"
+            # 📝 لا توجد حقول إضافية مطلوبة بجانب البريد الإلكتروني وكلمة المرور عند إنشاء مستخدم جديد عبر الأوامر الإدارية.
+            REQUIRED_FIELDS = []
+
+
+
 ```
 ```pyhone
 # Page [ account/serializers.py ]
@@ -430,15 +307,4 @@ python manage.py startapp account
 ```
 ```pyhone
 # Page [ account/urls.py ]
-```
-
-### 
-### 
-### 
-### 
-### 
-### 
-
-### 1 Create Page Sign Up
-```
 ```

@@ -1,27 +1,14 @@
-# Page [ account/models.py ]
-# uuid: يُستخدم لإنشاء معرّفات فريدة عالمياً
-# (UUID) التي يمكن استخدامها لتعريف المستخدمين
+# Page [ facebook/facebook_django/account/models.py ]
 import uuid
-
-# settings: لاستيراد إعدادات
-# Django الخاصة بالمشروع
 from django.conf import settings
-
-# AbstractBaseUser, PermissionsMixin: لإنشاء نموذج مستخدم مخصص
-# UserManager: لإدارة إنشاء المستخدمين
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
-
-# models: Django لإنشاء نماذج
 from django.db import models
-
-# timezone: للتعامل مع التوقيتات
 from django.utils import timezone
 
 
 class CustomUserManager(UserManager):
 
     def _create_user(self, name, email, password, **extra_fields):
-
         if not email:
             raise ValueError("You have not provided a valid e-mail address")
         email = self.normalize_email(email)
@@ -31,7 +18,6 @@ class CustomUserManager(UserManager):
         return user
 
     def create_user(self, name=None, email=None, password=None, **extra_fields):
-
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("is_superuser", False)
         return self._create_user(name, email, password, **extra_fields)
@@ -42,9 +28,15 @@ class CustomUserManager(UserManager):
         return self._create_user(name, email, password, **extra_fields)
 
 
+# اللي هو المستخدم User بنعمل كلاس اسمه
+# AbstractBaseUser و PermissionsMixin وده بيورث من
+# Djangoاللي فيهم أساسيات المستخدم في
 class User(AbstractBaseUser, PermissionsMixin):
+    # id: اللي بيكون مفتاح أساسي للمستخدم، عشان يكون فريد لكل مستخدم UUID ده الـ
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    # ___________________
     # حقل يتم تعبئة من المستخدام
+    # ___________________
     # تسجيل الدخول
     # name: الاسم الخاص بالمستخدم
     name = models.CharField(max_length=255, blank=True, default="")
@@ -68,6 +60,23 @@ class User(AbstractBaseUser, PermissionsMixin):
     # is_staff: حالة المستخدم كموظف
     is_staff = models.BooleanField(default=False)
 
+    # ___________________
+    # حقل يتم تعبئة تلقائي
+    # ___________________
+    # date_joined: تاريخ انضمام المستخدم
+    date_joined = models.DateTimeField(default=timezone.now)
+    # last_login: تاريخ آخر تسجيل دخول للمستخدم
+    last_login = models.DateTimeField(blank=True, null=True)
+
+    # تخصيص السلوك في إدارة المستخدمين بشكل مرن ومنظم
+    objects = CustomUserManager()
+
+    # email يحدد الحقل الذي سيتم استخدامه لتسجيل الدخول. في هذه الحالة، هو
+    USERNAME_FIELD = "email"
+    # يحدد الحقل الذي يتم استخدامه كالبريد الإلكتروني الرئيسي للمستخدم. في هذه الحالة، هو email.
+    EMAIL_FIELD = "email"
+    # 📝 لا توجد حقول إضافية مطلوبة بجانب البريد الإلكتروني وكلمة المرور عند إنشاء مستخدم جديد عبر الأوامر الإدارية.
+    REQUIRED_FIELDS = []
     # personal_phone: رقم الهاتف الشخصي للمستخدم
     # personal_phone = models.CharField(max_length=15, blank=True, null=True)
     # public_phone: رقم الهاتف العام للمستخدم
@@ -90,22 +99,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     # people_you_may_know = models.ManyToManyField("self")
     #
     # posts_count = models.IntegerField(default=0)
-
-    # حقل يتم تعبئة تلقائي
-    # date_joined: تاريخ انضمام المستخدم
-    date_joined = models.DateTimeField(default=timezone.now)
-    # last_login: تاريخ آخر تسجيل دخول للمستخدم
-    last_login = models.DateTimeField(blank=True, null=True)
-
-    # تخصيص السلوك في إدارة المستخدمين بشكل مرن ومنظم
-    objects = CustomUserManager()
-
-    # email يحدد الحقل الذي سيتم استخدامه لتسجيل الدخول. في هذه الحالة، هو
-    USERNAME_FIELD = "email"
-    # يحدد الحقل الذي يتم استخدامه كالبريد الإلكتروني الرئيسي للمستخدم. في هذه الحالة، هو email.
-    EMAIL_FIELD = "email"
-    # 📝 لا توجد حقول إضافية مطلوبة بجانب البريد الإلكتروني وكلمة المرور عند إنشاء مستخدم جديد عبر الأوامر الإدارية.
-    REQUIRED_FIELDS = []
 
     # def get_avatar(self):
     #     if self.avatar:
