@@ -69,7 +69,11 @@ django-admin startproject facebook_django
 ```
 __________________________________________________
 ### 7 Create Django App
+```cmd
+python manage.py startapp account
 ```
+```python
+python manage.py startapp account
 ```
 
 
