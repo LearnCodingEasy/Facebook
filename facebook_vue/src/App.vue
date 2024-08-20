@@ -203,7 +203,7 @@ const toggle = (event) => {
                 <!-- Toggle Theme -->
                 <div class="flex div_wrapper_toggle_theme">
                   <ThemeSwitcher />
-                  <span class="font-medium mb-2">Toggle Theme</span>
+                  <span class="font-medium mb-2">Toggle theme</span>
                 </div>
               </div>
             </prime_popover>

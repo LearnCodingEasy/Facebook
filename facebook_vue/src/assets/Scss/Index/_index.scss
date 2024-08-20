@@ -45,10 +45,10 @@ main {
         /* For Scrollbar */
         &::-webkit-scrollbar {
           width: 0.5rem;
-          background-color: var(--page-index-sidebar-lift-scrollbar);
+          // background-color: var(--page-index-sidebar-lift-scrollbar);
         }
         &::-webkit-scrollbar-thumb {
-          background-color: var(--page-index-sidebar-lift-scrollbar-thumb);
+          // background-color: var(--page-index-sidebar-lift-scrollbar-thumb);
           border-radius: 0.25rem;
         }
         .wrapper_left {
@@ -618,10 +618,10 @@ main {
         /* For Scrollbar */
         &::-webkit-scrollbar {
           width: 0.5rem;
-          background-color: var(--page-index-sidebar-right-scrollbar);
+          // background-color: var(--page-index-sidebar-right-scrollbar);
         }
         &::-webkit-scrollbar-thumb {
-          background-color: var(--page-index-sidebar-right-scrollbar-thumb);
+          // background-color: var(--page-index-sidebar-right-scrollbar-thumb);
           border-radius: 0.25rem;
         }
 
@@ -1320,10 +1320,10 @@ main {
         /* For Scrollbar */
         ::-webkit-scrollbar {
           width: 0rem;
-          background-color: #333;
+          // background-color: #333;
         }
         ::-webkit-scrollbar-thumb {
-          background-color: #bbbbbb;
+          // background-color: #bbbbbb;
           border-radius: 0.25rem;
         }
         .main-center {
