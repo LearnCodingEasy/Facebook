@@ -15,7 +15,7 @@ const toggle = (event) => {
   <!-- Header -->
   <prime_card class="header_wrapper">
     <template #content>
-      <header class="card shadow-md">
+      <header class="card shadow-md fixed top-0 left-0 right-0">
         <div class="container mx-auto flex justify-between items-center">
           <!-- Left Section (Logo and Search Bar) -->
           <div class="header_left_section flex items-center space-x-1 basis-1/4">
@@ -190,11 +190,20 @@ const toggle = (event) => {
               aria-haspopup="true"
               aria-controls="overlay_tmenu"
             />
+            <!-- Popup User Option -->
             <prime_popover ref="op">
               <div class="w-[25rem]">
-                <div class="flex justify-between">
-                  <span class="font-medium mb-2">Toggle Theme</span>
+                <!-- Log Out -->
+                <div class="div_wrapper_logout flex align-middle">
+                  <div class="icon_logout flex justify-center align-middle">
+                    <i class="pi pi-sign-out" style="font-size: 1rem" shape="circle"></i>
+                  </div>
+                  <button class="font-bold" @click="logout">Log out</button>
+                </div>
+                <!-- Toggle Theme -->
+                <div class="flex div_wrapper_toggle_theme">
                   <ThemeSwitcher />
+                  <span class="font-medium mb-2">Toggle Theme</span>
                 </div>
               </div>
             </prime_popover>
@@ -208,6 +217,33 @@ const toggle = (event) => {
 
   <RouterView />
 </template>
+
+<script>
+// import axios from 'axios'
+import { useUserStore } from '@/stores/user'
+
+export default {
+  setup() {
+    const userStore = useUserStore()
+
+    return {
+      userStore
+    }
+  },
+  methods: {
+    logout() {
+      console.log('Log out')
+
+      this.userStore.removeToken()
+
+      // توجيه المستخدم إلى صفحة تسجيل الدخول
+      setTimeout(() => {
+        this.$router.push('/login').then(() => {})
+      }, 10)
+    }
+  }
+}
+</script>
 
 <style>
 .p-menubar {

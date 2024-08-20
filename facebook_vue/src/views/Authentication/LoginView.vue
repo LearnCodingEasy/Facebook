@@ -197,11 +197,14 @@
 import axios from 'axios'
 // eslint-disable-next-line no-unused-vars
 import { RouterLink } from 'vue-router'
-
+import { useUserStore } from '@/stores/user'
 export default {
   name: 'loginView',
   setup() {
-    return {}
+    const userStore = useUserStore()
+    return {
+      userStore
+    }
   },
   data() {
     return {
@@ -230,7 +233,6 @@ export default {
   },
   methods: {
     async submitFormLogin() {
-      console.log(`Yes`)
       this.errorsLogin = []
       if (this.formLogin.email === '') {
         this.$toast.add({
@@ -260,8 +262,9 @@ export default {
           })
           .catch((error) => {
             console.log('error', error)
-
-            this.errors.push('The email or password is incorrect! Or the user is not activated!')
+            this.errorsLogin.push(
+              'The email or password is incorrect! Or the user is not activated!'
+            )
           })
       }
       if (this.errorsLogin.length === 0) {

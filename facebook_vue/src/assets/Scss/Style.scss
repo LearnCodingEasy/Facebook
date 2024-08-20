@@ -24,6 +24,7 @@
   --header-center-section-icon-size: 1.5rem;
   --header-link-border-color: #0866ff;
   --header-link-background-color: #d8dadf;
+  --header-user-option-btn-bg-light: #e4e6eb;
   //
   // Index Style
   //
@@ -43,6 +44,7 @@
   --page-index-sidebar-right-border-user-control: #bcc0c4;
   --page-index-sidebar-right-text-color: #65676b;
   --page-index-sidebar-right-icon-bg: #65676b;
+  //
 }
 
 // Header
@@ -59,6 +61,7 @@ html.p-dark {
   /* Body */
   // --body-bg: #0d121b;
   --body-bg: #09090b;
+  --header-user-option-btn-bg-light: #09090b;
 }
 body {
   // background-color: var(--body-bg-hr);

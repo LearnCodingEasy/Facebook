@@ -3,10 +3,6 @@
     padding: 0;
     header {
       height: var(--header-height);
-      // background-color: var(--header-bg);
-      position: fixed;
-      top: 0;
-      left: 0;
       width: 100%;
       z-index: 1000;
       padding: 0 0.5rem;
@@ -218,7 +214,7 @@
           .header_right_section_link {
             border-radius: 50%;
             padding: 10px;
-            background-color: #f0f2f5;
+
             .header_right_section_link_span {
               .header_right_section_link_svg {
                 height: var(--header-center-section-icon-size);
@@ -226,8 +222,39 @@
               }
             }
           }
+          // Avater
+          div.p-avatar {
+            img {
+              width: 40px;
+              height: 40px;
+            }
+          }
         }
       }
     }
+  }
+}
+
+// Popup User Option
+.div_wrapper_logout {
+  align-items: center;
+  .icon_logout {
+    background-color: var(--header-user-option-btn-bg-light);
+    border-radius: 50%;
+    padding: 5px;
+    height: 36px;
+    width: 36px;
+    margin-right: 12px;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+  }
+}
+
+.div_wrapper_toggle_theme {
+  align-items: center;
+  margin-top: 1rem;
+  span:first-child {
+    margin-right: 12px;
   }
 }
