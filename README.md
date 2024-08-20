@@ -40,6 +40,18 @@
 ## Website Build
 
 
+# Facebook
+👋 Hello! 🗣️ Design presentation about online Social project named “Faceb ook”.
+
+🎨 Design motivation for an online Facebook project.
+
+💖 Please click like and appreciate.
+
+🙏 Thank you for supporting and appreciating my efforts
+
+## Website Build
+
+
 ### 1 Git Clone Project
 ```
 git clone https://github.com/LearnCodingEasy/Facebook.git
@@ -56,26 +68,26 @@ Copyright (c) 2024 Hossam Rashad
 ```
 __________________________________________________
 ### 3 Create Virtual Environment
-```
+```cmd
 python -m venv facebook_virtual_environment
 ```
 #### Activate Virtual Environment
-```
+```cmd
 facebook_virtual_environment\Scripts\activate
 ```
 __________________________________________________
 ### 4 Install Django
-```
+```cmd
 pip install django
 ```
 __________________________________________________
 ### 5 Install Django Libraries [ 1 - djangorestframework | 2 - djangorestframework-simplejwt | 3 - django-cors-headers | 4 - pillow ]
-```
+```cmd
 pip install djangorestframework djangorestframework-simplejwt django-cors-headers pillow
 ```
-
+__________________________________________________
 ### 6 Create Django Project
-```
+```cmd
 django-admin startproject facebook_django
 ```
 __________________________________________________
@@ -83,7 +95,7 @@ __________________________________________________
 ```cmd
 cd facebook_django
 ```
-```cmd
+```python
 python manage.py startapp account
 ```
 __________________________________________________
@@ -173,7 +185,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 ```
 __________________________________________________
 ### 9 Setup App [ Account ]
-```pyhone
+```python
 # Page [ facebook/facebook_django/account/models.py ]
 # uuid: يُستخدم لإنشاء معرّفات فريدة عالمياً
 # (UUID) التي يمكن استخدامها لتعريف المستخدمين
@@ -345,16 +357,16 @@ class User(AbstractBaseUser, PermissionsMixin):
     
     
 ```
-```pyhone
+```python
 # Page [ account/serializers.py ]
 ```
-```pyhone
+```python
 # Page [ account/forms.py ]
 ```
-```pyhone
+```python
 # Page [ account/api.py ]
 ```
-```pyhone
+```python
 # Page [ account/urls.py ]
 ```
 
