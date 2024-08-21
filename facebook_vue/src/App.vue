@@ -244,14 +244,14 @@ let logout = () => {
                   </RouterLink>
                 </div>
                 <!-- Log Out -->
-                <div class="div_wrapper_logout flex align-middle">
+                <div class="div_wrapper_logout flex align-middle cursor-pointer" @click="logout">
                   <div class="icon_logout flex justify-center align-middle">
                     <i class="pi pi-sign-out" style="font-size: 1rem" shape="circle"></i>
                   </div>
-                  <button class="font-bold" @click="logout">Log out</button>
+                  <button class="font-bold">Log out</button>
                 </div>
                 <!-- Toggle Theme -->
-                <div class="flex div_wrapper_toggle_theme">
+                <div class="flex div_wrapper_toggle_theme cursor-pointer">
                   <ThemeSwitcher />
                   <span class="font-medium mb-2">Toggle theme</span>
                 </div>

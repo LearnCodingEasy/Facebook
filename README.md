@@ -28,29 +28,6 @@
 
 ## Website Build
 
-# Facebook
-👋 Hello! 🗣️ Design presentation about online Social project named “Faceb ook”.
-
-🎨 Design motivation for an online Facebook project.
-
-💖 Please click like and appreciate.
-
-🙏 Thank you for supporting and appreciating my efforts
-
-## Website Build
-
-
-# Facebook
-👋 Hello! 🗣️ Design presentation about online Social project named “Faceb ook”.
-
-🎨 Design motivation for an online Facebook project.
-
-💖 Please click like and appreciate.
-
-🙏 Thank you for supporting and appreciating my efforts
-
-## Website Build
-
 
 ### 1 Git Clone Project
 ```
@@ -358,10 +335,77 @@ class User(AbstractBaseUser, PermissionsMixin):
     
 ```
 ```python
-# Page [ account/serializers.py ]
+# Page [ facebook/facebook_django/account/serializers.py ]
+# Django Rest Framework من serializers هنا بنستورد مكتبة
+# JSON اللي بتساعدنا في تحويل البيانات لأنواع مختلفة زي
+from rest_framework import serializers
+
+# اللي بنستخدمه في تكوين البيانات User هنا بنستورد الموديل الخاص بـ
+from .models import User
+
+# UserSerializer بنعمل كلاس اسمه
+# اللي هو هيكون مسؤول عن تحويل البيانات من وإلى شكل مناسب للاستخدام
+class UserSerializer(serializers.ModelSerializer):
+    # Serializer هنا بنحدد الميتا كلاس اللي بيحتوي على إعدادات الـ
+    class Meta:
+        # User هو موديل الـ Serializer بنحدد ان الموديل اللي هنستخدمه في الـ
+        model = User
+        # API بنحدد الحقول اللي عايزين نحولها أو نرجعها عند التعامل مع الـ
+        fields = (
+            # الخاص بالمستخدم ID الحقل ده بيخزن الـ
+            "id",
+            # الحقل ده بيخزن الاسم الأول للمستخدم
+            "name",
+            # الحقل ده بيخزن اسم العائلة للمستخدم
+            "surname",
+            # الحقل ده بيخزن البريد الإلكتروني للمستخدم
+            "email",
+            # الحقل ده بيخزن تاريخ الميلاد للمستخدم
+            "date_of_birth",
+            # الحقل ده بيخزن الجنس الخاص بالمستخدم
+            "gender",
+        )
+
 ```
 ```python
-# Page [ account/forms.py ]
+# Page [ facebook/facebook_django/account/forms.py ]
+
+# UserCreationForm خاص بإنشاء المستخدمين اللي هو Django هنا بنستورد فورم جاهز من
+from django.contrib.auth.forms import UserCreationForm
+
+# اللي بتساعدنا في إنشاء الفورمات Django من forms هنا بنستورد مكتبة
+from django import forms
+
+# app من الموديلز الخاصة بالـ User هنا بنستورد الموديل الخاص بالمستخدم اللي هو
+from .models import User
+
+# UserCreationForm اللي بيرث من SignupForm بنعمل كلاس اسمه
+# الكلاس ده هيستخدم لإنشاء فورم لتسجيل المستخدمين الجدد
+class SignupForm(UserCreationForm):
+    # بنحدد الميتا كلاس اللي بيحتوي على إعدادات الفورم
+    class Meta:
+        # User بنحدد ان الموديل اللي الفورم ده هيشتغل عليه هو موديل الـ
+        model = User
+        fields = (
+            # الاسم الأول للمستخدم
+            "name",
+            # اسم العائلة للمستخدم
+            "surname",
+            # البريد الإلكتروني للمستخدم
+            "email",
+            # تاريخ ميلاد المستخدم
+            "date_of_birth",
+            # الجنس الخاص بالمستخدم
+            "gender",
+            # كلمة المرور الأولى اللي المستخدم هيكتبها
+            "password1",
+            # تأكيد كلمة المرور اللي المستخدم هيكتبها للمطابقة
+            "password2",
+        )
+
+```
+```python
+# Page [ facebook/facebook_django/account/views.py ]
 ```
 ```python
 # Page [ account/api.py ]
@@ -369,4 +413,5 @@ class User(AbstractBaseUser, PermissionsMixin):
 ```python
 # Page [ account/urls.py ]
 ```
+
 

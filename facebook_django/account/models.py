@@ -28,54 +28,27 @@ class CustomUserManager(UserManager):
         return self._create_user(name, email, password, **extra_fields)
 
 
-# اللي هو المستخدم User بنعمل كلاس اسمه
-# AbstractBaseUser و PermissionsMixin وده بيورث من
-# Djangoاللي فيهم أساسيات المستخدم في
 class User(AbstractBaseUser, PermissionsMixin):
-    # id: اللي بيكون مفتاح أساسي للمستخدم، عشان يكون فريد لكل مستخدم UUID ده الـ
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    # ___________________
-    # حقل يتم تعبئة من المستخدام
-    # ___________________
-    # تسجيل الدخول
-    # name: الاسم الخاص بالمستخدم
     name = models.CharField(max_length=255, blank=True, default="")
-    # surname: الاسم العائلةالخاص بالمستخدم
     surname = models.CharField(max_length=255, blank=True, default="")
-    # email: البريد الإلكتروني الخاص بالمستخدم
     email = models.EmailField(unique=True)
-    # Date of birth تاريخ الميلاد
     date_of_birth = models.DateField(default=timezone.now)
-    # Gender الجنس المستخدم
     gender = models.CharField(max_length=15, blank=True, null=True)
-    # avatar: الصورة الشخصية للمستخدم
     avatar = models.ImageField(upload_to="avatars", blank=True, null=True)
-    # cover: الصورة الغلاف للمستخدم
     cover = models.ImageField(upload_to="covers", blank=True, null=True)
 
-    # is_active: حالة تفعيل المستخدم
     is_active = models.BooleanField(default=True)
-    # is_superuser: حالة المستخدم كمشرف
     is_superuser = models.BooleanField(default=False)
-    # is_staff: حالة المستخدم كموظف
     is_staff = models.BooleanField(default=False)
 
-    # ___________________
-    # حقل يتم تعبئة تلقائي
-    # ___________________
-    # date_joined: تاريخ انضمام المستخدم
     date_joined = models.DateTimeField(default=timezone.now)
-    # last_login: تاريخ آخر تسجيل دخول للمستخدم
     last_login = models.DateTimeField(blank=True, null=True)
 
-    # تخصيص السلوك في إدارة المستخدمين بشكل مرن ومنظم
     objects = CustomUserManager()
 
-    # email يحدد الحقل الذي سيتم استخدامه لتسجيل الدخول. في هذه الحالة، هو
     USERNAME_FIELD = "email"
-    # يحدد الحقل الذي يتم استخدامه كالبريد الإلكتروني الرئيسي للمستخدم. في هذه الحالة، هو email.
     EMAIL_FIELD = "email"
-    # 📝 لا توجد حقول إضافية مطلوبة بجانب البريد الإلكتروني وكلمة المرور عند إنشاء مستخدم جديد عبر الأوامر الإدارية.
     REQUIRED_FIELDS = []
     # personal_phone: رقم الهاتف الشخصي للمستخدم
     # personal_phone = models.CharField(max_length=15, blank=True, null=True)

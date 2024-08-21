@@ -1,11 +1,14 @@
 # Page [ account/api.py ]
-# Django إستيراد إعدادات المشروع في
+# Django إستيراد إعدادات المشروع عشان نستخدمها في الكود
 from django.conf import settings
 
 # إستيراد نموذج تغيير كلمة المرور
+# هنا بنستورد نموذج تغيير كلمة المرور الجاهز من Django
+
 from django.contrib.auth.forms import PasswordChangeForm
 
 # إستيراد دالة إرسال البريد الإلكتروني
+# هنا بنستورد دالة إرسال البريد الإلكتروني عشان نستخدمها في إرسال إيميل التفعيل
 from django.core.mail import send_mail
 
 # JSON لإرجاع استجابات JsonResponse إستيراد
@@ -96,20 +99,23 @@ def me(request):
             "email": request.user.email,
             "date_of_birth": request.user.date_of_birth,
             "gender": request.user.gender,
-            # "avatar": request.user.get_avatar(),
-            # "cover": request.user.get_cover(),
-            # "personal_phone": request.user.personal_phone,
-            # "public_phone": request.user.public_phone,
-            # "address": request.user.address,
-            # "workplace_company": request.user.workplace_company,
-            # "workplace_position": request.user.workplace_position,
-            # "workplace_city_town": request.user.workplace_city_town,
-            # "workplace_description": request.user.workplace_description,
-            # "workplace_time_period": request.user.workplace_time_period,
         }
     )
 
 
+# "avatar": request.user.get_avatar(),
+# "cover": request.user.get_cover(),
+# "personal_phone": request.user.personal_phone,
+# "public_phone": request.user.public_phone,
+# "address": request.user.address,
+# "workplace_company": request.user.workplace_company,
+# "workplace_position": request.user.workplace_position,
+# "workplace_city_town": request.user.workplace_city_town,
+# "workplace_description": request.user.workplace_description,
+# "workplace_time_period": request.user.workplace_time_period,
+
+
+# Profile
 @api_view(["GET"])
 def profile(request, id):
 
