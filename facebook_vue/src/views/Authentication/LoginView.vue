@@ -262,6 +262,16 @@ export default {
           })
           .catch((error) => {
             console.log('error', error)
+            if (error.response.data.detail) {
+              // Code If True
+              this.$toast.add({
+                severity: 'error',
+                summary: 'Error Message',
+                detail: `${error.response.data.detail}`,
+                life: 6000
+              })
+            }
+
             this.errorsLogin.push(
               'The email or password is incorrect! Or the user is not activated!'
             )
@@ -340,6 +350,14 @@ export default {
           .post('/api/signup/', this.formSignup)
           .then((response) => {
             if (response.data.message === 'success') {
+              if (response.data.email_sent) {
+                this.$toast.add({
+                  severity: 'success',
+                  summary: 'User Registered',
+                  detail: 'Please activate your account by clicking the link sent to your email.',
+                  life: 3000
+                })
+              }
               this.$toast.add({
                 severity: 'success',
                 summary: 'User Is Registered',

@@ -1,4 +1,4 @@
-# Page [ account/api.py ]
+# Page [ facebook/facebook_django/account/api.py ]
 # Django إستيراد إعدادات المشروع عشان نستخدمها في الكود
 from django.conf import settings
 
@@ -77,6 +77,8 @@ def signup(request):
             [user.email],
             fail_silently=False,
         )
+        # إضافة رسالة تأكيد إرسال البريد الإلكتروني
+        return JsonResponse({"message": message, "email_sent": True}, safe=False)
     else:
         # JSON إذا كان النموذج غير صالح، استرجاع الأخطاء كرسالة
         message = form.errors.as_json()

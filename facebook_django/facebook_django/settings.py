@@ -1,3 +1,5 @@
+# Page [ facebook/facebook_django/facebook_django/settings.py ]
+
 # استيراد مكتبة timedelta عشان نحدد مدة صلاحية التوكين
 from datetime import timedelta
 
@@ -21,8 +23,21 @@ ALLOWED_HOSTS = []
 # URL أو على سيرفر حقيقي (localhost) الموقع اللي بنشتغل عليه سواء كان محلي
 WEBSITE_URL = "http://127.0.0.1:8000"
 
-# EMAIL_BACKEND ده اللي بيحدد طريقة إرسال الإيميلات من خلال Django، هنا مختار انه يطبع الإيميلات في الكونسل
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# EMAIL_BACKEND ده اللي بيحدد طريقة إرسال الإيميلات من خلال 
+# Django، هنا مختار انه يطبع الإيميلات في الكونسل
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# Django، هنا سيتم إرسال الرسائل الإيميلات الى الإيميلات
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+# مزود SMTP الخاص بك (في هذه الحالة Gmail)
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+# البريد الإلكتروني الذي سيتم إرسال الرسائل منه
+EMAIL_HOST_USER = "learncodingeasy0100@gmail.com"
+# كلمة مرور البريد الإلكتروني
+EMAIL_HOST_PASSWORD = "uxcg nuae kfjq txre"
+DEFAULT_FROM_EMAIL = "learncodingeasy0100@gmail.com"
+
 
 # AUTH_USER_MODEL ده اللي بنحدد فيه موديل المستخدمين اللي شغالين عليه
 AUTH_USER_MODEL = "account.User"
