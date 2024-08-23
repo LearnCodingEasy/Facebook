@@ -450,10 +450,144 @@ def activateemail(request):
 
 ```
 ```python
-# Page [ account/api.py ]
+# Page [ facebook/facebook_django/account/api.py ]
+# Django إستيراد إعدادات المشروع عشان نستخدمها في الكود
+from django.conf import settings
+
+# إستيراد نموذج تغيير كلمة المرور
+# هنا بنستورد نموذج تغيير كلمة المرور الجاهز من Django
+
+from django.contrib.auth.forms import PasswordChangeForm
+
+# إستيراد دالة إرسال البريد الإلكتروني
+# هنا بنستورد دالة إرسال البريد الإلكتروني عشان نستخدمها في إرسال إيميل التفعيل
+from django.core.mail import send_mail
+
+# JSON لإرجاع استجابات JsonResponse إستيراد
+from django.http import JsonResponse
+
+# إستيراد الديكورات لتعريف وحدات الواجهة البرمجية
+from rest_framework.decorators import (
+    api_view,
+    authentication_classes,
+    permission_classes,
+)
+
+# إستيراد دالة إنشاء الإشعارات
+# from notification.utils import create_notification
+
+# إستيراد النماذج المخصصة لتسجيل المستخدم وتعديل الملف الشخصي
+from .forms import SignupForm, ProfileForm
+
+# إستيراد النماذج المخصصة للمستخدم وطلبات الصداقة
+from .models import User
+
+# FriendshipRequest
+
+# إستيراد المسلسلات للمستخدم وطلبات الصداقة
+from .serializers import UserSerializer
+
+# FriendshipRequestSerializer
+
+
+@api_view(["POST"])
+# لا توجد فئات مصادقة مطلوبة لهذه العملية
+@authentication_classes([])
+# لا توجد أذونات مطلوبة لهذه العملية
+@permission_classes([])
+def signup(request):
+
+    data = request.data
+    # القيمة الافتراضية للرسالة هي نجاح
+    message = "success"
+
+    form = SignupForm(
+        {
+            "name": data.get("name"),
+            "surname": data.get("surname"),
+            "email": data.get("email"),
+            "date_of_birth": data.get("date_of_birth"),
+            "gender": data.get("gender"),
+            "password1": data.get("password1"),
+            "password2": data.get("password2"),
+        }
+    )
+
+    if form.is_valid():
+        # حفظ النموذج إذا كان صالحًا واسترجاع كائن المستخدم
+        user = form.save()
+        # تعيين حالة المستخدم على غير نشط
+        user.is_active = False
+        user.save()
+
+        url = f"{settings.WEBSITE_URL}/activateemail/?email={user.email}&id={user.id}"
+
+        send_mail(
+            "Please verify your email",
+            f"The url for activating your account is: {url}",
+            "learncodingeasy@yahoo.com",
+            [user.email],
+            fail_silently=False,
+        )
+        # إضافة رسالة تأكيد إرسال البريد الإلكتروني
+        return JsonResponse({"message": message, "email_sent": True}, safe=False)
+    else:
+        # JSON إذا كان النموذج غير صالح، استرجاع الأخطاء كرسالة
+        message = form.errors.as_json()
+
+    # طباعة حالة العملية (نجاح أو الأخطاء) إلى وحدة التحكم
+    print(message)
+
+    # تحتوي على حالة العملية JSON إرجاع رسالة
+    return JsonResponse({"message": message}, safe=False)
+
+
+# JSON إرجاع بيانات المستخدم الحالي كاستجابة
+@api_view(["GET"])
+def me(request):
+    return JsonResponse(
+        {
+            "id": request.user.id,
+            "name": request.user.name,
+            "surname": request.user.surname,
+            "email": request.user.email,
+            "date_of_birth": request.user.date_of_birth,
+            "gender": request.user.gender,
+        }
+    )
+
 ```
 ```python
-# Page [ account/urls.py ]
+# Page [ facebook/facebook_django/facebook_django/urls.py ]
+# djangoمن admin بعمل استيراد لـ
+# Django عشان اقدر أستخدم لوحة التحكم الخاصة بـ
+from django.contrib import admin
+
+# URLs عشان أستخدمهم في تعريف مسارات الـ path و include بستورد
+from django.urls import path, include
+
+# بستورد الإعدادات
+# `settings` و`static`
+# عشان أستخدمهم في إضافة مسارات الملفات الثابتة زي الصور
+from django.conf import settings
+from django.conf.urls.static import static
+
+# بستورد الفيو اللى هستخدمه لتفعيل الإيميل
+from account.views import activateemail
+
+# هنا بقوم بتعريف كل المسارات الـ
+# URLs اللي الموقع هيستخدمها
+urlpatterns = [
+    # include وبستخدم /api/،و اللى كل حاجة فيه هتبقى تحت API مسار الـ
+    # account اللى اسمها app عشان أضيف كل المسارات الخاصة بالـ
+    path("api/", include("account.urls")),
+    # اللي هيكون شغال لما حد يضغط على لينك التفعيل في الإيميل activateemail مسار الـ
+    path("activateemail/", activateemail, name="activateemail"),
+    # Django اللى بيدخلني على لوحة التحكم بتاعة admin المسار الخاص بالـ
+    path("admin/", admin.site.urls),
+    # ده لإضافة مسارات الملفات الثابتة زي الصور،
+    #  وبيبقى شغال بس لما الموقع بيكون في وضع التطوير (development)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 ```
 
 
