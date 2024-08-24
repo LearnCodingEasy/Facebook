@@ -1,3 +1,5 @@
+// Page [ facebook/facebook_vue/vite.config.js ]
+
 import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'

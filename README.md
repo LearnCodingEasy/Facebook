@@ -614,6 +614,336 @@ urlpatterns = [
     #  وبيبقى شغال بس لما الموقع بيكون في وضع التطوير (development)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 ```
+__________________________________________________
+
+### 10 Create Vue Project
+```
+npm create vue@latest
+```
+__________________________________________________
+
+### 11 Choose Vite [ Project name & Select a framework ]
+```
+√ Project name: ... facebook_vue
+√ Add TypeScript? ... No / Yes
+√ Add JSX Support? ... No / Yes
+√ Add Vue Router for Single Page Application development? ... No / Yes
+√ Add Pinia for state management? ... No / Yes
+√ Add Vitest for Unit Testing? ... No / Yes
+√ Add an End-to-End Testing Solution? » No
+√ Add ESLint for code quality? ... No / Yes
+√ Add Prettier for code formatting? ... No / Yes
+√ Add Vue DevTools 7 extension for debugging? (experimental) ... No / Yes
+
+Scaffolding project in E:\Projects\Facebook\facebook_vue...
+
+Done. Now run:
+  cd facebook_vue
+  npm install
+  npm run format
+  npm run dev
+```
+__________________________________________________
+
+### 12 Go To Project [ Install & Run Dev ]
+```
+cd facebook_vue
+npm install
+npm run format
+npm run build
+npm run dev
+```
+
+__________________________________________________
+### 13  Install Vue Libraries [ 1 - Tailwind | 2 - PrimeVue | 3 - scss | 4 - Axios | 5 - Font Awesome | 6 - Pwa | 7 -  | 8 - | 9 - |  ]
+```
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+npm install primevue primeicons
+npm install @primevue/themes
+
+npm install -D sass
+
+npm install axios
+
+npm i --save @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome@latest @fortawesome/vue-fontawesome@prerelease @fortawesome/free-solid-svg-icons @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons
+
+npm install -D vite-plugin-pwa
+
+npm i swiper
+```
+__________________________________________________
+
+### 14 Configure Tailwind
+* tailwind.config.js
+```js
+// Page [ facebook/facebook_vue/tailwind.config.js ]
+content: [
+"./index.html",
+"./src/**/*.{vue,js,ts,jsx,tsx}",
+],
+```
+* style.css
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+__________________________________________________
+
+### 15 Import Font Awesome
+```js
+// Page [ facebook/facebook_vue/src/main.js ]
+// Font Awesome
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import { far } from "@fortawesome/free-regular-svg-icons";
+// Add Free Icons Styles To SVG Core
+library.add(fas, far, fab);
+
+app.component("fa", FontAwesomeIcon)
+```
 
 
+__________________________________________________
+### 16 Add Pwa To Vue 
+```js
+// Page [ facebook/facebook_vue/vite.config.js ]
 
+import { fileURLToPath, URL } from 'node:url'
+
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+
+// For Pwa
+// https://vite-pwa-org.netlify.app/guide/
+import { VitePWA } from 'vite-plugin-pwa'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    vue(),
+    // For Pwa
+    VitePWA({ 
+      // ليكون "تحديث تلقائي" Service Worker إعداد نوع التسجيل لـ 
+      registerType: 'autoUpdate',
+      workbox: {
+        // Service Worker أنماط الملفات التي سيتم تخزينها مسبقًا في الـ 
+        globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+        // يتحكم في كل العملاء الحاليين دون الحاجة لإعادة التحميل Service Worker يجعل الـ 
+        clientsClaim: true,
+         //  Service Worker يتجاوز فترة الانتظار وينشط الـ 
+        skipWaiting: true,
+        // ولا يُنظفها Cache يُبقي على النسخ القديمة من الـ 
+        cleanupOutdatedCaches: false,
+        // للعمل أثناء عدم الاتصال بالإنترنت Google يتيح تحليلات 
+        offlineGoogleAnalytics: true,
+        // (الخرائط المصدرية) لتسهيل تتبع الأخطاء sourcemaps تفعيل 
+        sourcemap: true,
+        runtimeCaching: [
+          {
+            // أو نوع الطلبات التي سيتم تخزينها أثناء التشغيل URL تحديد نمط 
+            urlPattern: ({ request }) => 
+              request.destination === 'document' || 
+              request.destination === 'script' || 
+              request.destination === 'style' || 
+              request.destination === 'image' || 
+              request.destination === 'font',
+            // استراتيجية التخزين المؤقت التي تعرض النسخة المخزنة مؤقتًا أثناء الحصول على نسخة جديدة من الشبكة
+            handler: 'StaleWhileRevalidate',
+            options: {
+              // المستخدم لتخزين هذه الملفات (cache) اسم الكاش 
+              cacheName: 'assets-cache',
+              expiration: {
+                // عدد الملفات التي يمكن تخزينها في الكاش كحد أقصى
+                maxEntries: 100,
+                // مدة التخزين المؤقت لهذه الملفات (30 يومًا)
+                maxAgeSeconds: 60 * 60 * 24 * 30 
+              }
+            }
+          }
+        ],
+      },
+      devOptions: {
+         // PWA تمكين خيارات التطوير أثناء تطوير 
+        enabled: true
+      },
+      injectRegister: 'auto',
+      includeAssets: ["**/*"],
+      manifest: {
+        name: 'Facebook',
+        short_name: 'Facebook',
+        description: 'My Awesome App Facebook',
+        theme_color: '#ffffff',
+        icons: [
+                {
+                  "src": "./images/icons/facebook_icon_72x72.png",
+                  "type": "image/png",
+                  "sizes": "72x72",
+                  "purpose": "any maskable"
+                },
+                {
+                  "src": "./images/icons/facebook_icon_96x96.png",
+                  "type": "image/png",
+                  "sizes": "96x96",
+                  "purpose": "any maskable"
+                },
+                {
+                  "src": "./images/icons/facebook_icon_128x128.png",
+                  "type": "image/png",
+                  "sizes": "128x128",
+                  "purpose": "any maskable"
+                },
+                {
+                  "src": "./images/icons/facebook_icon_144x144.png",
+                  "type": "image/png",
+                  "sizes": "144x144",
+                  "purpose": "any maskable"
+                },
+                {
+                  "src": "./images/icons/facebook_icon_152x152.png",
+                  "type": "image/png",
+                  "sizes": "152x152",
+                  "purpose": "any maskable"
+                },
+                {
+                  "src": "./images/icons/facebook_icon_192x192.png",
+                  "type": "image/png",
+                  "sizes": "192x192",
+                  "purpose": "any maskable"
+                },
+                {
+                  "src": "./images/icons/facebook_icon_384x384.png",
+                  "type": "image/png",
+                  "sizes": "384x384",
+                  "purpose": "any maskable"
+                },
+                {
+                  "src": "./images/icons/facebook_icon_512x512.png",
+                  "type": "image/png",
+                  "sizes": "512x512",
+                  "purpose": "any maskable"
+                }
+              ],
+              screenshots: [
+                {
+                  "src": "./images/screenshots/screenshots.png",
+                  "sizes": "640x480",
+                  "type": "image/png",
+                  "form_factor": "wide"
+                  // "form_factor": "narrow"
+                }
+              ]
+      },
+    })
+  ],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  }
+})
+
+```
+
+__________________________________________________
+
+### 17 Setup Axios
+```js
+// Axios
+// axios استيراد
+import axios from "axios"
+axios.defaults.baseURL = "http://127.0.0.1:8000"
+
+app.use(router, axios)
+```
+
+__________________________________________________
+### 18 Setup PrimeVue
+```js
+// Page [ facebook/facebook_vue/src/main.js ]
+// Prime Vue 
+import PrimeVue from "primevue/config";
+// Popup
+import ConfirmationService from 'primevue/confirmationservice'
+import DialogService from 'primevue/dialogservice'
+// Button
+import Button from 'primevue/button';
+// Form
+import Fluid from 'primevue/fluid';
+import InputText from 'primevue/inputtext';
+import Password from 'primevue/password';
+import FloatLabel from 'primevue/floatlabel';
+import Checkbox from 'primevue/checkbox';
+import DatePicker from 'primevue/datepicker';
+import InputGroup from 'primevue/inputgroup';
+import InputGroupAddon from 'primevue/inputgroupaddon';
+// Menu
+import Menubar from 'primevue/menubar';
+import TieredMenu from 'primevue/tieredmenu';
+// Image
+import Avatar from 'primevue/avatar';
+import AvatarGroup from 'primevue/avatargroup';
+// Popup
+import Popover from 'primevue/popover';
+import Dialog from 'primevue/dialog';
+// Card
+import Card from 'primevue/card';
+// Theme
+import Noir from './presets/Noir.js';
+import ThemeSwitcher from './components/Theme/ThemeSwitcher.vue';
+// Toast
+import Toast from 'primevue/toast';
+import ToastService from 'primevue/toastservice';
+// Message
+import Message from 'primevue/message';
+// PrimeIcons أيقونات 
+import 'primeicons/primeicons.css'
+import 'tailwindcss/tailwind.css'
+
+// Prime Vue 
+app.use(PrimeVue, {
+  theme: {
+      preset: Noir,
+      options: {
+          prefix: 'p',
+          darkModeSelector: '.p-dark',
+          cssLayer: false,
+      }
+  }
+});
+app.use(ConfirmationService);
+app.use(DialogService);
+// Prime Theme Switcher
+app.component('ThemeSwitcher', ThemeSwitcher);
+// Prime Button
+app.component('prime_button', Button);
+// Prime Form
+app.component('prime_fluid', Fluid);
+app.component('prime_input_text', InputText);
+app.component('prime_input_password', Password);
+app.component('prime_float_label', FloatLabel);
+app.component('prime_check_box', Checkbox);
+app.component('prime_date_picker', DatePicker);
+app.component('prime_input_group', InputGroup);
+app.component('prime_input_group_addon', InputGroupAddon);
+// Prime Menu
+app.component('prime_menubar', Menubar);
+app.component('prime_tiered_menu', TieredMenu);
+app.component('prime_avatar', Avatar);
+app.component('prime_avatar_group', AvatarGroup);
+app.component('prime_popover', Popover);
+app.component('prime_card', Card);
+app.component('prime_dialog', Dialog);
+// Toast
+// app.use(Toast);
+app.component('prime_toast', Toast);
+app.use(ToastService);
+// Message
+// app.use(Message);
+app.component('prime_message', Message);
+```

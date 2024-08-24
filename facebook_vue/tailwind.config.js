@@ -1,3 +1,5 @@
+// Page [ facebook/facebook_vue/tailwind.config.js ]
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [

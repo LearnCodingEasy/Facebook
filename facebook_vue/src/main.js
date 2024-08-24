@@ -1,3 +1,5 @@
+// Page [ facebook/facebook_vue/src/main.js ]
+
 // main.js
 // Tailwind
 import './assets/main.css'
@@ -40,8 +42,6 @@ import Checkbox from 'primevue/checkbox';
 import DatePicker from 'primevue/datepicker';
 import InputGroup from 'primevue/inputgroup';
 import InputGroupAddon from 'primevue/inputgroupaddon';
-
-
 // Menu
 import Menubar from 'primevue/menubar';
 import TieredMenu from 'primevue/tieredmenu';
@@ -59,11 +59,8 @@ import ThemeSwitcher from './components/Theme/ThemeSwitcher.vue';
 // Toast
 import Toast from 'primevue/toast';
 import ToastService from 'primevue/toastservice';
-
 // Message
 import Message from 'primevue/message';
-
-
 // PrimeIcons أيقونات 
 import 'primeicons/primeicons.css'
 import 'tailwindcss/tailwind.css'
@@ -79,8 +76,7 @@ app.use(router, axios)
 // eslint-disable-next-line vue/multi-word-component-names
 app.component("fa", FontAwesomeIcon)
 
-// 
-app.component('ThemeSwitcher', ThemeSwitcher);
+
 // Prime Vue 
 app.use(PrimeVue, {
   theme: {
@@ -94,8 +90,11 @@ app.use(PrimeVue, {
 });
 app.use(ConfirmationService);
 app.use(DialogService);
+// Prime Theme Switcher
+app.component('ThemeSwitcher', ThemeSwitcher);
+// Prime Button
 app.component('prime_button', Button);
-// Form
+// Prime Form
 app.component('prime_fluid', Fluid);
 app.component('prime_input_text', InputText);
 app.component('prime_input_password', Password);
@@ -104,14 +103,13 @@ app.component('prime_check_box', Checkbox);
 app.component('prime_date_picker', DatePicker);
 app.component('prime_input_group', InputGroup);
 app.component('prime_input_group_addon', InputGroupAddon);
-// Menu
+// Prime Menu
 app.component('prime_menubar', Menubar);
 app.component('prime_tiered_menu', TieredMenu);
 app.component('prime_avatar', Avatar);
 app.component('prime_avatar_group', AvatarGroup);
 app.component('prime_popover', Popover);
 app.component('prime_card', Card);
-
 app.component('prime_dialog', Dialog);
 // Toast
 // app.use(Toast);
