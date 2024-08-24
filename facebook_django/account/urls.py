@@ -1,8 +1,16 @@
 # Page [ account/urls.py ]
+# URLs عشان أستخدمهم في تعريف مسارات الـ path بستورد
 from django.urls import path
+
+# Simple JWT من مكتبة TokenObtainPairView و TokenRefreshView بستورد
+# login والـ token refresh عشان أستخدمهم في الـ  DRF الخاصة بالـ
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
+# اللى في نفس المجلد عشان أستخدم الفيوهات اللى فيه api بستورد كل حاجة من ملف
 from . import api
 
+# هنا بقوم بتعريف كل المسارات الـ 
+# URLs الخاصة بالـ app دي
 urlpatterns = [
     path("me/", api.me, name="me"),
     path("signup/", api.signup, name="signup"),
