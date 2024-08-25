@@ -1151,3 +1151,696 @@ export const useUserStore = defineStore({
     }
 })
 ```
+
+__________________________________________________
+### 20 Edite Page [ App ]
+```js
+<script setup>
+  import { RouterLink, RouterView } from 'vue-router'
+  
+  import { ref } from 'vue'
+  //
+  import { onMounted } from 'vue'
+  import { useUserStore } from '@/stores/user'
+  import { useRouter } from 'vue-router'
+  
+  const userStore = useUserStore()
+  userStore.initStore()
+  const router = useRouter()
+  
+  onMounted(() => {
+    // Perform any necessary operations on component mount
+    if (!userStore.user.access) {
+      console.log('User Data: ', userStore.user.access)
+      // Replace '/login' with your actual login route
+      router.push('/login')
+    } else {
+      // Set default Authorization header for axios
+      axios.defaults.headers.common['Authorization'] = `Bearer ${userStore.user.access}`
+      // console.log('User Data: ', userStore.user)
+    }
+  })
+  
+  // For Toggle Theme
+  const op = ref(null)
+  const toggle = (event) => {
+    op.value.toggle(event)
+  }
+  // Log Out
+  let logout = () => {
+    console.log('User Log out')
+    userStore.removeToken()
+    // توجيه المستخدم إلى صفحة تسجيل الدخول
+    setTimeout(() => {
+      router.push('/login').then(() => {})
+    }, 10)
+  }
+  </script>
+```
+```html
+<template>
+  <!-- Header -->
+  <prime_card class="header_wrapper" v-if="userStore.user.isAuthenticated">
+    <template #content>
+      <header class="card shadow-md fixed top-0 left-0 right-0">
+        <div class="container mx-auto flex justify-between items-center">
+          <!-- Left Section (Logo and Search Bar) -->
+          <div class="header_left_section flex items-center space-x-1 basis-1/4">
+            <!-- Logo -->
+            <RouterLink to="/" class="logo">
+              <!-- <i class="fab fa-facebook fa-fw"></i> -->
+              <fa :icon="['fab', 'facebook']" />
+            </RouterLink>
+            <!-- Search Bar -->
+            <div class="search_bar w-full">
+              <span class="icon">
+                <!-- <i class="fas fa-search fa-fw"></i> -->
+                <fa :icon="['fas', 'search']" />
+              </span>
+              <input
+                type="text"
+                class="w-full p-2 rounded-full focus:outline-none"
+                placeholder="Search Facebook"
+              />
+            </div>
+          </div>
+
+          <!-- Center Section (Navigation Icons) -->
+          <div class="header_center_section flex items-center justify-center space-x-1 basis-1/2">
+            <RouterLink to="/" class="header_center_section_link_home grow">
+              <span class="header_center_section_link_home_span">
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                  class="header_center_section_link_home_svg"
+                >
+                  <path
+                    d="M9.464 1.286C10.294.803 11.092.5 12 .5c.908 0 1.707.303 2.537.786.795.462 1.7 1.142 2.815 1.977l2.232 1.675c1.391 1.042 2.359 1.766 2.888 2.826.53 1.059.53 2.268.528 4.006v4.3c0 1.355 0 2.471-.119 3.355-.124.928-.396 1.747-1.052 2.403-.657.657-1.476.928-2.404 1.053-.884.119-2 .119-3.354.119H7.93c-1.354 0-2.471 0-3.355-.119-.928-.125-1.747-.396-2.403-1.053-.656-.656-.928-1.475-1.053-2.403C1 18.541 1 17.425 1 16.07v-4.3c0-1.738-.002-2.947.528-4.006.53-1.06 1.497-1.784 2.888-2.826L6.65 3.263c1.114-.835 2.02-1.515 2.815-1.977zM10.5 13A1.5 1.5 0 0 0 9 14.5V21h6v-6.5a1.5 1.5 0 0 0-1.5-1.5h-3z"
+                  ></path>
+                </svg>
+              </span>
+            </RouterLink>
+            <RouterLinka to="/" class="text-white text-xl grow header_center_section_link_friends">
+              <span class="header_center_section_link_friends_span">
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                  class="header_center_section_link_friends_svg"
+                >
+                  <path
+                    d="M12.496 5a4 4 0 1 1 8 0 4 4 0 0 1-8 0zm4-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-9 2.5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm-2 4a2 2 0 1 1 4 0 2 2 0 0 1-4 0zM5.5 15a5 5 0 0 0-5 5 3 3 0 0 0 3 3h8.006a3 3 0 0 0 3-3 5 5 0 0 0-5-5H5.5zm-3 5a3 3 0 0 1 3-3h4.006a3 3 0 0 1 3 3 1 1 0 0 1-1 1H3.5a1 1 0 0 1-1-1zm12-9.5a5.04 5.04 0 0 0-.37.014 1 1 0 0 0 .146 1.994c.074-.005.149-.008.224-.008h4.006a3 3 0 0 1 3 3 1 1 0 0 1-1 1h-3.398a1 1 0 1 0 0 2h3.398a3 3 0 0 0 3-3 5 5 0 0 0-5-5H14.5z"
+                  ></path>
+                </svg>
+              </span>
+            </RouterLinka>
+            <RouterLink to="/" class="text-white text-xl grow header_center_section_link_videos">
+              <span class="header_center_section_link_videos_span">
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                  class="header_center_section_link_videos_svg"
+                >
+                  <path
+                    d="M10.996 8.132A1 1 0 0 0 9.5 9v4a1 1 0 0 0 1.496.868l3.5-2a1 1 0 0 0 0-1.736l-3.5-2z"
+                  ></path>
+                  <path
+                    d="M14.573 2H9.427c-1.824 0-3.293 0-4.45.155-1.2.162-2.21.507-3.013 1.31C1.162 4.266.817 5.277.655 6.477.5 7.634.5 9.103.5 10.927v.146c0 1.824 0 3.293.155 4.45.162 1.2.507 2.21 1.31 3.012.802.803 1.813 1.148 3.013 1.31C6.134 20 7.603 20 9.427 20h5.146c1.824 0 3.293 0 4.45-.155 1.2-.162 2.21-.507 3.012-1.31.803-.802 1.148-1.813 1.31-3.013.155-1.156.155-2.625.155-4.449v-.146c0-1.824 0-3.293-.155-4.45-.162-1.2-.507-2.21-1.31-3.013-.802-.802-1.813-1.147-3.013-1.309C17.866 2 16.397 2 14.573 2zM3.38 4.879c.369-.37.887-.61 1.865-.741C6.251 4.002 7.586 4 9.5 4h5c1.914 0 3.249.002 4.256.138.978.131 1.496.372 1.865.74.37.37.61.888.742 1.866.135 1.007.137 2.342.137 4.256 0 1.914-.002 3.249-.137 4.256-.132.978-.373 1.496-.742 1.865-.369.37-.887.61-1.865.742-1.007.135-2.342.137-4.256.137h-5c-1.914 0-3.249-.002-4.256-.137-.978-.132-1.496-.373-1.865-.742-.37-.369-.61-.887-.741-1.865C2.502 14.249 2.5 12.914 2.5 11c0-1.914.002-3.249.138-4.256.131-.978.372-1.496.74-1.865zM8 21.5a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8z"
+                  ></path>
+                </svg>
+              </span>
+            </RouterLink>
+            <RouterLink
+              to="/"
+              class="text-white text-xl grow header_center_section_link_marketplace"
+            >
+              <span class="header_center_section_link_marketplace_span">
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                  class="header_center_section_link_marketplace_svg"
+                >
+                  <path
+                    d="M1.588 3.227A3.125 3.125 0 0 1 4.58 1h14.84c1.38 0 2.597.905 2.993 2.227l.816 2.719a6.47 6.47 0 0 1 .272 1.854A5.183 5.183 0 0 1 22 11.455v4.615c0 1.355 0 2.471-.119 3.355-.125.928-.396 1.747-1.053 2.403-.656.657-1.475.928-2.403 1.053-.884.12-2 .119-3.354.119H8.929c-1.354 0-2.47 0-3.354-.119-.928-.125-1.747-.396-2.403-1.053-.657-.656-.929-1.475-1.053-2.403-.12-.884-.119-2-.119-3.354V11.5l.001-.045A5.184 5.184 0 0 1 .5 7.8c0-.628.092-1.252.272-1.854l.816-2.719zM10 21h4v-3.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5V21zm6-.002c.918-.005 1.608-.025 2.159-.099.706-.095 1.033-.262 1.255-.485.223-.222.39-.55.485-1.255.099-.735.101-1.716.101-3.159v-3.284a5.195 5.195 0 0 1-1.7.284 5.18 5.18 0 0 1-3.15-1.062A5.18 5.18 0 0 1 12 13a5.18 5.18 0 0 1-3.15-1.062A5.18 5.18 0 0 1 5.7 13a5.2 5.2 0 0 1-1.7-.284V16c0 1.442.002 2.424.1 3.159.096.706.263 1.033.486 1.255.222.223.55.39 1.255.485.551.074 1.24.094 2.159.1V17.5a2.5 2.5 0 0 1 2.5-2.5h3a2.5 2.5 0 0 1 2.5 2.5v3.498zM4.581 3c-.497 0-.935.326-1.078.802l-.815 2.72A4.45 4.45 0 0 0 2.5 7.8a3.2 3.2 0 0 0 5.6 2.117 1 1 0 0 1 1.5 0A3.19 3.19 0 0 0 12 11a3.19 3.19 0 0 0 2.4-1.083 1 1 0 0 1 1.5 0A3.2 3.2 0 0 0 21.5 7.8c0-.434-.063-.865-.188-1.28l-.816-2.72A1.125 1.125 0 0 0 19.42 3H4.58z"
+                  ></path>
+                </svg>
+              </span>
+            </RouterLink>
+            <RouterLink to="/" class="text-white text-xl grow header_center_section_link_groups">
+              <span class="header_center_section_link_groups_span">
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                  class="header_center_section_link_groups_svg"
+                >
+                  <path
+                    d="M12 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm-2 4a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
+                  ></path>
+                  <path
+                    d="M12 .5C5.649.5.5 5.649.5 12S5.649 23.5 12 23.5 23.5 18.351 23.5 12 18.351.5 12 .5zM2.5 12c0-.682.072-1.348.209-1.99a2 2 0 0 1 0 3.98A9.539 9.539 0 0 1 2.5 12zm4 0a4.001 4.001 0 0 0-3.16-3.912A9.502 9.502 0 0 1 12 2.5a9.502 9.502 0 0 1 8.66 5.588 4.001 4.001 0 0 0 0 7.824 9.514 9.514 0 0 1-1.755 2.613A5.002 5.002 0 0 0 14 14.5h-4a5.002 5.002 0 0 0-4.905 4.025 9.515 9.515 0 0 1-1.755-2.613A4.001 4.001 0 0 0 6.5 12zm13 0a2 2 0 0 1 1.791-1.99 9.538 9.538 0 0 1 0 3.98A2 2 0 0 1 19.5 12zm-2.51 8.086A9.455 9.455 0 0 1 12 21.5c-1.83 0-3.54-.517-4.99-1.414a1.004 1.004 0 0 1-.01-.148V19.5a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v.438a1 1 0 0 1-.01.148z"
+                  ></path>
+                </svg>
+              </span>
+            </RouterLink>
+          </div>
+          <!--  -->
+          <div class="toggle_header_left_section">
+            <span class="icon"> <i class="fas fa-bars"></i> </span>
+          </div>
+          <!-- Right Section (Profile and Notifications) -->
+          <div class="header_right_section flex items-center justify-end space-x-1 basis-1/4">
+            <RouterLinka to="/" class="header_right_section_link">
+              <span class="header_right_section_link_span">
+                <svg
+                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                  fill="currentColor"
+                  class="header_right_section_link_svg"
+                >
+                  <path
+                    d="M18.5 1A1.5 1.5 0 0 0 17 2.5v3A1.5 1.5 0 0 0 18.5 7h3A1.5 1.5 0 0 0 23 5.5v-3A1.5 1.5 0 0 0 21.5 1h-3zm0 8a1.5 1.5 0 0 0-1.5 1.5v3a1.5 1.5 0 0 0 1.5 1.5h3a1.5 1.5 0 0 0 1.5-1.5v-3A1.5 1.5 0 0 0 21.5 9h-3zm-16 8A1.5 1.5 0 0 0 1 18.5v3A1.5 1.5 0 0 0 2.5 23h3A1.5 1.5 0 0 0 7 21.5v-3A1.5 1.5 0 0 0 5.5 17h-3zm8 0A1.5 1.5 0 0 0 9 18.5v3a1.5 1.5 0 0 0 1.5 1.5h3a1.5 1.5 0 0 0 1.5-1.5v-3a1.5 1.5 0 0 0-1.5-1.5h-3zm8 0a1.5 1.5 0 0 0-1.5 1.5v3a1.5 1.5 0 0 0 1.5 1.5h3a1.5 1.5 0 0 0 1.5-1.5v-3a1.5 1.5 0 0 0-1.5-1.5h-3zm-16-8A1.5 1.5 0 0 0 1 10.5v3A1.5 1.5 0 0 0 2.5 15h3A1.5 1.5 0 0 0 7 13.5v-3A1.5 1.5 0 0 0 5.5 9h-3zm0-8A1.5 1.5 0 0 0 1 2.5v3A1.5 1.5 0 0 0 2.5 7h3A1.5 1.5 0 0 0 7 5.5v-3A1.5 1.5 0 0 0 5.5 1h-3zm8 0A1.5 1.5 0 0 0 9 2.5v3A1.5 1.5 0 0 0 10.5 7h3A1.5 1.5 0 0 0 15 5.5v-3A1.5 1.5 0 0 0 13.5 1h-3zm0 8A1.5 1.5 0 0 0 9 10.5v3a1.5 1.5 0 0 0 1.5 1.5h3a1.5 1.5 0 0 0 1.5-1.5v-3A1.5 1.5 0 0 0 13.5 9h-3z"
+                  ></path>
+                </svg>
+              </span>
+            </RouterLinka>
+            <RouterLinka to="/" class="header_right_section_link">
+              <span class="header_right_section_link_span">
+                <svg
+                  viewBox="0 0 12 13"
+                  width="20"
+                  height="20"
+                  fill="currentColor"
+                  class="header_right_section_link_svg"
+                >
+                  <g fill-rule="evenodd" transform="translate(-450 -1073)">
+                    <path
+                      d="m459.603 1077.948-1.762 2.851a.89.89 0 0 1-1.302.245l-1.402-1.072a.354.354 0 0 0-.433.001l-1.893 1.465c-.253.196-.583-.112-.414-.386l1.763-2.851a.89.89 0 0 1 1.301-.245l1.402 1.072a.354.354 0 0 0 .434-.001l1.893-1.465c.253-.196.582.112.413.386M456 1073.5c-3.38 0-6 2.476-6 5.82 0 1.75.717 3.26 1.884 4.305.099.087.158.21.162.342l.032 1.067a.48.48 0 0 0 .674.425l1.191-.526a.473.473 0 0 1 .32-.024c.548.151 1.13.231 1.737.231 3.38 0 6-2.476 6-5.82 0-3.344-2.62-5.82-6-5.82"
+                    ></path>
+                  </g>
+                </svg>
+              </span>
+            </RouterLinka>
+            <RouterLink to="/" class="header_right_section_link">
+              <span class="header_right_section_link_span">
+                <svg
+                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                  fill="currentColor"
+                  class="header_right_section_link_svg"
+                >
+                  <path
+                    d="M3 9.5a9 9 0 1 1 18 0v2.927c0 1.69.475 3.345 1.37 4.778a1.5 1.5 0 0 1-1.272 2.295h-4.625a4.5 4.5 0 0 1-8.946 0H2.902a1.5 1.5 0 0 1-1.272-2.295A9.01 9.01 0 0 0 3 12.43V9.5zm6.55 10a2.5 2.5 0 0 0 4.9 0h-4.9z"
+                  ></path>
+                </svg>
+              </span>
+            </RouterLink>
+            <!-- Avatar -->
+            <prime_avatar
+              image="./src/assets/image/user.png"
+              size="large"
+              shape="circle"
+              alt="Profile Picture"
+              class="w-10 h-10 rounded-full"
+              @click="toggle"
+              type="button"
+              aria-haspopup="true"
+              aria-controls="overlay_tmenu"
+            />
+            <!-- Popup User Option -->
+            <prime_popover ref="op">
+              <div class="w-[25rem]">
+                <!-- User Profile -->
+                <div class="div_wrapper_profile">
+                  <RouterLink
+                    class="flex align-middle"
+                    v-if="userStore.user.id"
+                    :to="{ name: 'profile', params: { id: userStore.user.id } }"
+                  >
+                    <span class="user_img">
+                      <!-- v-if="userStore.user.avatar" -->
+                      <img
+                        v-if="userStore.user.avatar"
+                        :src="userStore.user.avatar"
+                        class="rounded-full"
+                        alt=""
+                      />
+                      <!-- v-else  -->
+                      <img v-else src="./assets/image/user.png" class="rounded-full" alt="" />
+                    </span>
+                    <span class="user_name">{{ userStore.user.name }}</span>
+                  </RouterLink>
+                </div>
+                <!-- Log Out -->
+                <div class="div_wrapper_logout flex align-middle cursor-pointer" @click="logout">
+                  <div class="icon_logout flex justify-center align-middle">
+                    <i class="pi pi-sign-out" style="font-size: 1rem" shape="circle"></i>
+                  </div>
+                  <button class="font-bold">Log out</button>
+                </div>
+                <!-- Toggle Theme -->
+                <div class="flex div_wrapper_toggle_theme cursor-pointer">
+                  <ThemeSwitcher />
+                  <span class="font-medium mb-2">Toggle theme</span>
+                </div>
+              </div>
+            </prime_popover>
+          </div>
+        </div>
+      </header>
+    </template>
+  </prime_card>
+
+  <prime_toast />
+
+  <RouterView />
+</template>
+```
+```js
+<script>
+  import axios from 'axios'
+  
+  export default {
+    setup() {
+      return {}
+    },
+    methods: {}
+  }
+</script>
+```
+__________________________________________________
+### 21 Create Page [ Signup & Login ]
+```html
+<template>
+  <div class="wrapper_login_page">
+    <div class="inner_login_page">
+      <div class="container">
+        <div class="flex justify-center align-middle w_80 m-auto">
+          <div class="grid grid-cols-3 gap-4 w_95">
+            <div class="wrapper_text_login col-span-2">
+              <div class="inner">
+                <div class="title">facebook</div>
+                <div class="subtitle">
+                  Facebook helps you connect and share <br />
+                  with the people in your life.
+                </div>
+              </div>
+            </div>
+            <div class="wrapper_form_login shadow-2xl rounded-lg">
+              <!-- Log in -->
+              <form class="form_login" v-on:submit.prevent="submitFormLogin">
+                <prime_card class="p-3">
+                  <template #header>
+                    <div class="my-5 font-bold text-3xl">Log in</div>
+                  </template>
+                  <template #title>
+                    <prime_float_label class="mt-5">
+                      <prime_input_text
+                        id="emailAddress"
+                        v-model="formLogin.email"
+                        class="block w_100"
+                      />
+                      <label for="emailAddress" class="text-base">Your E-mail Address</label>
+                    </prime_float_label>
+                  </template>
+                  <template #content>
+                    <prime_float_label class="mt-5">
+                      <prime_input_password
+                        id="password"
+                        v-model="formLogin.password"
+                        :feedback="false"
+                      />
+                      <label for="password">password</label>
+                    </prime_float_label>
+                  </template>
+                  <template #footer>
+                    <div class="row">
+                      <!-- Errors -->
+                      <template v-if="errorsLogin.length > 0">
+                        <prime_toast></prime_toast>
+                      </template>
+                      <!-- Login -->
+                      <div class="mt-3">
+                        <button
+                          type="submit"
+                          class="d_block_important mt-5 mb-3 mx-auto w_100 bg-blue-500 py-3 px-5 rounded text-white"
+                          @click.prevent="submitFormLogin"
+                        >
+                          Log In
+                        </button>
+                        <a href="#" class="text-blue-600 mx-auto my-4 block text-center"
+                          >Forgotten password?</a
+                        >
+                        <hr />
+                        <!-- Button Signup -->
+                        <prime_button
+                          label="Create new account"
+                          severity="success"
+                          @click="visible = true"
+                          class="d_block_important my-5 mx-auto"
+                        />
+                      </div>
+                    </div>
+                  </template>
+                </prime_card>
+              </form>
+              <!-- Signup -->
+              <div class="card flex justify-center">
+                <!-- @submit.prevent="submitFormSignup" -->
+                <form class="space-y-6">
+                  <!-- <form class="space-y-6" @submit.prevent="submitFormSignup"> -->
+                  <prime_dialog
+                    v-model:visible="visible"
+                    modal
+                    header="Sign Up"
+                    :style="{ width: '25rem' }"
+                  >
+                    <span class="text-surface-500 dark:text-surface-400 block mb-8"
+                      >It's quick and easy.</span
+                    >
+                    <prime_fluid>
+                      <div class="grid grid-cols-2 gap-4">
+                        <!-- First name -->
+                        <div>
+                          <prime_input_text placeholder="First name" v-model="formSignup.name" />
+                        </div>
+                        <!-- Surname -->
+                        <div>
+                          <prime_input_text placeholder="Surname" v-model="formSignup.surname" />
+                        </div>
+                        <!-- Mobile number or email address -->
+                        <div class="col-span-full">
+                          <prime_input_text
+                            placeholder="Mobile number or email address"
+                            v-model="formSignup.email"
+                          />
+                        </div>
+                        <!-- password1 -->
+                        <div class="col-span-full">
+                          <prime_input_password
+                            placeholder="New Password"
+                            v-model="formSignup.password1"
+                          />
+                        </div>
+                        <!-- password2 -->
+                        <div class="col-span-full">
+                          <prime_input_password
+                            placeholder="Repeat password"
+                            v-model="formSignup.password2"
+                          />
+                        </div>
+                        <!-- Date of birth -->
+                        <div class="col-span-full">Date of birth</div>
+                        <div class="col-span-full">
+                          <div class="flex flex-col md:flex-row gap-2">
+                            <!-- Day -->
+                            <prime_input_group>
+                              <prime_date_picker v-model="day" view="day" dateFormat="dd" />
+                            </prime_input_group>
+                            <!-- Month -->
+                            <prime_input_group>
+                              <prime_date_picker v-model="month" view="month" dateFormat="mm" />
+                            </prime_input_group>
+                            <!-- Year -->
+                            <prime_input_group>
+                              <prime_date_picker v-model="year" view="year" dateFormat="yy" />
+                            </prime_input_group>
+                          </div>
+                        </div>
+                        <!-- Gender -->
+                        <div class="col-span-full">Gender</div>
+                        <div class="flex flex-col md:flex-row gap-2">
+                          <prime_input_group>
+                            <prime_check_box
+                              v-model="formSignup.gender"
+                              inputId="ingredient1"
+                              name="gender"
+                              value="Female"
+                            />
+                            <label for="ingredient1" class="ml-2"> Female </label>
+                          </prime_input_group>
+                          <prime_input_group>
+                            <prime_check_box
+                              v-model="formSignup.gender"
+                              inputId="ingredient2"
+                              name="gender"
+                              value="Male"
+                            />
+                            <label for="ingredient2" class="ml-2"> Male </label>
+                          </prime_input_group>
+
+                          <prime_input_group>
+                            <prime_check_box
+                              v-model="formSignup.gender"
+                              inputId="ingredient3"
+                              name="gender"
+                              value="Custom"
+                            />
+                            <label for="ingredient3" class="ml-2"> Custom </label>
+                          </prime_input_group>
+                        </div>
+                      </div>
+                    </prime_fluid>
+                    <div class="flex justify-center gap-2">
+                      <button
+                        type="submit"
+                        class="d_block_important mt-5 mb-3 mx-auto w_50 bg-green-500 py-3 px-5 rounded text-white"
+                        @click.prevent="submitFormSignup"
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </prime_dialog>
+                  <!-- Errors -->
+                  <template v-if="errorsSignup.length > 0">
+                    <prime_toast />
+                  </template>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <prime_toast />
+  </div>
+</template>
+```
+```js
+
+<script>
+  import axios from 'axios'
+  // eslint-disable-next-line no-unused-vars
+  import { RouterLink } from 'vue-router'
+  import { useUserStore } from '@/stores/user'
+  export default {
+    name: 'loginView',
+    setup() {
+      const userStore = useUserStore()
+      return {
+        userStore
+      }
+    },
+    data() {
+      return {
+        formLogin: {
+          email: '',
+          password: ''
+        },
+        errorsLogin: [],
+        // visible Signup
+        visible: false,
+        // Signup
+        formSignup: {
+          name: '',
+          surname: '',
+          email: '',
+          date_of_birth: null,
+          gender: '',
+          password1: '',
+          password2: ''
+        },
+        day: '',
+        month: '',
+        year: '',
+        errorsSignup: []
+      }
+    },
+    methods: {
+      async submitFormLogin() {
+        this.errorsLogin = []
+        if (this.formLogin.email === '') {
+          this.$toast.add({
+            severity: 'error',
+            summary: 'User Name missing',
+            detail: 'Your name is missing',
+            life: 3000
+          })
+          this.errorsLogin.push('Your e-mail is missing')
+        }
+        if (this.formLogin.password === '') {
+          this.$toast.add({
+            severity: 'error',
+            summary: 'User password is missing',
+            detail: 'Your password is missing',
+            life: 3000
+          })
+          this.errorsLogin.push('Your password is missing')
+        }
+        if (this.errorsLogin.length === 0) {
+          await axios
+            .post('/api/login/', this.formLogin)
+            .then((response) => {
+              this.userStore.setToken(response.data)
+              console.log('response.data: ', response.data)
+              axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.access
+            })
+            .catch((error) => {
+              console.log('error', error)
+              if (error.response.data.detail) {
+                // Code If True
+                this.$toast.add({
+                  severity: 'error',
+                  summary: 'Error Message',
+                  detail: `${error.response.data.detail}`,
+                  life: 6000
+                })
+              }
+  
+              this.errorsLogin.push(
+                'The email or password is incorrect! Or the user is not activated!'
+              )
+            })
+        }
+        if (this.errorsLogin.length === 0) {
+          await axios
+            .get('/api/me/')
+            .then((response) => {
+              this.userStore.setUserInfo(response.data)
+              this.$router.push('/')
+            })
+            .catch((error) => {
+              console.log('error', error)
+            })
+        }
+      },
+      submitFormSignup() {
+        this.errorsSignup = []
+  
+        // استخراج اليوم، الشهر، والسنة من كائنات Date وتنسيقها
+        const day = this.day.getDate().toString().padStart(2, '0')
+        const month = (this.month.getMonth() + 1).toString().padStart(2, '0')
+        const year = this.year.getFullYear()
+  
+        const formattedDate = `${year}-${month}-${day}`
+        this.formSignup.date_of_birth = formattedDate
+  
+        if (this.formSignup.name === '') {
+          this.$toast.add({
+            severity: 'error',
+            summary: 'User Name missing',
+            detail: 'Your name is missing',
+            life: 3000
+          })
+          this.errorsSignup.push('Your name is missing')
+        }
+        if (this.formSignup.surname === '') {
+          this.$toast.add({
+            severity: 'error',
+            summary: 'User Surname missing',
+            detail: 'Your Surname is missing',
+            life: 3000
+          })
+          this.errorsSignup.push('Your surname is missing')
+        }
+        if (this.formSignup.email === '') {
+          this.$toast.add({
+            severity: 'error',
+            summary: 'User Is missing',
+            detail: 'Your e-mail is missing',
+            life: 3000
+          })
+          this.errorsSignup.push('Your e-mail is missing')
+        }
+        if (this.formSignup.password1 === '') {
+          this.$toast.add({
+            severity: 'error',
+            summary: 'User passwordIs missing',
+            detail: 'Your password is missing',
+            life: 3000
+          })
+          this.errorsSignup.push('Your password is missing')
+        }
+        if (this.formSignup.password1 !== this.formSignup.password2) {
+          this.$toast.add({
+            severity: 'error',
+            summary: 'User  password does not match',
+            detail: 'Your password  does not match',
+            life: 3000
+          })
+          this.errorsSignup.push('The password does not match')
+        }
+        if (this.errorsSignup.length === 0) {
+          axios
+            .post('/api/signup/', this.formSignup)
+            .then((response) => {
+              if (response.data.message === 'success') {
+                if (response.data.email_sent) {
+                  this.$toast.add({
+                    severity: 'success',
+                    summary: 'User Registered',
+                    detail: 'Please activate your account by clicking the link sent to your email.',
+                    life: 3000
+                  })
+                }
+                this.$toast.add({
+                  severity: 'success',
+                  summary: 'User Is Registered',
+                  detail: 'Please activate your account by clicking your email link',
+                  life: 3000
+                })
+                this.formSignup.name = ''
+                this.formSignup.surname = ''
+                this.formSignup.email = ''
+                this.formSignup.date_of_birth = ''
+                this.formSignup.gender = ''
+                this.formSignup.password1 = ''
+                this.formSignup.password2 = ''
+                // this.$router.push('/loginView')
+                window.location.reload()
+              } else {
+                const data = JSON.parse(response.data.message)
+                this.$toast.add({
+                  severity: 'error',
+                  summary: 'Error Message',
+                  detail: 'Message Content Something went wrong. Please try again',
+                  life: 6000
+                })
+                for (const key in data) {
+                  this.errors.push(data[key][0].message)
+                }
+                console.log(`Bad`, this.formSignup.date_of_birth)
+                console.log(`Day`, this.day)
+                console.log(`month`, this.month)
+                console.log(`year`, this.year)
+              }
+            })
+            .catch((error) => {
+              console.log('error', error)
+            })
+        }
+      }
+    }
+  }
+</script>
+```
