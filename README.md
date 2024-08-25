@@ -489,7 +489,7 @@ from rest_framework.decorators import (
 # from notification.utils import create_notification
 
 # إستيراد النماذج المخصصة لتسجيل المستخدم وتعديل الملف الشخصي
-from .forms import SignupForm, ProfileForm
+from .forms import SignupForm
 
 # إستيراد النماذج المخصصة للمستخدم وطلبات الصداقة
 from .models import User
