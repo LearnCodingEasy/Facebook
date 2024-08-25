@@ -346,6 +346,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     
     
 ```
+* Create Page [ serializers.py ] Inside App Account 
+```cmd
+serializers.py
+```
 ```python
 # Page [ facebook/facebook_django/account/serializers.py ]
 # Django Rest Framework من serializers هنا بنستورد مكتبة
@@ -378,6 +382,10 @@ class UserSerializer(serializers.ModelSerializer):
             "gender",
         )
 
+```
+* Create Page [ forms.py ] Inside App Account 
+```cmd
+forms.py
 ```
 ```python
 # Page [ facebook/facebook_django/account/forms.py ]
@@ -448,6 +456,10 @@ def activateemail(request):
         # لو البيانات مش كاملة أو مش صحيحة، بنرجع رد نصي بيقول إن البارامترات غير صحيحة
         return HttpResponse("The parameters is not valid!")
 
+```
+* Create Page [ api.py ] Inside App Account 
+```cmd
+api.py
 ```
 ```python
 # Page [ facebook/facebook_django/account/api.py ]
@@ -556,6 +568,10 @@ def me(request):
         }
     )
 
+```
+* Create Page [ urls.py ] Inside App Account 
+```cmd
+urls.py
 ```
 ```python
 # Page [ facebook/facebook_django/account/urls.py ]
