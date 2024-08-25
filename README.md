@@ -964,7 +964,7 @@ export default {
 __________________________________________________
 ### 19 Setup Vuex
 * Creat Page [ user.js ] Inside Store
-```
+```js
 // Page [ facebook/facebook_vue/src/stores/user.js ]
 // `pinia`من مكتبة `defineStore` استيراد 
 import { defineStore } from 'pinia'
