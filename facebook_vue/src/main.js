@@ -65,7 +65,6 @@ import Message from 'primevue/message';
 import 'primeicons/primeicons.css'
 import 'tailwindcss/tailwind.css'
 
-
 const app = createApp(App)
 
 app.use(createPinia())
@@ -75,7 +74,6 @@ app.use(router, axios)
 
 // eslint-disable-next-line vue/multi-word-component-names
 app.component("fa", FontAwesomeIcon)
-
 
 // Prime Vue 
 app.use(PrimeVue, {

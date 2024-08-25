@@ -947,3 +947,4 @@ app.use(ToastService);
 // app.use(Message);
 app.component('prime_message', Message);
 ```
+* Setup Prime Theme

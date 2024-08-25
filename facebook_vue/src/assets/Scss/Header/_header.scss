@@ -3,6 +3,7 @@
     padding: 0;
     header {
       height: var(--header-height);
+      background-color: var(--header-bg);
       width: 100%;
       z-index: 1000;
       padding: 0 0.5rem;
