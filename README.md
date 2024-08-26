@@ -887,6 +887,7 @@ export default defineConfig({
 })
 ```
 * Add Image Inside Public
+```
 ├── public/
 │   ├── images/
 │   |   ├── icons/
@@ -900,7 +901,7 @@ export default defineConfig({
 │   │   |   ├── 🖼️ facebook_icon_512x512.png
 │   |   ├── screenshots/
 │   │   |   ├── 🖼️ screenshots.png
-
+```
 __________________________________________________
 
 ### 17 Setup Axios
