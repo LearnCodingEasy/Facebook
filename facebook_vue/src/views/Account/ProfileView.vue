@@ -1,4 +1,6 @@
-<template><div class="Component-Name">ProfileView</div></template>
+<template>
+<div class="Component-Name">Page Profile View</div>
+</template>
 
 <script>
 export default { name: 'ProfileView' }

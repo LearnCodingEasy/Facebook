@@ -1609,6 +1609,7 @@ __________________________________________________
 ```
 __________________________________________________
 ### 21 Create Page [ Signup & Login ]
+* Create Page [ Authentication/LoginView.vue ] Inside views/Authentication
 ```html
 <template>
   <div class="wrapper_login_page">
@@ -1806,7 +1807,6 @@ __________________________________________________
 </template>
 ```
 ```js
-
 <script>
   import axios from 'axios'
   // eslint-disable-next-line no-unused-vars
@@ -2012,4 +2012,495 @@ __________________________________________________
     }
   }
 </script>
+```
+
+__________________________________________________
+### 22 Create Page [ Account/LoginView.vue ] Inside views/Account
+```html
+<template>
+  <div class="Component-Name">Page Profile View</div>
+</template>
+```
+```js
+<script>
+export default { name: 'ProfileView' }
+</script>
+```
+__________________________________________________
+### 23 Edite Page [ index.js ] Inside router
+```js
+// index.js
+import { createRouter, createWebHistory } from 'vue-router'
+import HomeView from '../views/HomeView.vue'
+
+// Authentication
+import LoginView from '../views/Authentication/LoginView.vue'
+
+// Account
+import ProfileView from '../views/Account/ProfileView.vue'
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [
+    {
+      path: '/',
+      name: 'home',
+      component: HomeView
+    },
+    // Authentication 
+    // Login
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginView
+    },
+    // Account
+    {
+      path: '/profile/:id',
+      name: 'profile',
+      component: ProfileView,
+      meta: {
+        requireLogin: true
+      }
+    },
+    {
+      path: '/about',
+      name: 'about',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/AboutView.vue')
+    }
+  ]
+})
+
+export default router
+
+```
+
+__________________________________________________
+### 23 Edite Page [ style.scss ] Inside src/assets/Scss
+* Import Css Style To Use It Inside Glopal [ index.js ]
+```js
+// Page [ facebook/facebook_vue/src/main.js ]
+import './assets/main.css'
+import './assets/Scss/Style.scss'
+```
+* Project Structure
+├── src/
+│   ├── assets/
+│   |   ├── Scss/
+│   |   |   ├── Authentication/
+│   │   |   |   ├── 📝 _login.scss
+│   |   |   ├── Header/
+│   │   |   |   ├── 📝 _header.scss
+│   |   |   ├── Style.scss
+```cmd
+Scss/Authentication/_login.scss
+Header/_header.scss
+Style.scss
+```
+* style
+```css
+// Global Color Light Theme
+:root {
+  /* Body */
+  --body-bg-hr: #f0f2f5;
+  --body-bg: #f8fafc;
+  // Header Style
+  --header-height: 4rem;
+  --header-bg: #fff;
+  // Logo
+  --header-facebook-icon-color: #0866ff;
+  --header-facebook-icon-font-size: 2.5rem;
+  // search
+  --header-search-icon-color: #65676b;
+  --header-search-input-text-color: #050505;
+  --header-search-input-placeholder-color: #0505059e;
+  // placeholder
+  --header-search-input-color: #f0f2f5;
+  // Linke Center
+  --header_center_section_link_home_border: #0866ff;
+  --header_center_section_link_home_active_color: #0866ff;
+  --header_center_section_link_home_color: #65676b;
+  --header_center_section_link_home_hover_bg: #f2f2f2;
+  //
+  --header-center-section-icon-size: 1.5rem;
+  --header-link-border-color: #0866ff;
+  --header-link-background-color: #d8dadf;
+  --header-user-option-btn-bg-light: #e4e6eb;
+  //
+  // Index Style
+  //
+
+  /* Fore Content Page Index Center Content */
+  --page-index-content-center: #fff;
+  --page-index-post-bg: #fff;
+  --page-index-post-button-hover: #f0f2f5;
+  --page-index-post-icon-trand: #65676b;
+  /* For Scrollbar Page Index Lift Sidebar */
+  --page-index-sidebar-lift-scrollbar: #e6e8eb;
+  --page-index-sidebar-lift-scrollbar-thumb: #bcc0c4;
+
+  /* For Scrollbar Page Index right Sidebar */
+  --page-index-sidebar-right-scrollbar: #e6e8eb;
+  --page-index-sidebar-right-scrollbar-thumb: #bcc0c4;
+  --page-index-sidebar-right-border-user-control: #bcc0c4;
+  --page-index-sidebar-right-text-color: #65676b;
+  --page-index-sidebar-right-icon-bg: #65676b;
+  //
+}
+
+// Header
+@import 'Header/header';
+// Authentication
+@import 'Authentication/login';
+// Style For Dark Mode
+html.dark,
+html.p-dark {
+  /* Body */
+  // --body-bg: #0d121b;
+  --body-bg: #09090b;
+  --header-user-option-btn-bg-light: #09090b;
+  --header-bg: #18181b;
+}
+body {
+  // background-color: var(--body-bg-hr);
+  background-color: var(--body-bg);
+  transition:
+    background-color 0.95s linear,
+    color 0.95s linear;
+}
+
+```
+* login
+```css
+.wrapper_login_page {
+  padding-top: 60px;
+  .inner_login_page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 94vh;
+    .container,
+    .container {
+      .flex {
+        .wrapper_text_login {
+          .inner {
+            // width: 70%;
+            // margin: auto;
+            .title {
+              color: #0866ff;
+              font-size: 8vh;
+              font-weight: bold;
+            }
+            .subtitle {
+              font-family: SFProDisplay-Regular, Helvetica, Arial, sans-serif;
+              font-size: 28px;
+              font-weight: normal;
+              line-height: 32px;
+              width: 500px;
+            }
+          }
+        }
+        .wrapper_form_login {
+          // background-color: #fff;
+          // padding: 1rem;
+          // border-radius: 1rem;
+          .form_login {
+            .p-card-body {
+              padding: 0 !important;
+              .p-password {
+                display: block !important;
+                input[type='password'] {
+                  width: 100% !important;
+                }
+              }
+            }
+          }
+          .button_signup {
+            // background-color: #42b72a;
+            // color: #fff;
+            // width: 50%;
+            display: block;
+            margin: 2rem auto;
+          }
+        }
+      }
+    }
+  }
+}
+```
+* header
+```css
+.header_wrapper {
+  > div {
+    padding: 0;
+    header {
+      height: var(--header-height);
+      background-color: var(--header-bg);
+      width: 100%;
+      z-index: 1000;
+      padding: 0 0.5rem;
+      .container {
+        height: var(--header-height);
+        // Left Section (Logo and Search Bar)
+        .header_left_section {
+          .logo {
+            color: var(--header-facebook-icon-color);
+            font-size: var(--header-facebook-icon-font-size);
+          }
+          .search_bar {
+            position: relative;
+            span.icon {
+              position: absolute;
+              left: 7px;
+              top: 7px;
+              i,
+              svg {
+                font-size: 16px;
+                color: var(--header-search-icon-color);
+                font-weight: 700;
+              }
+              /* Console Devices */
+              /* Mobil S, Less Than 320px */
+              @media screen and (max-width: 320px) {
+                left: 10px;
+              }
+              /* Mobil M, Less Than 375px */
+              @media screen and (min-width: 321px) and (max-width: 375px) {
+                left: 10px;
+              }
+              /* Mobil L, Less Than 425px */
+              @media screen and (min-width: 376px) and (max-width: 425px) {
+                left: 10px;
+              }
+            }
+            input {
+              background-color: var(--header-search-input-color);
+              padding-left: 2rem;
+              color: var(--header-search-input-text-color);
+              &::placeholder {
+                color: var(--header-search-input-placeholder-color);
+                // font-weight: 500;
+                font-size: 15px;
+              }
+              /* Console Devices */
+              /* Mobil S, Less Than 320px */
+              @media screen and (max-width: 320px) {
+                width: 35px;
+              }
+              /* Mobil M, Less Than 375px */
+              @media screen and (min-width: 321px) and (max-width: 375px) {
+                width: 35px;
+              }
+              /* Mobil L, Less Than 425px */
+              @media screen and (min-width: 376px) and (max-width: 425px) {
+                width: 35px;
+              }
+              /* Tablet , Less Than 768px */
+              @media screen and (min-width: 426px) and (max-width: 768px) {
+                width: 35px;
+              }
+              /* Laptop , Less Than 1024px */
+              @media screen and (min-width: 769px) and (max-width: 1024px) {
+              }
+              /* Laptop L, Less Than 1440px */
+              @media screen and (min-width: 1025px) and (max-width: 1440px) {
+              }
+              /* 4K , Less Than 2560px */
+              @media screen and (min-width: 1441px) and (max-width: 2560px) {
+              }
+            }
+          }
+        }
+        .toggle_header_left_section {
+          // border: 0.5rem solid #f00;
+          font-size: 1.5rem;
+          padding: 0.5rem 1rem;
+          margin: 5px 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 5px;
+          &:hover {
+            background-color: var(--header_center_section_link_home_hover_bg);
+          }
+          /* Console Devices */
+          /* Mobil S, Less Than 320px */
+          @media screen and (max-width: 320px) {
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            position: relative;
+            left: -25px;
+            display: none;
+          }
+          /* Mobil M, Less Than 375px */
+          @media screen and (min-width: 321px) and (max-width: 375px) {
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            position: relative;
+            left: -40px;
+          }
+          /* Mobil L, Less Than 425px */
+          @media screen and (min-width: 376px) and (max-width: 425px) {
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            position: relative;
+            left: -60px;
+          }
+          /* Tablet , Less Than 768px */
+          @media screen and (min-width: 426px) and (max-width: 768px) {
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            position: relative;
+            left: -10px;
+          }
+          /* Laptop , Less Than 1024px */
+          @media screen and (min-width: 769px) and (max-width: 1024px) {
+          }
+          /* Laptop L, Less Than 1440px */
+          @media screen and (min-width: 1025px) and (max-width: 1440px) {
+          }
+          /* 4K , Less Than 2560px */
+          @media screen and (min-width: 1441px) and (max-width: 2560px) {
+          }
+        }
+        // Center Section (Navigation Icons)
+        .header_center_section {
+          height: var(--header-height);
+          /* Console Devices */
+          /* Mobil S, Less Than 320px */
+          @media screen and (max-width: 320px) {
+            position: fixed;
+            left: 100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+          }
+          /* Mobil M, Less Than 375px */
+          @media screen and (min-width: 321px) and (max-width: 375px) {
+            position: fixed;
+            left: 100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+          }
+          /* Mobil L, Less Than 425px */
+          @media screen and (min-width: 376px) and (max-width: 425px) {
+            position: fixed;
+            left: 100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+          }
+          /* Tablet , Less Than 768px */
+          @media screen and (min-width: 426px) and (max-width: 768px) {
+          }
+          /* Laptop , Less Than 1024px */
+          @media screen and (min-width: 769px) and (max-width: 1024px) {
+          }
+          /* Laptop L, Less Than 1440px */
+          @media screen and (min-width: 1025px) and (max-width: 1440px) {
+          }
+          /* 4K , Less Than 2560px */
+          @media screen and (min-width: 1441px) and (max-width: 2560px) {
+          }
+          .header_center_section_link_home,
+          .header_center_section_link_friends,
+          .header_center_section_link_videos,
+          .header_center_section_link_marketplace,
+          .header_center_section_link_groups {
+            height: 100%;
+            border-bottom: 4px solid transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &:hover {
+              background-color: var(--header_center_section_link_home_hover_bg);
+              border-radius: 5px;
+            }
+            span {
+              position: relative;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              svg {
+                height: var(--header-center-section-icon-size);
+                width: var(--header-center-section-icon-size);
+                color: var(--header_center_section_link_home_color);
+              }
+            }
+          }
+          .header_center_section_link_home {
+            border-bottom: 3px solid var(--header_center_section_link_home_active_color);
+            span {
+              svg {
+                color: var(--header_center_section_link_home_active_color);
+              }
+            }
+          }
+        }
+        //
+        .header_right_section {
+          .header_right_section_link {
+            border-radius: 50%;
+            padding: 10px;
+
+            .header_right_section_link_span {
+              .header_right_section_link_svg {
+                height: var(--header-center-section-icon-size);
+                width: var(--header-center-section-icon-size);
+              }
+            }
+          }
+          // Avater
+          div.p-avatar {
+            img {
+              width: 40px;
+              height: 40px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Popup User Option
+.div_wrapper_profile {
+  a {
+    align-items: center;
+    margin-bottom: 1rem;
+    .user_img {
+      margin-right: 12px;
+    }
+    .user_name {
+    }
+  }
+}
+.div_wrapper_logout {
+  align-items: center;
+  .icon_logout {
+    background-color: var(--header-user-option-btn-bg-light);
+    border-radius: 50%;
+    padding: 5px;
+    height: 36px;
+    width: 36px;
+    margin-right: 12px;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+  }
+}
+.div_wrapper_toggle_theme {
+  align-items: center;
+  margin-top: 1rem;
+  span:first-child {
+    margin-right: 12px;
+  }
+}
 ```
