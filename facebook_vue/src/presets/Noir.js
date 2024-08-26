@@ -50,4 +50,3 @@ const Noir = definePreset(Aura, {
 });
 
 export default Noir;
-        
