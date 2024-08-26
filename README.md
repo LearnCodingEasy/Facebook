@@ -742,6 +742,7 @@ import { far } from "@fortawesome/free-regular-svg-icons";
 // Add Free Icons Styles To SVG Core
 library.add(fas, far, fab);
 
+// eslint-disable-next-line vue/multi-word-component-names
 app.component("fa", FontAwesomeIcon)
 ```
 
@@ -997,7 +998,125 @@ export default {
     }
 };
 ```
+- Create Page [ ThemeSwitcher.vue ] components/Theme/
+```html
+<template>
+  <span class="">
+    <ul class="flex list-none m-0 p-0 gap-2 items-center">
+      <li>
+        <button
+          type="button"
+          class="inline-flex w-8 h-8 p-0 items-center justify-center surface-0 dark:surface-800 border border-surface-200 dark:border-surface-600 rounded-full"
+          @click="onThemeToggler"
+        >
+          <i :class="`dark:text-white pi ${iconClass}`" />
+        </button>
+      </li>
+    </ul>
+  </span>
+</template>
+```
+```js
+<script>
+  import { updatePreset, updateSurfacePalette } from '@primevue/themes'
+  
+  export default {
+    data() {
+      return {
+        iconClass: 'pi-moon',
+        selectedPrimaryColor: 'noir',
+        selectedSurfaceColor: null
+      }
+    },
+    methods: {
+      onThemeToggler() {
+        const root = document.getElementsByTagName('html')[0]
+        root.classList.toggle('p-dark')
+        this.iconClass = this.iconClass === 'pi-moon' ? 'pi-sun' : 'pi-moon'
+      },
+  
+      updateColors(type, color) {
+        if (type === 'primary') this.selectedPrimaryColor = color.name
+        else if (type === 'surface') this.selectedSurfaceColor = color.name
+  
+        this.applyTheme(type, color)
+      },
+      applyTheme(type, color) {
+        if (type === 'primary') {
+          updatePreset(this.getPresetExt())
+        } else if (type === 'surface') {
+          updateSurfacePalette(color.palette)
+        }
+      },
+      onRippleChange(value) {
+        this.$primevue.config.ripple = value
+      }
+    },
+    computed: {
+      rippleActive() {
+        return this.$primevue.config.ripple
+      }
+    }
+  }
+</script>
+```
+* Setup Prime Theme
+- Create Page [ Noir.js ] Inside src/presets 
+```js
+import { definePreset } from '@primevue/themes';
+import Aura from '@primevue/themes/aura';
 
+const Noir = definePreset(Aura, {
+    semantic: {
+        primary: {
+        50: '{surface.50}',
+        100: '{surface.100}',
+        200: '{surface.200}',
+        300: '{surface.300}',
+        400: '{surface.400}',
+        500: '{surface.500}',
+        600: '{surface.600}',
+        700: '{surface.700}',
+        800: '{surface.800}',
+        900: '{surface.900}',
+        950: '{surface.950}'
+        },
+        colorScheme: {
+            light: {
+                primary: {
+                color: '{primary.950}',
+                contrastColor: '#ffffff',
+                hoverColor: '{primary.900}',
+                activeColor: '{primary.800}'
+                },
+                highlight: {
+                background: '{primary.950}',
+                focusBackground: '{primary.700}',
+                color: '#ffffff',
+                focusColor: '#ffffff'
+                },
+            },
+            dark: {
+                primary: {
+                color: '{primary.50}',
+                contrastColor: '{primary.950}',
+                hoverColor: '{primary.100}',
+                activeColor: '{primary.200}'
+                },
+                highlight: {
+                background: '{primary.50}',
+                focusBackground: '{primary.300}',
+                color: '{primary.950}',
+                focusColor: '{primary.950}'
+                }
+            }
+        }
+    }
+});
+
+export default Noir;
+
+```
 __________________________________________________
 ### 19 Setup Vuex
 * Creat Page [ user.js ] Inside Store
