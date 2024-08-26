@@ -889,16 +889,18 @@ export default defineConfig({
 * Add Image Inside Public
 ├── public/
 │   ├── images/
-│   │   ├── 🖼️ icons/facebook_icon_72x72.png
-│   │   ├── 🖼️ icons/facebook_icon_96x96.png
-│   │   ├── 🖼️ icons/facebook_icon_128x128.png
-│   │   ├── 🖼️ icons/facebook_icon_144x144.png
-│   │   ├── 🖼️ icons/facebook_icon_152x152.png
-│   │   ├── 🖼️ icons/facebook_icon_192x192.png
-│   │   ├── 🖼️ icons/facebook_icon_384x384.png
-│   │   ├── 🖼️ icons/facebook_icon_512x512.png
-│   ├── screenshots/
-│   │   ├── 🖼️ icons/screenshots.png
+│   |   ├── icons/
+│   │   |   ├── 🖼️ facebook_icon_72x72.png
+│   │   |   ├── 🖼️ facebook_icon_96x96.png
+│   │   |   ├── 🖼️ facebook_icon_128x128.png
+│   │   |   ├── 🖼️ facebook_icon_144x144.png
+│   │   |   ├── 🖼️ facebook_icon_152x152.png
+│   │   |   ├── 🖼️ facebook_icon_192x192.png
+│   │   |   ├── 🖼️ facebook_icon_384x384.png
+│   │   |   ├── 🖼️ facebook_icon_512x512.png
+│   |   ├── screenshots/
+│   │   |   ├── 🖼️ screenshots.png
+
 __________________________________________________
 
 ### 17 Setup Axios
