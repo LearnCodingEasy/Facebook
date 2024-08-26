@@ -2087,6 +2087,7 @@ import './assets/main.css'
 import './assets/Scss/Style.scss'
 ```
 * Project Structure
+```
 ├── src/
 │   ├── assets/
 │   |   ├── Scss/
@@ -2095,6 +2096,9 @@ import './assets/Scss/Style.scss'
 │   |   |   ├── Header/
 │   │   |   |   ├── 📝 _header.scss
 │   |   |   ├── Style.scss
+```
+* 
+
 ```cmd
 Scss/Authentication/_login.scss
 Header/_header.scss
