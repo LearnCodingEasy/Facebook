@@ -2097,8 +2097,7 @@ import './assets/Scss/Style.scss'
 │   │   |   |   ├── 📝 _header.scss
 │   |   |   ├── Style.scss
 ```
-* 
-
+* Creat This Pages
 ```cmd
 Scss/Authentication/_login.scss
 Header/_header.scss
@@ -2191,8 +2190,6 @@ body {
       .flex {
         .wrapper_text_login {
           .inner {
-            // width: 70%;
-            // margin: auto;
             .title {
               color: #0866ff;
               font-size: 8vh;
@@ -2508,4 +2505,59 @@ body {
     margin-right: 12px;
   }
 }
+```
+__________________________________________________
+__________________________________________________
+__________________________________________________
+_____________________ Start Profile ______________
+__________________________________________________
+__________________________________________________
+__________________________________________________
+* Create Function Profile In Side Page [ api.py ]
+```
+# Profile
+@api_view(["GET"])
+def profile(request, id):
+    # (primary key) استرجاع معلومات المستخدم بناءً على معرفه الفريد
+    user = User.objects.get(pk=id)
+    # تسلسل بيانات المستخدم باستخدام السيريالايزر المخصص
+    user_serializer = UserSerializer(user)
+    # JSON إرجاع البيانات كاستجابة
+    return JsonResponse(
+        {
+            "user": user_serializer.data,
+        },
+        safe=False,
+    )
+
+```
+* Create Url Profile In Side Page [ url.py ]
+```
+urlpatterns = [
+    path("profile/<uuid:id>/", api.profile, name="profile"),
+]
+```
+__________________________________________________
+__________________________________________________
+__________________________________________________
+_____________________ Start Doker ________________
+__________________________________________________
+__________________________________________________
+__________________________________________________
+
+### Start Doker
+* 
+```
+├── 📁 Facebook/
+│   ├── 📁 facebook_django/
+│   ├── 📁 facebook_virtual_environment/
+│   ├── 📁 facebook_vue/
+│   ├── 📁 templates/
+│   ├── 📝 .gitignore
+│   ├── 📝 Build.md
+│   ├── 📝 desktop.ini
+│   ├── 📝 LICENSE
+│   ├── 📝 README.md
+```
+```
 ```

@@ -192,37 +192,49 @@ userStore.initStore()
                     >
                       <div class="creat_story">
                         <div class="user_create_story">
-                          <div class="img">
-                            <!-- :src="userStore.user.avatar" -->
-                            <!-- v-if="userStore.user.avatar" -->
-                            <img
-                              v-if="userStore.user.avatar"
-                              :src="userStore.user.avatar"
-                              class=""
-                              :alt="userStore.user.name"
-                            />
-                            <!-- v-else -->
-                            <img v-else src="../assets/image/user.png" class="" alt="" />
-                          </div>
-                          <div class="icon">
-                            <span class="">
-                              <fa :icon="['fas', 'plus']"></fa>
-                            </span>
-                          </div>
-                          <div class="text">
-                            <span class=""> Create Story </span>
-                          </div>
+                          <prime_card>
+                            <template #header>
+                              <div class="img">
+                                <!-- :src="userStore.user.avatar" -->
+                                <!-- v-if="userStore.user.avatar" -->
+                                <img
+                                  v-if="userStore.user.avatar"
+                                  :src="userStore.user.avatar"
+                                  class=""
+                                  :alt="userStore.user.name"
+                                />
+                                <!-- v-else -->
+                                <img v-else src="../assets/image/user.png" class="" alt="" />
+                              </div>
+                            </template>
+                            <template #content>
+                              <div class="icon">
+                                <span class="">
+                                  <fa :icon="['fas', 'plus']"></fa>
+                                </span>
+                              </div>
+                            </template>
+                            <template #footer>
+                              <div class="text">
+                                <span class=""> Create Story </span>
+                              </div>
+                            </template>
+                          </prime_card>
                         </div>
                       </div>
                     </swiper-slide>
-                    <swiper-slide class="card">Slide 2</swiper-slide>
-                    <swiper-slide>Slide 3</swiper-slide>
-                    <swiper-slide>Slide 4</swiper-slide>
-                    <swiper-slide>Slide 5</swiper-slide>
-                    <swiper-slide>Slide 6</swiper-slide>
-                    <swiper-slide>Slide 7</swiper-slide>
-                    <swiper-slide>Slide 8</swiper-slide>
-                    <swiper-slide>Slide 9</swiper-slide>
+                    <swiper-slide class="card" v-if="friends_accepted.length">
+                      <img src="../assets/image/user_2.png" class="" alt="" />
+                    </swiper-slide>
+                    <swiper-slide class="card" v-else>
+                      <img
+                        src="../assets/image/user.png"
+                        class=""
+                        alt=""
+                        width="100%"
+                        style="height: 100% !important"
+                      />
+                    </swiper-slide>
                   </swiper>
                 </div>
               </div>
@@ -230,46 +242,53 @@ userStore.initStore()
           </div>
           <!-- User Create Post -->
           <div class="wrapper_user_add_post_image_video">
-            <div class="inner_user_add_post_image_video">
-              <div class="content">
-                <div class="">
-                  <!-- AddPostForm -->
-                </div>
-                <div class="post">
-                  <div class="user">
-                    <div class="img">
-                      <img src="../assets/image/user.png" class="" alt="" />
+            <prime_card class="inner_user_add_post_image_video">
+              <template #header>
+                <div class="content">
+                  <div class="post">
+                    <div class="user">
+                      <div class="img">
+                        <img src="../assets/image/user.png" class="" alt="" />
+                      </div>
+                    </div>
+                    <div class="input">
+                      <div class="like_input">
+                        <!-- @click="toggleAddPost" -->
+                        <input type="text" placeholder="What's on your mind, Hossam?" readonly />
+                      </div>
                     </div>
                   </div>
-                  <div class="input">
-                    <div class="like_input">
-                      <!-- @click="toggleAddPost" -->
-                      <input type="text" placeholder="What's on your mind, Hossam?" readonly />
+                </div>
+              </template>
+              <template #content> </template>
+              <template #footer>
+                <div class="content">
+                  <div class="live_video_photo_or_video_feeling_or_activity flex items-center">
+                    <div class="live_video basis-1/3">
+                      <span class="icon">
+                        <img src="../assets/image/add_Live_video.png" class="" alt="" />
+                      </span>
+                      <span class="text"> Live video </span>
+                    </div>
+                    <div class="photo_or_video basis-1/3">
+                      <span class="icon">
+                        <img src="../assets/image/add_Photo_video.png" class="" alt="" />
+                      </span>
+                      <span class="text"> Photo/video </span>
+                    </div>
+                    <div class="feeling_or_activity basis-1/3">
+                      <span class="icon">
+                        <img src="../assets/image/add_Feeling_activity.png" class="" alt="" />
+                      </span>
+                      <span class="text"> Feeling/activity </span>
                     </div>
                   </div>
                 </div>
-                <div class="live_video_photo_or_video_feeling_or_activity flex items-center">
-                  <div class="live_video basis-1/3">
-                    <span class="icon">
-                      <img src="../assets/image/add_Live_video.png" class="" alt="" />
-                    </span>
-                    <span class="text"> Live video </span>
-                  </div>
-                  <div class="photo_or_video basis-1/3">
-                    <span class="icon">
-                      <img src="../assets/image/add_Photo_video.png" class="" alt="" />
-                    </span>
-                    <span class="text"> Photo/video </span>
-                  </div>
-                  <div class="feeling_or_activity basis-1/3">
-                    <span class="icon">
-                      <img src="../assets/image/add_Feeling_activity.png" class="" alt="" />
-                    </span>
-                    <span class="text"> Feeling/activity </span>
-                  </div>
-                </div>
+              </template>
+              <div class="">
+                <!-- AddPostForm -->
               </div>
-            </div>
+            </prime_card>
           </div>
           <!-- All Posts Item -->
 
@@ -787,6 +806,11 @@ export default {
   components: {
     Swiper,
     SwiperSlide
+  },
+  data() {
+    return {
+      friends_accepted: []
+    }
   }
 }
 </script>

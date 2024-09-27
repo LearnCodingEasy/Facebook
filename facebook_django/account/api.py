@@ -117,16 +117,36 @@ def me(request):
 # "workplace_time_period": request.user.workplace_time_period,
 
 
+#
+#
+#
+#
+#
+# Work With Profile
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 # Profile
 @api_view(["GET"])
 def profile(request, id):
-
     # (primary key) استرجاع معلومات المستخدم بناءً على معرفه الفريد
     user = User.objects.get(pk=id)
-
     # تسلسل بيانات المستخدم باستخدام السيريالايزر المخصص
     user_serializer = UserSerializer(user)
-
     # JSON إرجاع البيانات كاستجابة
     return JsonResponse(
         {
@@ -139,24 +159,20 @@ def profile(request, id):
 # فقط POST يسمح له بالاستجابة لطلبات
 @api_view(["POST"])
 def editprofile(request):
-
     user = request.user
     email = request.data.get("email")
-
     # التحقق مما إذا كان البريد الإلكتروني المحدث موجود بالفعل لمستخدم آخر
     if User.objects.exclude(id=user.id).filter(email=email).exists():
         return JsonResponse({"message": "email already exists"})
     else:
         # إنشاء نموذج ProfileForm باستخدام البيانات المرسلة عبر POST
         form = ProfileForm(request.POST, request.FILES, instance=user)
-
         if form.is_valid():
             # حفظ التغييرات إذا كانت البيانات صالحة
             form.save()
-
+            print("edite Done")
         # استرجاع بيانات المستخدم المحدثة بعد التعديلات
         serializer = UserSerializer(user)
-
         # إرجاع رسالة بنجاح تحديث المعلومات وبيانات المستخدم المحدثة
         return JsonResponse({"message": "information updated", "user": serializer.data})
 

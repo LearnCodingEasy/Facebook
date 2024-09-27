@@ -20,6 +20,11 @@ urlpatterns = [
     path("login/", TokenObtainPairView.as_view(), name="token_obtain"),
     # refresh token باستخدام الـ access token المسار ده مسئول عن تجديد الـ
     path("refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    # ___________________________
+    # ___________________________
+    # ___________________________
+    # Profile
+    path("profile/<uuid:id>/", api.profile, name="profile"),
     path("editprofile/", api.editprofile, name="editprofile"),
     path("editpassword/", api.editpassword, name="editpassword"),
     # Suggested

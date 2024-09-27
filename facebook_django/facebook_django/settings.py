@@ -23,7 +23,7 @@ ALLOWED_HOSTS = []
 # URL أو على سيرفر حقيقي (localhost) الموقع اللي بنشتغل عليه سواء كان محلي
 WEBSITE_URL = "http://127.0.0.1:8000"
 
-# EMAIL_BACKEND ده اللي بيحدد طريقة إرسال الإيميلات من خلال 
+# EMAIL_BACKEND ده اللي بيحدد طريقة إرسال الإيميلات من خلال
 # Django، هنا مختار انه يطبع الإيميلات في الكونسل
 # EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 # Django، هنا سيتم إرسال الرسائل الإيميلات الى الإيميلات

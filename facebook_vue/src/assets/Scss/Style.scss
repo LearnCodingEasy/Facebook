@@ -44,7 +44,10 @@
   --page-index-sidebar-right-border-user-control: #bcc0c4;
   --page-index-sidebar-right-text-color: #65676b;
   --page-index-sidebar-right-icon-bg: #65676b;
-  //
+  // ___________________
+  // Page Profile
+  --btn-profile: #e4e6eb;
+  --btn-profile-hover: #d8dadf;
 }
 
 // Header
@@ -53,16 +56,20 @@
 @import 'Index/index';
 // Authentication
 @import 'Authentication/login';
+// Account
+@import 'Account/Profile';
 // Frameworks
 @import 'Frameworks/Frameworks';
 // Style For Dark Mode
 html.dark,
 html.p-dark {
   /* Body */
-  // --body-bg: #0d121b;
   --body-bg: #09090b;
   --header-user-option-btn-bg-light: #09090b;
   --header-bg: #18181b;
+  // Page Profile
+  --btn-profile: #09090b;
+  --btn-profile-hover: #0f0f11;
 }
 body {
   // background-color: var(--body-bg-hr);

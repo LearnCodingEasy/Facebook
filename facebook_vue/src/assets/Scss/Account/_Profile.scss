@@ -1,0 +1,766 @@
+.wrapper_profile_page {
+  .inner_profile_page {
+    .contant {
+      .wrapper_user_cover {
+        position: relative;
+        .inner_user_cover {
+          padding: 0 5px;
+          img {
+            width: 100%;
+            height: 500px;
+            border-radius: 0 0 10px 10px;
+          }
+        }
+        .control_user_cover {
+          position: absolute;
+          bottom: 1rem;
+          right: 1rem;
+          padding: 5px 10px;
+          background-color: #f2f2f2;
+          border-radius: 5px;
+          .button_control_user_cover {
+            cursor: pointer;
+            .icon {
+              svg {
+                font-weight: bold;
+              }
+            }
+            .text {
+              font-weight: 500;
+            }
+          }
+        }
+      }
+      .container-fluid,
+      .main-container,
+      .container {
+        .wrapper_user_name_edite_profile {
+          // background-color: #fff;
+          // padding: 1rem 0;
+          .inner_user_name_edite_profile {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
+            .left {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              .image {
+                position: relative;
+                width: 180px;
+                margin-top: -70px;
+                .img {
+                  background-color: #fff;
+                  padding: 5px;
+                  border-radius: 50%;
+                  img {
+                    border-radius: 50%;
+                    width: 170px;
+                    height: 170px;
+                  }
+                  .icon {
+                    width: 45px;
+                    height: 45px;
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: absolute;
+                    bottom: 10px;
+                    right: 5px;
+                    z-index: 2;
+                    background-color: #d8dadf;
+                    cursor: pointer;
+                    svg {
+                      font-size: 1.5rem;
+                      cursor: pointer;
+                    }
+                  }
+                }
+              }
+              .name_friends {
+                padding: 0.5rem 1rem;
+                .user_name {
+                  font-weight: 800;
+                  font-size: 32px;
+                }
+                .user_friends_count {
+                  font-weight: 500;
+                  padding: 0.5rem 0;
+                  a {
+                    color: #65676b;
+                    text-decoration: none;
+                  }
+                }
+                .user_friends {
+                  display: flex;
+                  span {
+                    &:nth-child(1) {
+                      z-index: 20;
+                      border: 0.2rem solid #fff;
+                      position: relative;
+                    }
+                    &:nth-child(2) {
+                      z-index: 19;
+                      margin-left: -5px;
+                      border: 0.2rem solid #fff;
+                      position: relative;
+                    }
+                    &:nth-child(3) {
+                      z-index: 18;
+                      margin-left: -5px;
+                      border: 0.2rem solid #fff;
+                      position: relative;
+                    }
+                    &:nth-child(4) {
+                      z-index: 17;
+                      margin-left: -5px;
+                      border: 0.2rem solid #fff;
+                      position: relative;
+                    }
+                    &:nth-child(5) {
+                      z-index: 16;
+                      margin-left: -5px;
+                      border: 0.2rem solid #fff;
+                      position: relative;
+                    }
+                    &:nth-child(6) {
+                      z-index: 15;
+                      margin-left: -5px;
+                      border: 0.2rem solid #fff;
+                      position: relative;
+                    }
+                    &:nth-child(7) {
+                      z-index: 14;
+                      margin-left: -5px;
+                      border: 0.2rem solid #fff;
+                      position: relative;
+                    }
+                    &:nth-child(8) {
+                      z-index: 13;
+                      margin-left: -5px;
+                      border: 0.2rem solid #fff;
+                      position: relative;
+                    }
+                    img {
+                      border-radius: 50%;
+                      width: 35px;
+                      height: 35px;
+                    }
+                  }
+                }
+              }
+            }
+            .right {
+              .wrapper_button_edit_progile {
+                .inner_button_edit_progile {
+                  .is_owner {
+                    display: inline-block;
+                    botton.Add_to_story {
+                      padding: 5px 15px;
+                      span.icon {
+                      }
+                      span.text {
+                        font-weight: bold;
+                      }
+                    }
+                    botton.Edit_profile,
+                    a.Edit_profile {
+                      padding: 5px 15px;
+                      margin: 0 0.5rem;
+                      background-color: #d8dadf;
+                      span.icon {
+                      }
+                      span.text {
+                        font-weight: bold;
+                      }
+                    }
+                  }
+                  .is_visitor {
+                    display: inline-block;
+                    botton.Add_friend {
+                      padding: 5px 15px;
+                      span.icon {
+                        margin-right: 0.5rem;
+                        display: inline-block;
+                      }
+                      span.text {
+                        font-weight: bold;
+                      }
+                    }
+                    botton.is_friend {
+                      padding: 5px 15px;
+                      span.icon {
+                        margin-right: 0.5rem;
+                        display: inline-block;
+                      }
+                      span.text {
+                        font-weight: bold;
+                      }
+                    }
+                    .message_friend {
+                      padding: 5px 15px;
+                      margin: 0 0.5rem;
+                      span.icon {
+                      }
+                      span.text {
+                        font-weight: bold;
+                      }
+                    }
+                  }
+
+                  botton.toggle_see_frindes {
+                    padding: 5px 15px;
+                    margin: 0 0.5rem 0 0;
+                    background-color: #d8dadf;
+                    span.icon {
+                    }
+                    span.text {
+                      font-weight: bold;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        .wrapper_all_data_profile {
+          .inner_all_data_profile {
+            .wrapper_tabs_choose {
+              border-top: 1px solid #cfcfcf;
+              .control_tabs_choose {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1.5rem 0 0 0;
+              }
+              .tabs_choose {
+                margin: 0;
+                li {
+                  list-style: none;
+                  display: inline-block;
+                  cursor: pointer;
+                  padding: 10px 15px;
+                  font-size: 16px;
+                  font-weight: 700;
+                  &:hover {
+                    background-color: #f2f2f2;
+                    border-radius: 5px;
+                  }
+                  &.activeLi {
+                    border-bottom: 3px solid #0866ff;
+                  }
+                }
+              }
+              .tabs_content {
+                > div {
+                  // background-color: #fff;
+                  padding: 1rem;
+                  border-radius: 1rem;
+                  &.posts {
+                    border: 0.1rem solid transparent;
+                    div.col-5 {
+                      position: -webkit-sticky;
+                      position: sticky;
+                      top: -150px;
+                      height: fit-content;
+                    }
+                    .div_intro {
+                      border-radius: 1rem;
+                      .title {
+                        padding: 1rem 0 0 1rem;
+                        font-size: 1.5rem;
+                      }
+                      div.buttons {
+                        display: flex;
+                        flex-direction: column;
+                        button {
+                          border: none;
+                          outline: none;
+                          margin: 0.5rem 0;
+                          padding: 0.5rem;
+                          text-align: center;
+                          border-radius: 7px;
+
+                          background-color: var(--btn-profile);
+                          &:hover {
+                            background-color: var(--btn-profile-hover);
+                          }
+                        }
+                      }
+                    }
+                    div.photos {
+                      padding: 1rem;
+                      background-color: #fff;
+                      border-radius: 1rem;
+                      display: flex;
+                      align-items: center;
+                      justify-content: space-between;
+                      margin: 1rem 0;
+                      .link_text {
+                        span {
+                          font-size: 1.5rem;
+                          font-weight: bold;
+                          &:hover {
+                            text-decoration: underline;
+                            cursor: pointer;
+                          }
+                        }
+                      }
+                      .link_photo {
+                        span {
+                          color: #385898;
+                          padding: 0.5rem 1rem;
+
+                          &:hover {
+                            background-color: #f2f2f2;
+                            cursor: pointer;
+                          }
+                        }
+                      }
+                    }
+                    .frinds {
+                      padding: 1rem 1rem 2rem 1rem;
+                      background-color: #fff;
+                      border-radius: 1rem;
+                      margin: 1rem 0;
+                      .wrapper_frindes_name_count {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        .frindes_name_count {
+                          .friends_title {
+                            font-weight: bold;
+                            font-size: 1.5rem;
+                            &:hover {
+                              text-decoration: underline;
+                              cursor: pointer;
+                            }
+                          }
+                        }
+                        .friends_linke {
+                          span {
+                            color: #385898;
+                            padding: 0.5rem 1rem;
+                            &:hover {
+                              background-color: #f2f2f2;
+                              cursor: pointer;
+                            }
+                          }
+                        }
+                      }
+                      .user_friends {
+                        display: grid;
+                        grid-gap: 2% 2%;
+                        grid-template-columns: repeat(3, auto);
+                        .box_single_friend {
+                          display: flex;
+                          flex-direction: column;
+                          .friend_img {
+                            width: 100%;
+                            height: 150px;
+                            img {
+                              height: 150px;
+                              width: 100%;
+                              border-radius: 10px;
+                            }
+                          }
+                          .friend_name {
+                          }
+                        }
+                      }
+                    }
+                    .wrapper_post_image_video {
+                      margin-top: 0.8rem;
+                      background-color: #fff;
+                      padding: 1rem;
+                      border-radius: 1rem;
+                      .inner_post_image_video {
+                        .content {
+                          width: 100%;
+                          padding: 0;
+                          .user_data_and_option_post {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            .user_data {
+                              display: flex;
+                              justify-content: space-between;
+                              align-items: center;
+                              .img {
+                                width: 50px;
+                                margin-right: 1rem;
+                                img {
+                                  width: 50px;
+                                  height: 50px;
+                                  border-radius: 50%;
+                                  cursor: pointer;
+                                }
+                              }
+                              .user_info {
+                                .user_name {
+                                  font-weight: bold;
+                                  cursor: pointer;
+                                }
+                                .add_at_trand {
+                                  font-size: 13px;
+                                  cursor: pointer;
+                                  .trand {
+                                  }
+                                  .add_at {
+                                    &:nth-child(1) {
+                                    }
+                                    &:nth-child(2) {
+                                      svg {
+                                        margin-left: 5px;
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                            .option_post {
+                              display: flex;
+                              justify-content: center;
+                              align-items: center;
+                              .option {
+                                margin-right: 0.5rem;
+                                svg {
+                                  cursor: pointer;
+                                  font-size: 1.5rem;
+                                }
+                              }
+                              .close {
+                                svg {
+                                  cursor: pointer;
+                                  font-size: 1.5rem;
+                                }
+                              }
+                            }
+                          }
+                          .post_content {
+                            .post_text {
+                              margin-top: 0.7rem;
+                              p {
+                              }
+                            }
+                            .post_img_or_video {
+                              img {
+                                width: 100%;
+                                // max-height: 600px;
+                              }
+                              video {
+                                width: 100%;
+                              }
+                            }
+                            .post_count_like_comment_share {
+                              margin-top: 16px;
+                              display: flex;
+                              justify-content: space-between;
+                              align-items: center;
+                              .count_like {
+                                .icon_like {
+                                  svg.like {
+                                    margin-right: 5px;
+                                    color: #007aff;
+                                    font-size: 1.2rem;
+                                  }
+                                  svg.heart {
+                                    color: #ff0808;
+                                    font-size: 1.2rem;
+                                    margin-right: 5px;
+                                  }
+                                }
+                                .count_like_number {
+                                  font-weight: bold;
+                                }
+                              }
+                              .count_comment_share {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                .comment {
+                                  margin-right: 1rem;
+                                  .text_comment {
+                                  }
+                                  .count_like {
+                                  }
+                                }
+                                .share {
+                                  .icon_share {
+                                  }
+                                  .count_like {
+                                  }
+                                }
+                              }
+                            }
+                          }
+                          .wrapper_add_like_coment_send_share {
+                            margin-top: 1rem;
+                            border-top: 2px solid #999;
+                            .inner_add_like_coment_send_share {
+                              display: flex;
+                              justify-content: space-between;
+                              align-items: center;
+                              padding-top: 1rem;
+                              .add_like,
+                              .add_comment,
+                              .add_send,
+                              .add_share {
+                                width: 20%;
+                                padding: 10px;
+                                text-align: center;
+                                &:hover {
+                                  background-color: #f0f2f5;
+                                }
+                                .like,
+                                .comment,
+                                .send,
+                                .share {
+                                  cursor: pointer;
+                                  .icon {
+                                    padding-right: 0.5rem;
+                                    svg {
+                                      color: #151515;
+                                      font-size: 1.2rem;
+                                    }
+                                  }
+                                  .text {
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                  &.about {
+                    .wrapper_about_user {
+                      .inner_about_user {
+                        padding: 1rem;
+                        background-color: #fff;
+                        border-radius: 1rem;
+                        display: grid;
+                        grid-template-columns: 25% 75%;
+
+                        .control_about_link {
+                          border-right: 1px solid #5b5b5b72;
+                          padding: 0 0.5rem 0 0;
+                          .card-title {
+                            font-weight: bold;
+                            margin-bottom: 1rem;
+                          }
+                          ul {
+                            margin: 0;
+                            padding: 0;
+                            li {
+                              cursor: pointer;
+                              padding: 0.5rem;
+                              list-style: none;
+                              border-radius: 10px;
+                              span {
+                                font-weight: 500;
+                              }
+                              &.activeLiAbout {
+                                color: #0866ff;
+                                background-color: #ebf5ff;
+                              }
+                            }
+                          }
+                        }
+                        .control_about_view {
+                          padding: 1rem;
+                          .about_overview {
+                            .button_overview {
+                              button {
+                                background-color: transparent;
+                                border: none;
+                                color: #007aff;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                margin: 1rem 0;
+                                span.icon {
+                                  margin-right: 0.5rem;
+                                  svg {
+                                    font-size: 1.5rem;
+                                  }
+                                }
+                                span.text {
+                                  font-size: 15px;
+                                  color: #0866ff;
+                                  &:hover {
+                                    text-decoration: underline;
+                                  }
+                                }
+                              }
+                              .user_phone_number {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                .phone_number_data {
+                                  display: flex;
+                                  justify-content: space-between;
+                                  align-items: center;
+                                  .icon {
+                                    color: #727b87;
+                                    font-size: 1.5rem;
+                                    margin-right: 1rem;
+                                  }
+                                  .image {
+                                    color: #727b87;
+                                    font-size: 1.5rem;
+                                    margin-right: 1rem;
+                                  }
+                                  .span_phone_number_data {
+                                    display: flex;
+                                    // justify-content: space-between;
+                                    // align-items: center;
+                                    flex-direction: column;
+                                  }
+                                }
+                                .phone_number_control {
+                                  .icon {
+                                    color: #727b87;
+                                    &.lock {
+                                      margin-right: 0.7rem;
+                                      font-size: 1.2rem;
+                                    }
+                                    &.pen {
+                                      padding: 10px;
+                                      background-color: #cfcfcf;
+                                      font-size: 1.2rem;
+                                      border-radius: 50%;
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                  &.friends {
+                    .wrapper_user_friends {
+                      .inner_user_friends {
+                        background-color: #fff;
+                        padding: 1rem;
+                        border-radius: 10px;
+                        .header_user_friends {
+                          display: flex;
+                          justify-content: space-between;
+                          align-items: center;
+                          .title {
+                          }
+                          .options {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            .friends_search {
+                              margin: 0 1rem;
+                              input {
+                                background-color: #f0f2f5 !important;
+                                border-radius: 1rem;
+                                border: none;
+                                box-shadow: none;
+                                outline: none;
+                                width: 200px;
+                              }
+                            }
+                            .links {
+                              display: flex;
+                              justify-content: space-between;
+                              align-items: center;
+                              a {
+                                margin: 0 0.5rem;
+                                color: #0866ff;
+                                padding: 0.5rem;
+                                &:hover {
+                                  background-color: #e4e6eb;
+                                }
+                              }
+                            }
+                            .icon {
+                              span {
+                                padding: 10px 15px;
+                                background-color: #d7d9de;
+                                border-radius: 5px;
+                              }
+                            }
+                          }
+                        }
+                        .main_user_friends {
+                          .control_toggle_show_fran {
+                            ul {
+                              margin: 2rem 0;
+                              padding: 0;
+                              li {
+                                list-style: none;
+                                margin: 0 0.5rem;
+                                display: inline-block;
+                                padding: 1rem;
+                                border-radius: 5px;
+                                cursor: pointer;
+                                &.activeLiFriend {
+                                  border-bottom: 0.2rem solid #0866ff;
+                                }
+                                &:hover {
+                                  background-color: #f2f2f2;
+                                }
+                                span {
+                                }
+                              }
+                            }
+                          }
+                          .contant_user_friends {
+                            .frinds_overview {
+                              .inner_frinds_overview {
+                                display: grid;
+                                grid-template-columns: repeat(2, auto);
+                                grid-gap: 1rem;
+                                .single_user_friend {
+                                  border: 0.1rem solid #d7d9de4a;
+                                  a {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    width: 100%;
+                                    color: #151515;
+                                    padding: 1rem;
+                                    .friend_data {
+                                      display: flex;
+                                      // justify-content: center;
+                                      align-items: center;
+                                      .img {
+                                        margin-right: 1rem;
+                                        img {
+                                          width: 100px;
+                                          height: 100px;
+                                          border-radius: 10px;
+                                        }
+                                      }
+                                      .friend_data_name_discribshin {
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
