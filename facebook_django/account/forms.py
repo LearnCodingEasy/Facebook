@@ -9,6 +9,7 @@ from django import forms
 # app من الموديلز الخاصة بالـ User هنا بنستورد الموديل الخاص بالمستخدم اللي هو
 from .models import User
 
+
 # UserCreationForm اللي بيرث من SignupForm بنعمل كلاس اسمه
 # الكلاس ده هيستخدم لإنشاء فورم لتسجيل المستخدمين الجدد
 class SignupForm(UserCreationForm):
@@ -48,11 +49,14 @@ class ProfileForm(forms.ModelForm):
             "email",
             "date_of_birth",
             "gender",
+            # _______________________________________
+            # _______________________________________
+            # Profile
             "avatar",
+            "cover",
         )
 
 
-# "cover",
 # "personal_phone",
 # "public_phone",
 # "address",

@@ -28,6 +28,11 @@ class UserSerializer(serializers.ModelSerializer):
             "date_of_birth",
             # الحقل ده بيخزن الجنس الخاص بالمستخدم
             "gender",
+            # _______________________________________
+            # _______________________________________
+            # Profile
+            "get_avatar",
+            "get_cover",
         )
 
 
@@ -39,8 +44,7 @@ class UserSerializer(serializers.ModelSerializer):
 # "workplace_city_town",
 # "workplace_description",
 # "workplace_time_period",
-# "get_avatar",
-# "get_cover",
+
 # "friends_count",
 # "posts_count",
 

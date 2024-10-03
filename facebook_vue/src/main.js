@@ -42,6 +42,7 @@ import Checkbox from 'primevue/checkbox';
 import DatePicker from 'primevue/datepicker';
 import InputGroup from 'primevue/inputgroup';
 import InputGroupAddon from 'primevue/inputgroupaddon';
+import FileUpload from 'primevue/fileupload';
 // Menu
 import Menubar from 'primevue/menubar';
 import TieredMenu from 'primevue/tieredmenu';
@@ -101,6 +102,7 @@ app.component('prime_check_box', Checkbox);
 app.component('prime_date_picker', DatePicker);
 app.component('prime_input_group', InputGroup);
 app.component('prime_input_group_addon', InputGroupAddon);
+app.component('prime_input_file_upload', FileUpload);
 // Prime Menu
 app.component('prime_menubar', Menubar);
 app.component('prime_tiered_menu', TieredMenu);

@@ -5,6 +5,7 @@ import { RouterLink } from 'vue-router'
 import { onMounted } from 'vue'
 import { useUserStore } from '@/stores/user'
 import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 
 const userStore = useUserStore()
 userStore.initStore()
@@ -19,9 +20,20 @@ onMounted(() => {
   } else {
     // Set default Authorization header for axios
     axios.defaults.headers.common['Authorization'] = `Bearer ${userStore.user.access}`
-    // console.log('User Data: ', userStore.user)
+    console.log('User Data: ', userStore.user)
   }
 })
+// Upload User Avater
+const src = ref(null)
+function onFileSelect(event) {
+  const file = event.files[0]
+  const reader = new FileReader()
+  reader.onload = async (e) => {
+    src.value = e.target.result
+  }
+
+  reader.readAsDataURL(file)
+}
 </script>
 <template>
   <div class="wrapper_profile_page" v-if="userStore.user.isAuthenticated">
@@ -58,13 +70,22 @@ onMounted(() => {
                         alt=""
                       />
                       <img src="./../../assets/image/user.png" v-else class="" alt="" />
-                      <span class="icon" v-if="userStore.user.id === user.id">
+                      <span
+                        class="icon"
+                        v-if="userStore.user.id === user.id"
+                        @click="visibleEditeProfileAvatar = true"
+                      >
                         <fa :icon="['fas', 'camera']"></fa>
                       </span>
                     </div>
                   </div>
                   <div class="name_friends">
-                    <div class="user_name">{{ userStore.user.name }}</div>
+                    <div class="user_name" v-if="userStore.user.id == user.id">
+                      {{ userStore.user.name }}
+                    </div>
+                    <div class="user_name" v-else>
+                      {{ user.name }}
+                    </div>
                     <div class="user_friends_count">
                       <!-- <RouterLink
                       :to="{ name: 'FriendsView', params: { id: user.id } }"
@@ -145,6 +166,61 @@ onMounted(() => {
                 </div>
               </template>
             </prime_card>
+            <!-- Updite User Avatar Iamge -->
+            <div class="card flex justify-center">
+              <!-- @submit.prevent="submitFormSignup" -->
+              <form class="space-y-6">
+                <!-- <form class="space-y-6" @submit.prevent="submitFormSignup"> -->
+                <prime_dialog
+                  v-model:visible="visibleEditeProfileAvatar"
+                  modal
+                  header="Choose profile picture"
+                  :style="{ width: '50rem' }"
+                >
+                  <!--
+                  <span class="text-surface-500 dark:text-surface-400 block mb-8"
+                    >It's quick and easy.</span
+                  >
+                  -->
+                  <prime_fluid>
+                    <div class="grid grid-cols-2 gap-4">
+                      <!-- First name -->
+                      <div class="card flex flex-col items-center gap-6">
+                        <prime_input_file_upload
+                          mode="basic"
+                          @select="onFileSelect"
+                          customUpload
+                          auto
+                          severity="secondary"
+                          class="p-button-outlined"
+                          ref="fileAvatar"
+                        />
+                        <img
+                          v-if="src"
+                          :src="src"
+                          alt="Image"
+                          class="shadow-md rounded-xl w-full sm:w-64"
+                          style="filter: grayscale(100%)"
+                        />
+                      </div>
+                    </div>
+                  </prime_fluid>
+                  <div class="flex justify-center gap-2">
+                    <button
+                      type="submit"
+                      class="d_block_important mt-5 mb-3 mx-auto w_50 bg-blue-500 py-3 px-5 rounded text-white"
+                      @click.prevent="submitFormEditeProfileAvatar"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </prime_dialog>
+                <!-- Errors -->
+                <!-- <template v-if="errorsEditeProfileAvatar.length > 0">
+                  <prime_toast />
+                </template> -->
+              </form>
+            </div>
           </div>
           <!-- all_data_profile -->
           <div class="wrapper_all_data_profile">
@@ -740,9 +816,9 @@ onMounted(() => {
                               </div>
                               <div class="user_phone_number mt-3">
                                 <div class="phone_number_data" v-if="activeTabEditeEmail === '1'">
-                                  <span class="image"
-                                    ><img src="../../assets/iamge/icon/email.png" class="" alt=""
-                                  /></span>
+                                  <span class="image">
+                                    <img src="../../assets/image/email.png" class="" alt="" />
+                                  </span>
                                   <span class="span_phone_number_data">
                                     <span class=""> {{ user.email }} </span>
                                     <span class=""> Email </span>
@@ -807,29 +883,105 @@ onMounted(() => {
                               </div>
                             </div>
                           </div>
-                          <div class="about_overview" v-if="activeTabAbout === '5'">
-                            <form v-on:submit.prevent="submitFormEditeProfileName">
-                              <prime_float_label class="mt-5">
-                                <prime_input_text
-                                  id="userName"
-                                  v-model="formEditeProfileName.name"
-                                  class="block w_100"
-                                />
-                                <label for="userName" class="text-base">User Name </label>
-                              </prime_float_label>
-                              <!-- 
-                                    @click="activeTabEditeEmail = '1'"
-                                      :class="[activeTabEditeEmail === '1' ? 'activeLi' : '']"
-                                      -->
-                              <prime_button
-                                label="Save"
-                                icon="pi pi-check"
-                                iconPos="right"
-                                severity="success"
-                              />
-                            </form>
+                          <div class="about_overview" v-if="activeTabAbout === '5'"></div>
+                          <div class="about_overview" v-if="activeTabAbout === '6'">
+                            <div class="button_overview">
+                              <h2 class="h4 font-bold">About You</h2>
+                              <!-- User Name -->
+                              <div class="user_phone_number mt-3">
+                                <div class="phone_number_data" v-if="activeTabEditeName === '1'">
+                                  <span class="icon"><fa :icon="['fas', 'user']"></fa></span>
+                                  <span class="span_phone_number_data">
+                                    <!-- User Data Frome localStorage -->
+                                    <span class="capitalize"> {{ userStore.user.name }} </span>
+                                    <span class="text-xs"> Name </span>
+                                  </span>
+                                </div>
+
+                                <div class="phone_number_data" v-if="activeTabEditeName === '2'">
+                                  <form class="flex justify-between">
+                                    <prime_float_label class="mt-5 flex grow">
+                                      <prime_input_text
+                                        id="userName"
+                                        v-model="formEditeProfileName.name"
+                                        class="block w_100"
+                                      />
+                                      <label for="userName" class="text-base">User Name </label>
+                                    </prime_float_label>
+
+                                    <prime_button
+                                      label="Save"
+                                      icon="pi pi-check"
+                                      iconPos="right"
+                                      severity="success"
+                                      class="ml-4 h-10 flex align-middle flex_center"
+                                      @click.prevent="submitFormEditeProfile"
+                                      @click="activeTabEditeName = '1'"
+                                      :class="[activeTabEditeName === '2' ? 'activeLi' : '']"
+                                    />
+                                    <!-- @click.prevent="submitFormEditeProfileName" -->
+                                  </form>
+                                </div>
+                                <div class="phone_number_control">
+                                  <span class="icon lock"><fa :icon="['fas', 'lock']"></fa></span>
+                                  <span
+                                    class="icon pen"
+                                    v-if="userStore.user.id == user.id"
+                                    @click="activeTabEditeName = '2'"
+                                    :class="[activeTabEditeName === '2' ? 'activeLi' : '']"
+                                    ><fa :icon="['fas', 'pen']"></fa
+                                  ></span>
+                                </div>
+                              </div>
+                              <!-- User surname -->
+                              <div class="user_phone_number mt-3">
+                                <div class="phone_number_data" v-if="activeTabEditeSurname === '1'">
+                                  <span class="icon"><fa :icon="['fas', 'user']"></fa></span>
+                                  <span class="span_phone_number_data">
+                                    <!-- User Data Frome localStorage -->
+                                    <span class="capitalize"> {{ userStore.user.surname }} </span>
+                                    <span class="text-xs"> Surname </span>
+                                  </span>
+                                </div>
+
+                                <div class="phone_number_data" v-if="activeTabEditeSurname === '2'">
+                                  <form class="flex justify-between">
+                                    <prime_float_label class="mt-5 flex grow">
+                                      <prime_input_text
+                                        id="userName"
+                                        v-model="formEditeProfileSurname.surname"
+                                        class="block w_100"
+                                      />
+                                      <label for="userName" class="text-base">User SurName </label>
+                                    </prime_float_label>
+
+                                    <prime_button
+                                      label="Save"
+                                      icon="pi pi-check"
+                                      iconPos="right"
+                                      severity="success"
+                                      class="ml-4 h-10 flex align-middle flex_center"
+                                      @click.prevent="submitFormEditeProfile"
+                                      @click="activeTabEditeSurname = '1'"
+                                      :class="[activeTabEditeSurname === '2' ? 'activeLi' : '']"
+                                    />
+                                    <!-- @click.prevent="submitFormEditeProfileSurname" -->
+                                  </form>
+                                </div>
+                                <div class="phone_number_control">
+                                  <span class="icon lock"><fa :icon="['fas', 'lock']"></fa></span>
+                                  <span
+                                    class="icon pen"
+                                    v-if="userStore.user.id == user.id"
+                                    @click="activeTabEditeSurname = '2'"
+                                    :class="[activeTabEditeSurname === '2' ? 'activeLi' : '']"
+                                    ><fa :icon="['fas', 'pen']"></fa
+                                  ></span>
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                          <div class="about_overview" v-if="activeTabAbout === '6'"></div>
+                          <div class="about_overview" v-if="activeTabAbout === '7'"></div>
                         </div>
                       </div>
                     </div>
@@ -1006,7 +1158,7 @@ onMounted(() => {
 
 <script>
 import axios from 'axios'
-import { useUserStore } from '@/stores/user'
+// import { useUserStore } from '@/stores/user'
 
 export default {
   name: 'ProfileView',
@@ -1025,10 +1177,23 @@ export default {
       activeTab: '1',
       activeTabAbout: '1',
       // Edite Profile Name
+      activeTabEditeName: '1',
       formEditeProfileName: {
         name: ''
       },
       errorsEditeProfileName: [],
+      // Edite Profile Surname
+      activeTabEditeSurname: '1',
+      formEditeProfileSurname: {
+        surname: ''
+      },
+      errorsEditeProfileSurname: [],
+      // Edite Profile Avater
+      visibleEditeProfileAvatar: false,
+      formEditeProfileAvatar: {
+        avatar: ''
+      },
+      errorsEditeProfileAvatar: [],
       // Edite Profile Email
       activeTabEditeEmail: '1',
       formEditeProfileEmail: {
@@ -1073,8 +1238,18 @@ export default {
   mounted() {
     // التأكد من أن بيانات المستخدم موجودة قبل محاولة الوصول إليها
     const userStore = useUserStore()
+    // For Test
+    let line = '📌'.repeat(30)
+    console.log(` %c${line} `, 'color: #1cd07c; font-size: 16px')
+    console.log('userStore From mounted: ', userStore)
     if (userStore.user && userStore.user.name) {
       this.formEditeProfileName.name = userStore.user.name
+    }
+    // عند تسجيل الدخول localStorage تحميل البيانات من
+    const storedUser = localStorage.getItem('user')
+    if (storedUser) {
+      const userStore = useUserStore()
+      userStore.setUserInfo(JSON.parse(storedUser))
     }
 
     if (userStore.user && userStore.user.email) {
@@ -1105,15 +1280,13 @@ export default {
         .get(`/api/profile/${this.$route.params.id}/`)
         .then((response) => {
           this.user = response.data.user
-          console.log('this.user: ', this.user.id)
           // For Test
-          // console.log('profile user: ', response.data.user)
-          // this.$toast.add({
-          //   severity: 'success',
-          //   summary: `Welcome`,
-          //   detail: `${response.data.user.name}`,
-          //   life: 3000
-          // })
+          let line = '📌'.repeat(30)
+          console.log(` %c${line} `, 'color: #1cd07c; font-size: 16px')
+          console.log('Profile Django Data Of User: ', response.data.user)
+          console.log('Profile Browser Data Of User: ', this.user)
+          console.log('Profile Django Data Of User Name: ', response.data.user.name)
+          console.log('Profile Browser Data Of User Name: ', this.user.name)
         })
         .catch((error) => {
           console.error('error', error)
@@ -1126,7 +1299,315 @@ export default {
         })
     },
     submitFormEditeProfileName() {
-      console.log(`Yes`)
+      // التأكد من أن بيانات المستخدم موجودة قبل محاولة الوصول إليها
+      const userStore = useUserStore()
+      console.log('userStore: ', userStore)
+
+      this.errorsEditeProfileName = []
+
+      // التحقق من أن حقل الاسم ليس فارغًا
+      if (this.formEditeProfileName.name === '') {
+        this.errorsEditeProfileName.push('Your Name is missing')
+        this.$toast.add({
+          severity: 'error',
+          summary: 'User Name missing',
+          detail: 'Your name is missing',
+          life: 3000
+        })
+        return
+      }
+
+      // إذا لم يكن هناك أخطاء، قم بإرسال الطلب
+      if (this.errorsEditeProfileName.length === 0) {
+        // التحقق من وجود بيانات المستخدم في المتجر
+        if (userStore && userStore.user) {
+          console.log('userStore.user: ', userStore.user)
+          // قم بتحديث معلومات المستخدم في المتجر
+          userStore.setUserInfo({
+            id: userStore.user.id,
+            name: this.formEditeProfileName.name
+          })
+          // localStorage تحديث البيانات في
+          localStorage.setItem('user', JSON.stringify(userStore.user))
+          let formData = new FormData()
+          formData.append('name', this.formEditeProfileName.name)
+          axios
+            .post('/api/editprofile/', formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            })
+            .then((response) => {
+              if (response.data.message === 'information updated') {
+                console.log('response.data.message: ', response.data.message)
+                this.$toast.add({
+                  severity: 'success',
+                  summary: 'Name Updated',
+                  detail: 'Your name has been updated successfully',
+                  life: 3000
+                })
+              } else {
+                this.$toast.add({
+                  severity: 'error',
+                  summary: 'Try Again',
+                  detail: `${response.data.message}. Please try again`,
+                  life: 3000
+                })
+              }
+            })
+            .catch((error) => {
+              console.error('Error occurred: ', error)
+              this.$toast.add({
+                severity: 'error',
+                summary: 'Request Error',
+                detail: 'There was an error processing your request. Please try again.',
+                life: 3000
+              })
+            })
+        } else {
+          console.error('userStore or userStore.user is undefined')
+        }
+      }
+    },
+    submitFormEditeProfileSurname() {
+      // التأكد من أن بيانات المستخدم موجودة قبل محاولة الوصول إليها
+      const userStore = useUserStore()
+
+      this.errorsEditeProfileSurname = []
+
+      // التحقق من أن حقل الاسم ليس فارغًا
+      if (this.formEditeProfileSurname.surname === '') {
+        this.errorsEditeProfileSurname.push('Your Surname is missing')
+        this.$toast.add({
+          severity: 'error',
+          summary: 'User Surname missing',
+          detail: 'Your Surname is missing',
+          life: 3000
+        })
+        return
+      }
+
+      // إذا لم يكن هناك أخطاء، قم بإرسال الطلب
+      if (this.errorsEditeProfileSurname.length === 0) {
+        // التحقق من وجود بيانات المستخدم في المتجر
+        if (userStore && userStore.user) {
+          console.log('userStore.user: ', userStore.user)
+          // قم بتحديث معلومات المستخدم في المتجر
+          userStore.setUserInfo({
+            id: userStore.user.id,
+            surname: this.formEditeProfileSurname.surname
+          })
+          // localStorage تحديث البيانات في
+          localStorage.setItem('user', JSON.stringify(userStore.user))
+          let formData = new FormData()
+          formData.append('surname', this.formEditeProfileSurname.surname)
+          axios
+            .post('/api/editprofile/', formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            })
+            .then((response) => {
+              if (response.data.message === 'information updated') {
+                console.log('response.data.message: ', response.data.message)
+                this.$toast.add({
+                  severity: 'success',
+                  summary: 'Surname Updated',
+                  detail: 'Your Surname has been updated successfully',
+                  life: 3000
+                })
+              } else {
+                this.$toast.add({
+                  severity: 'error',
+                  summary: 'Try Again',
+                  detail: `${response.data.message}. Please try again`,
+                  life: 3000
+                })
+              }
+            })
+            .catch((error) => {
+              console.error('Error occurred: ', error)
+              this.$toast.add({
+                severity: 'error',
+                summary: 'Request Error',
+                detail: 'There was an error processing your request. Please try again.',
+                life: 3000
+              })
+            })
+        } else {
+          console.error('userStore or userStore.user is undefined')
+        }
+      }
+    },
+    //
+    submitFormEditeProfile() {
+      // التأكد من أن بيانات المستخدم موجودة قبل محاولة الوصول إليها
+      const userStore = useUserStore()
+
+      this.errorsEditeProfileName = []
+      this.errorsEditeProfileSurname = []
+
+      // التحقق من أن الحقول ليست فارغة
+      if (this.formEditeProfileName.name === '' || this.formEditeProfileSurname.surname === '') {
+        if (this.formEditeProfileName.name === '') {
+          this.errorsEditeProfileName.push('Your Name is missing')
+        }
+        if (this.formEditeProfileSurname.surname === '') {
+          this.errorsEditeProfileSurname.push('Your Surname is missing')
+        }
+
+        this.$toast.add({
+          severity: 'error',
+          summary: 'Missing Fields',
+          detail: 'Please complete all required fields',
+          life: 3000
+        })
+        return
+      }
+
+      // إذا لم يكن هناك أخطاء، قم بإرسال الطلب
+      if (this.errorsEditeProfileName.length === 0 || this.errorsEditeProfileSurname.length === 0) {
+        if (userStore && userStore.user) {
+          console.log('userStore.user: ', userStore.user)
+
+          // تحديث معلومات المستخدم في المتجر
+          userStore.setUserInfo({
+            id: userStore.user.id,
+            name: this.formEditeProfileName.name,
+            surname: this.formEditeProfileSurname.surname
+          })
+          // localStorage تحديث البيانات في
+          localStorage.setItem('user', JSON.stringify(userStore.user))
+
+          // إنشاء formData لتحديث البيانات
+          let formData = new FormData()
+          formData.append('name', this.formEditeProfileName.name)
+          formData.append('surname', this.formEditeProfileSurname.surname)
+
+          // إرسال الطلب إلى السيرفر لتحديث البيانات
+          axios
+            .post('/api/editprofile/', formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            })
+            .then((response) => {
+              if (response.data.message === 'information updated') {
+                this.$toast.add({
+                  severity: 'success',
+                  summary: 'Profile Updated',
+                  detail: 'Your profile has been updated successfully',
+                  life: 3000
+                })
+              } else {
+                this.$toast.add({
+                  severity: 'error',
+                  summary: 'Try Again',
+                  detail: `${response.data.message}. Please try again`,
+                  life: 3000
+                })
+              }
+            })
+            .catch((error) => {
+              console.error('Error occurred: ', error)
+              this.$toast.add({
+                severity: 'error',
+                summary: 'Request Error',
+                detail: 'There was an error processing your request. Please try again.',
+                life: 3000
+              })
+            })
+        } else {
+          console.error('userStore or userStore.user is undefined')
+        }
+      }
+    },
+
+    submitFormEditeProfileAvatar() {
+      // For Test
+      console.log(`You Are Click`)
+
+      // التأكد من أن بيانات المستخدم موجودة قبل محاولة الوصول إليها
+      const userStore = useUserStore()
+      console.log('userStore: ', userStore)
+
+      this.errorsEditeProfileAvatar = []
+      // if (this.$refs.fileAvatar.files[0] == null) {
+      // if (this.$refs.fileAvatar.files[0] >= 1) {
+      // if (this.$refs.fileAvatar.files[0] >= -1) {
+      // if (this.$refs.fileAvatar.files[0] <= 1) {
+      // if (this.$refs.fileAvatar.files[0] <= -1) {
+      if (this.$refs.fileAvatar.files[0] === 'undefined') {
+        this.errorsEditeProfileAvatar.push('Your Avatar is missing')
+        this.$toast.add({
+          severity: 'error',
+          summary: 'User Avatar missing',
+          detail: 'Your Avatar is missing',
+          life: 3000
+        })
+        return
+      }
+      if (this.errorsEditeProfileAvatar.length === 0) {
+        if (userStore && userStore.user) {
+          console.log(`Yes`)
+          let formData = new FormData()
+          formData.append('avatar', this.$refs.fileAvatar.files[0])
+          console.log('formData: ', formData)
+        }
+        // axios
+        //   .post('/api/editprofile/', formData, {
+        //     headers: {
+        //       'Content-Type': 'multipart/form-data'
+        //     }
+        //   })
+        //   .then((response) => {
+        //     if (response.data.message === 'information updated') {
+        //       console.log('response.data.message: ', response.data.message)
+        //       this.$toast.add({
+        //         severity: 'success',
+        //         summary: 'Name Updated',
+        //         detail: 'Your It Is Name Updated',
+        //         life: 3000
+        //       })
+        //       // التحقق من وجود بيانات المستخدم في المتجر
+        //       if (userStore && userStore.user) {
+        //         let line = '📌'.repeat(30)
+        //         console.log(` %c${line} `, 'color: #1cd07c; font-size: 16px')
+        //         console.log(`التحقق من وجود بيانات المستخدم في المتجر`)
+        //         console.log('userStore.user: ', userStore.user)
+        //         // قم بتحديث معلومات المستخدم في المتجر
+        //         userStore.setUserInfo({
+        //           ...userStore.user,
+        //           name: this.formEditeProfileName.name
+        //         })
+        //       } else {
+        //         console.error('userStore or userStore.user is undefined')
+        //       }
+        //       userStore.user.setUserInfo({
+        //         id: this.userStore.user.id,
+        //         name: this.formEditeProfileName.name
+        //       })
+        //       console.log('userStore.user.setUserInfo: ', userStore.user.setUserInfo())
+        //     } else {
+        //       this.$toast.add({
+        //         severity: 'error',
+        //         summary: 'Try Again',
+        //         detail: `${response.data.message}. Please try again`,
+        //         life: 3000
+        //       })
+        //     }
+        //   })
+        //   .catch((error) => {
+        //     console.log('error =>', error)
+        //     console.log('error message =>', error.message)
+        //     this.$toast.add({
+        //       severity: 'error',
+        //       summary: 'Request Error',
+        //       detail: 'There was an error processing your request. Please try again.',
+        //       life: 3000
+        //     })
+        //   })
+      }
     },
     submitFormEditeProfileEmail() {
       console.log(`Yes`)

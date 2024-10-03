@@ -27,6 +27,10 @@ export const useUserStore = defineStore({
             access: null,
             // رمز التجديد (Refresh Token)
             refresh: null,
+            // ? 2
+            // Profile
+            // صورة المستخدم الرمزية (غير مستخدم حالياً)
+            avatar: null,
             // personal_phone: null, // هاتف المستخدم الشخصي (غير مستخدم حالياً)
             // public_phone: null,   // هاتف المستخدم العام (غير مستخدم حالياً)
             // address: null,        // عنوان المستخدم (غير مستخدم حالياً)
@@ -35,7 +39,7 @@ export const useUserStore = defineStore({
             // workplace_city_town: null, // مدينة أو بلدة العمل (غير مستخدم حالياً)
             // workplace_description: null, // وصف العمل (غير مستخدم حالياً)
             // workplace_time_period: null, // فترة العمل (غير مستخدم حالياً)
-            // avatar: null,         // صورة المستخدم الرمزية (غير مستخدم حالياً)
+
             // cover: null           // صورة غلاف المستخدم (غير مستخدم حالياً)
         }
     }),
@@ -56,6 +60,7 @@ export const useUserStore = defineStore({
                 this.user.date_of_birth = localStorage.getItem('user.date_of_birth')
                 this.user.access = localStorage.getItem('user.access')
                 this.user.refresh = localStorage.getItem('user.refresh')
+                this.user.avatar = localStorage.getItem('user.avatar')
                 // this.user.personal_phone = localStorage.getItem('user.personal_phone')
                 // this.user.public_phone = localStorage.getItem('user.public_phone')
                 // this.user.address = localStorage.getItem('user.address')
@@ -64,7 +69,6 @@ export const useUserStore = defineStore({
                 // this.user.workplace_city_town = localStorage.getItem('user.workplace_city_town')
                 // this.user.workplace_description = localStorage.getItem('user.workplace_description')
                 // this.user.workplace_time_period = localStorage.getItem('user.workplace_time_period')
-                // this.user.avatar = localStorage.getItem('user.avatar')
                 // this.user.cover = localStorage.getItem('user.cover')
                 // تحديث رمز الوصول
                 this.refreshToken()
@@ -104,7 +108,6 @@ export const useUserStore = defineStore({
             // this.user.workplace_city_town = null
             // this.user.workplace_description = null
             // this.user.workplace_time_period = null
-            // this.user.avatar = null
             // this.user.cover = null
             // إزالة البيانات المخزنة في التخزين المحلي
             localStorage.setItem('user.access', '')
@@ -114,6 +117,10 @@ export const useUserStore = defineStore({
             localStorage.setItem('user.surname', '')
             localStorage.setItem('user.email', '')
             localStorage.setItem('user.date_of_birth', '')
+            // ? 2
+            // Profile
+            this.user.avatar = null
+            localStorage.setItem('user.avatar', '')
             // localStorage.setItem('user.personal_phone', '')
             // localStorage.setItem('user.public_phone', '')
             // localStorage.setItem('user.address', '')
@@ -122,7 +129,6 @@ export const useUserStore = defineStore({
             // localStorage.setItem('user.workplace_city_town', '')
             // localStorage.setItem('user.workplace_description', '')
             // localStorage.setItem('user.workplace_time_period', '')
-            // localStorage.setItem('user.avatar', '')
             // localStorage.setItem('user.cover', '')
         },
         // إجراء لتحديث بيانات المستخدم وتخزينها في التخزين المحلي
@@ -134,6 +140,9 @@ export const useUserStore = defineStore({
             this.user.surname = user.surname
             this.user.email = user.email
             this.user.date_of_birth = user.date_of_birth
+            // ? 2
+            // Profile
+            this.user.avatar = user.avatar
             // this.user.personal_phone = user.personal_phone
             // this.user.public_phone = user.public_phone
             // this.user.address = user.address
@@ -142,7 +151,6 @@ export const useUserStore = defineStore({
             // this.user.workplace_city_town = user.workplace_city_town
             // this.user.workplace_description = user.workplace_description
             // this.user.workplace_time_period = user.workplace_time_period
-            // this.user.avatar = user.avatar
             // this.user.cover = user.cover
 
             localStorage.setItem('user.id', this.user.id)
@@ -150,6 +158,9 @@ export const useUserStore = defineStore({
             localStorage.setItem('user.surname', this.user.surname)
             localStorage.setItem('user.email', this.user.email)
             localStorage.setItem('user.date_of_birth', this.user.date_of_birth)
+            // ? 2
+            // Profile
+            localStorage.setItem('user.avatar', this.user.avatar)
             // localStorage.setItem('user.personal_phone', this.user.personal_phone)
             // localStorage.setItem('user.public_phone', this.user.public_phone)
             // localStorage.setItem('user.address', this.user.address)
@@ -158,7 +169,6 @@ export const useUserStore = defineStore({
             // localStorage.setItem('user.workplace_city_town', this.user.workplace_city_town)
             // localStorage.setItem('user.workplace_description', this.user.workplace_description)
             // localStorage.setItem('user.workplace_time_period', this.user.workplace_time_period)
-            // localStorage.setItem('user.avatar', this.user.avatar)
             // localStorage.setItem('user.cover', this.user.cover)
             // console.log('User', this.user)
         },

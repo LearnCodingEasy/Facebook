@@ -1,5 +1,8 @@
 # Page [ facebook/facebook_django/account/models.py ]
 import uuid
+# _______________________________________
+# _______________________________________
+# Profile
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.db import models
@@ -72,18 +75,20 @@ class User(AbstractBaseUser, PermissionsMixin):
     # people_you_may_know = models.ManyToManyField("self")
     #
     # posts_count = models.IntegerField(default=0)
+    # _______________________________________
+    # _______________________________________
+    # Profile
+    def get_avatar(self):
+        if self.avatar:
+            return settings.WEBSITE_URL + self.avatar.url
+        else:
+            return "https://learncodingeasy.github.io/Images/images/user/user.png"
 
-    # def get_avatar(self):
-    #     if self.avatar:
-    #         return settings.WEBSITE_URL + self.avatar.url
-    #     else:
-    #         return "https://picsum.photos/200/200"
-
-    # def get_cover(self):
-    #     if self.cover:
-    #         return settings.WEBSITE_URL + self.cover.url
-    #     else:
-    #         return "https://picsum.photos/200/200"
+    def get_cover(self):
+        if self.cover:
+            return settings.WEBSITE_URL + self.cover.url
+        else:
+            return "https://learncodingeasy.github.io/Images/images/user/user.png"
 
 
 # class FriendshipRequest(models.Model):

@@ -101,12 +101,15 @@ def me(request):
             "email": request.user.email,
             "date_of_birth": request.user.date_of_birth,
             "gender": request.user.gender,
+            # _______________________________________
+            # _______________________________________
+            # Profile
+            "avatar": request.user.get_avatar(),
+            "cover": request.user.get_cover(),
         }
     )
 
 
-# "avatar": request.user.get_avatar(),
-# "cover": request.user.get_cover(),
 # "personal_phone": request.user.personal_phone,
 # "public_phone": request.user.public_phone,
 # "address": request.user.address,
@@ -173,6 +176,8 @@ def editprofile(request):
             print("edite Done")
         # استرجاع بيانات المستخدم المحدثة بعد التعديلات
         serializer = UserSerializer(user)
+        # طباعة البيانات فى الكنصال
+        print(serializer.data)
         # إرجاع رسالة بنجاح تحديث المعلومات وبيانات المستخدم المحدثة
         return JsonResponse({"message": "information updated", "user": serializer.data})
 

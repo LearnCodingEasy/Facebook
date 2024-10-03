@@ -7,6 +7,10 @@ import LoginView from '../views/Authentication/LoginView.vue'
 
 // Account
 import ProfileView from '../views/Account/ProfileView.vue'
+
+// 404 catchall Page Not Found
+import PageNotFound from "../views/PageNotFound/PageNotFound.vue";
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -15,6 +19,12 @@ const router = createRouter({
       name: 'home',
       component: HomeView
     },
+    // 404 catchall Page Not Found
+  {
+    path: "/:catchAll(.*)",
+    name: "NotFound",
+    component: PageNotFound
+  },
     // Authentication 
     // Login
     {

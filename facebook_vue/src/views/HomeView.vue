@@ -30,7 +30,7 @@ userStore.initStore()
                       <!-- v-else -->
                       <img v-else src="../assets/image/user.png" class="" alt="" />
                     </span>
-                    <span class="text" v-if="userStore.user.name"> {{ userStore.user.name }} </span>
+                    <span class="text" v-if="userStore.user.name"  dir="auto"> {{ userStore.user.name }} </span>
                     <span class="text" v-else> User Name </span>
                   </RouterLink>
                 </li>
@@ -657,7 +657,7 @@ userStore.initStore()
                         </div>
                       </template>
                     </div>
-                    <div class="wrapper_form">
+                    <!-- <div class="wrapper_form">
                       <form v-on:submit.prevent="submitForm">
                         <div class="div_textarea">
                           <textarea
@@ -672,7 +672,7 @@ userStore.initStore()
                           </button>
                         </div>
                       </form>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>

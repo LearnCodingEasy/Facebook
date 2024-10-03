@@ -188,6 +188,10 @@ main {
                         height: 36px;
                       }
                     }
+                    span.text {
+                      flex-grow: 1;
+                      display: inline-flex;
+                    }
                   }
                 }
               }
